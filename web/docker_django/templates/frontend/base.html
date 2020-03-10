@@ -1,0 +1,494 @@
+{% load staticfiles %}
+{% load cache %}
+
+<!DOCTYPE html>
+<html lang="uk-UA">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Twitter вигляд акаунту має бути: @акаунт -->
+    <meta name="twitter:site" content="@акаунт">
+    <meta name="twitter:creator" content="@акаунт">
+    <meta name="twitter:card" content="велика картинка">
+    <meta name="twitter:title" content="GPDK">
+    <meta name="twitter:description" content="Описова частина">
+    <meta name="twitter:image" content="#">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="https://github.com/e-republic/GPDK">
+    <meta property="og:title" content="GPDK">
+    <meta property="og:description" content="Описова частина">
+    <meta property="og:image" content="#">
+    <meta property="og:image:secure_url" content="#">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <!-- Meta -->
+    <meta name="description" content="Описова частина вашого проекту">
+    <meta name="author" content="Ваша організація">
+
+    <title>Головна. </title>
+
+    <!-- CSS-->
+    <link href="{% static 'lib/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/Ionicons/css/ionicons.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/rickshaw/css/rickshaw.min.css' %}" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form_element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/introjs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/toggles-full.css' %}">
+    <link rel="stylesheet" href="{% static 'css/spectrum.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/jt.timepicker/css/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/bootstrap-tagsinput/css/bootstrap-tagsinput.css' %}">
+
+    {% block extrahead %}{% endblock %}
+
+  </head>
+  <body id="body" class="">
+  <div class="gpdk-header">
+    <div class="container container_wrap">
+      <div class="gpdk-header-left">
+
+        <a class="main-logo main-logo-light" href="#">
+          <div class="icon-flag">
+            <div class="yellow"></div>
+            <div class="blue"></div>
+          </div>
+          <div class="wrap-text">
+            <span class="one">gov.ua</span>
+            <span class="light">Державні сайти України</span>
+          </div>
+        </a>
+      </div>
+      <div class="gpdk-header-left dis-flex">
+
+
+        <div class="trezub">
+          <a href="/" title="Головна сторінка"> <img src="/static/img/trezub.png" alt="Головна сторінка"></a>
+        </div>
+
+        <div class="wrap-text">
+          <a href="/" title="Головна сторінка">   <span class="big-fat">Електронний кабінет державного органу</span></a>
+        </div>
+
+      </div>
+      <!-- gpdk-header-left -->
+      <div class="gpdk-header-right">
+        <div class="change">
+
+         <img class="icon_change icon_change_header" id="change_lowvision" src="{% static '/img/icn-accessability.svg' %}" alt="">
+          <span>Людям із  порушенням зору</span>
+        </div>
+
+        <!-- IntroJS -->
+      <div style="width: 40px; height: 40px;"><a href="{% url 'dialogs_user' %}" class="header-notification intro-begin">
+          <i class="fa fa-envelope"></i>
+          {% if request.user.has_unreaded_message %}
+          <span class="indicator"></span>
+          {% endif %}
+        </a></div>
+        <div style="width: 40px; height: 40px;"><a href="#" class="header-notification intro-begin" onclick="intro()">
+          <i class="fa fa-question"></i>
+        </a></div>
+        {% load group %}
+        {% if request.user|has_group:"Оператори" %}
+          <div style="width: 40px; height: 40px;"><a href="/backend/" class="header-notification intro-begin">
+            <i class="fa fa-gears"></i>
+          </a></div>
+        {% endif %}
+        <div class="dropdown dropdown-c">
+          <a href="#" class="logged-user" data-toggle="dropdown">
+
+            <span> {{request.user.last_name}} {{request.user.first_name|make_list|first}}.{{request.user.middle_name|make_list|first}}.  </span>
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <nav class="nav">
+              <a href="#" class="nav-link"><i class="icon ion-forward"></i> Мій профіль</a>
+              <a href="/auth/logout" class="nav-link"><i class="icon ion-forward"></i> Вийти з акаунту</a>
+            </nav>
+          </div><!-- dropdown-menu -->
+        </div><!-- dropdown -->
+      </div><!-- header-right -->
+
+      <div class="modal-gov" id="modal-gov">
+        <div class="close"></div>
+        <div class="wrap">
+          <ul class="wrap-link">
+            <li>
+              <a href="#" target="_blank">Президент України</a>
+            </li>
+            <li>
+              <a href="#" target="_blank">Верховна Рада України</a>
+            </li>
+          </ul>
+          <ul class="wrap-link">
+            <li>
+              <a href="#" target="_blank">Конституційний суд України</a>
+            </li>
+            <li>
+              <a href="#" target="_blank">Рада національноїа безпеки і оборони України</a>
+            </li>
+          </ul>
+          <ul class="wrap-link" target="_blank">
+            <li>
+              <a href="#">Центральні та місцеві органи виконавчої влади</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-background"></div>
+    </div><!-- container -->
+  </div><!-- gpdk-header -->
+
+
+    <div class="gpdk-navbar">
+      <div class="container">
+        <ul class="nav">
+          <li class="nav-item active" data-intro="Головна сторінка">
+            <a class="nav-link" href="/">
+              <i class="icon ion-ios-home-outline"></i>
+              <span>Мій дашборд</span>
+            </a>
+          </li>
+          <li class="nav-item with-sub " data-intro="Послуги">
+            <a class="nav-link" href="#">
+              <i class="icon ion-ios-paper-outline"></i>
+              <span>Послуги</span>
+            </a>
+            <div class="sub-item">
+              <ul>
+                <li><a href="/eservice/my_eservices/">Замовлені послуги</a></li>
+                <li><a href="/eservice/create/">Замовити тестову послугу</a></li>
+
+
+              </ul>
+            </div><!-- sub-item -->
+          <li class="nav-item" data-intro="Профіль оператора">
+            <a class="nav-link" href="/backend/">
+              <i class="icon ion-ios-book-outline"></i>
+              <span>Бекенд оператора</span>
+            </a>
+
+          </li>
+          <li class="nav-item" data-intro="Адміністраторська">
+            <a class="nav-link" href="/_admin/">
+              <i class="icon ion-ios-gear-outline"></i>
+              <span>Адміністраторська</span>
+            </a>
+
+          </li>
+
+          </li>
+          <li class="nav-item" data-intro="Дизайн елементи фреймворку">
+            <a class="nav-link" href="/elements/">
+              <i class="icon ion-ios-analytics-outline"></i>
+              <span>Дизайн-фреймворк</span>
+            </a>
+          </li>
+          <li class="nav-item" data-intro="Документація">
+            <a class="nav-link" href="/documentation">
+              <i class="icon ion-ios-chatboxes-outline"></i>
+              <span>Документація</span>
+
+            </a>
+        </ul>
+      </div><!-- container -->
+    </div><!-- gpdk-navbar -->
+
+    <div class="edriver-mainpanel">
+    {% if 'dialogs-users' in request.path %}
+      <div class="container" style="height: 700px">
+      {% else %}
+        <div class="container">
+      {% endif %}
+
+        {% block breadcrumb%}{% endblock %}
+
+        <div class="row row-sm">
+          <div class="col-lg-12">
+          {% if not request.path == '/dialogs-users/' %}
+              <div class="card card-wrapper" >
+      {% endif %}
+{#              {% endif %}#}
+                <!--<div class="messages">-->
+                     <!--{% if messages %}-->
+                        <!--{% for message in messages %}-->
+                            <!--<div class="alert alert-solid {% if message.tags %} {{ message.tags }} {% endif %} alert-error  mg-b-0" role="alert">-->
+                                <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+                                  <!--<span aria-hidden="true">×</span>-->
+                                <!--</button>-->
+                                <!--{{ message }}-->
+                            <!--</div>-->
+                        <!--{% endfor %}-->
+                    <!--{% endif %}-->
+                <!--</div>-->
+                {% block content %}
+                {% endblock %}
+        {% if not request.path == '/dialogs-users/' %}
+              </div><!-- row -->
+          {% endif %}
+      </div><!-- container -->
+    </div><!-- edriver-mainpanel -->
+
+    </div>
+    </div>
+
+  <footer>
+    <div class="container mt-footer">
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="description">
+            <div class="item">
+              <div class="icon"></div>
+              <span class="first">
+
+                          Власність #######. Проект реалізовано
+                            <a href="#" target="_blank">
+                               Фондом "Східна Європа"
+                            </a>
+                            та
+                            <a href="#" target="_blank">
+                                Державним агентством з питань електронного урядування України
+                            </a>
+                            у межах програми міжнародної
+                            технічної допомоги
+                            <a href="#" target="_blank">
+                                 "Електронне врядування задля підзвітності влади та участі громади"
+                            </a> (TAPAS) ,
+                            за фінансової підтримки
+                            <a href="#" target="_blank">
+                                 Швейцарської агенції розвитку та співробітництва
+                            </a>
+                        </span>
+            </div>
+            <div class="item">
+              <div class="icon"></div>
+              <span>
+                   Портал працює в тестовому режимі.
+                   Якщо ви маєте зауваження або пропозиції, будь ласка, напишіть нам:
+                  <a href="#">support@hsc.gov.ua</a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <ul class="menu_footer">
+            <li><a href="">1. Меню </a></li>
+            <li><a href="">2. Меню </a></li>
+            <li><a href="">3. Меню </a></li>
+            <li><a href="">4. Меню </a></li>
+            <li><a href="">5. Меню </a></li>
+            <li><a href="">6. Меню </a></li>
+          </ul>
+          <div class="links second">
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="col-md-4 right_footer_block">
+          <div class="social-links">
+            <ul>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa fa-2x fa-facebook-square"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa fa-2x fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa fa-2x fa-youtube-play"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="change_footer">
+            <img class="icon_change" src="" alt="">
+            <span><a href="">Людям із порушенням зору</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="developer">
+            <div class="license">
+              <div class="icon"></div>
+              <span>
+                         Весь контент доступний за ліцензією
+                        <a target="_blank" href="#">Creative Commons Attribution 4.0 International license</a>, якщо не зазначено інше
+                    </span>
+            </div>
+
+            <div class="clearfix"></div>
+          </div>
+
+        </div>
+      </div>
+
+    <script src="{% static 'lib/jquery/js/jquery.js' %}"></script>
+    <script src="{% static 'lib/popper.js/js/popper.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'lib/jquery.cookie/js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'lib/jquery.sparkline.bower/js/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'js/ResizeSensor.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <!-- scripts for Form elements -->
+
+    <script src="{% static 'lib/jquery-toggles/js/toggles.min.js' %}"></script>
+    <script src="{% static 'lib/jt.timepicker/js/jquery.timepicker.js' %}"></script>
+    <script src="{% static 'lib/spectrum/js/spectrum.js' %}"></script>
+    <script src="{% static 'lib/jquery.maskedinput/js/jquery.maskedinput.js' %}"></script>
+    <script src="{% static 'lib/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"></script>
+    <script src="{% static 'js/slim.js' %}"></script>
+
+    <script src="{% static 'lib/select2/js/select2.full.min.js' %}"></script>
+    <script>
+      $(document).ready(function() {
+              $('select').select2({
+              });
+      } );
+    </script>
+
+    <script>
+          $(function(){
+            'use strict'
+
+            // Toggles
+            $('.toggle').toggles({
+              on: true,
+              height: 26
+            });
+
+            // Input Masks
+            $('#dateMask').mask('99.99.9999');
+
+            // Time Picker
+            $('#tpBasic').timepicker();
+            $('#tp2').timepicker({'scrollDefault': 'now'});
+            $('#tp3').timepicker();
+
+            $('#setTimeButton').on('click', function (){
+              $('#tp3').timepicker('setTime', new Date());
+            });
+
+            // Color picker
+            $('#colorpicker').spectrum({
+              color: '#17A2B8'
+            });
+
+            $('#showAlpha').spectrum({
+              color: 'rgba(23,162,184,0.5)',
+              showAlpha: true
+            });
+
+            $('#showPaletteOnly').spectrum({
+                showPaletteOnly: true,
+                showPalette:true,
+                color: '#DC3545',
+                palette: [
+                    ['#1D2939', '#fff', '#0866C6','#23BF08', '#F49917'],
+                    ['#DC3545', '#17A2B8', '#6610F2', '#fa1e81', '#72e7a6']
+                ]
+            });
+
+          });
+        </script>
+
+
+
+    <!-- scripts for Widgets -->
+
+    <!--<script src="{% static 'lib/moment/js/moment.js' %}"></script>-->
+    <!--<script src="{% static 'lib/d3/js/d3.js' %}"></script>-->
+    <!--<script src="{% static 'lib/rickshaw/js/rickshaw.min.js' %}"></script>-->
+    <!--<script src="{% static 'lib/gmaps/js/gmaps.js' %}"></script>-->
+    <!--<script src="{% static 'lib/peity/js/jquery.peity.js' %}"></script>-->
+    <!--<script src="{% static 'js/ResizeSensor.js' %}"></script>-->
+    <!--<script src="{% static 'js/widgets.js' %}"></script>-->
+
+    <!-- IntroJS -->
+    <script>
+      function intro() {
+              introJs().start();
+          }
+    </script>
+    <script src="{% static 'js/intro.js' %}"></script>
+{#    <script src="{% static 'js/main.js' %}"></script>#}
+  <script type="application/javascript">
+
+      $(document).ready(function() {
+
+      if (window.localStorage.is_lowvision == "1" ) {
+            $('#body').addClass('lowvision');
+
+        }
+
+       if (window.localStorage.resize != "0" ) {
+            $('#body').addClass('change_font_size');
+
+        }
+
+          var logo = $('.main-logo');
+          var modalBackground = $('.modal-background');
+          var modalGov = $('#modal-gov');
+          var close = $('#modal-gov .close');
+
+          $(logo).on('click', function(event) {
+              event.preventDefault();
+              $(modalBackground).fadeIn(200, function() {
+                  $(modalGov).fadeIn(200);
+              });
+          });
+
+          $(modalBackground).on('click', function() {
+              $(modalGov).fadeOut('400');
+              $(modalBackground).fadeOut('400');
+          });
+
+          $(close).on('click', function() {
+              $(modalGov).fadeOut('400');
+              $(modalBackground).fadeOut('400');
+          });
+
+      });
+  </script>
+<script type="application/javascript">
+
+  $(document).ready(function() {
+
+      $('.icon_change').click(function(){
+         $('#body').toggleClass('lowvision');
+    //     localStorage.resize= 16.8;
+            var resize = new Array('body', 'tr', '.table-responsive', '.nav-link', '.country', 'li');
+                resize = resize.join(',');
+    //            $(resize).css('font-size', 16.8);
+
+         if (window.localStorage.is_lowvision == "1" ) {
+            localStorage.is_lowvision = "0";
+    //         $(resize).css('font-size', 13);
+    //         localStorage.resize = 13;
+         }
+         else{
+            localStorage.is_lowvision = "1";
+
+         }
+    });
+
+      });
+</script>
+  {% block js_footer %}{% endblock %}
+
+    </div>
+  </footer>
+  </body>
+</html>
+

@@ -1,0 +1,56 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">
+            {{ document.type.title }} №{{ document.internal_id }}
+            <small> Статус:
+                <div class="label {{ document.status.color }}">{{ document.status.title }}</div>
+            </small>
+
+        </h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-6">
+        <div class="form-group">
+            <label><b>Дата реєстрації послуги:</b></label>
+            {{ document.created_at|date:"d.m.Y" }}
+        </div>
+        <div class="form-group">
+            <label><b>Заголовок або короткий зміст послуги:</b></label>
+            {{ document.title }}
+        </div>
+        <div class="form-group">
+            <label><b>Автор послуги:</b></label>
+            {{ document.created_by.last_name }}
+            {{ document.created_by.first_name }}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label><b>Тип ліцензії:</b></label>
+            {{ document.type_license }}
+        </div>
+        <div class="form-group">
+            <label><b>Тип оплати:</b></label>
+            {{ document.payment }}
+        </div>
+        <div class="form-group">
+            <label><b>Область:</b></label>
+            {{ document.created_by.region }}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+

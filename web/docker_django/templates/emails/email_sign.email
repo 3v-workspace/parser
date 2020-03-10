@@ -1,0 +1,9 @@
+<div class="wrapper" style="width:100%; margin:0; padding:0; color: #000; background: linear-gradient(0deg, #073b5b 0%, #072240 100%); ">
+    <div class="content" style="margin-left: 10%; height: 100%; margin-right: 10%;  background-color: #ffff; ">
+        <div class="header" style="border-bottom: 2px solid #dee2e6;">
+
+        </div>
+        <b style="margin: 2%; display: block; font-size: 18px;">Вітаємо Вас, {{user_name}}!</b>
+        <span style="margin: 2%; display: block; font-size: 18px;">Для того щоб активувати вашу email адресу та щоб Ви мали змогу отримувати сповіщення перейдіть за посиланням {{ domain }}{% url 'another_sign' encoded=encoded %}</span>
+    </div>
+</div>

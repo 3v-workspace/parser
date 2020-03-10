@@ -1,0 +1,50 @@
+{% extends 'backend/base_with_filter.html' %}
+{% load staticfiles %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/backend/">Головна</a></li>
+            <li class="breadcrumb-item active" aria-current="page">послуги організації</li>
+        </ol>
+        <h6 class="gpdk-pagetitle">Послуги з оцінкою {{ desciption }}</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container section-wrapper">
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="table-responsive">
+                {% if eservices %}
+                    <table class="table mg-b-0">
+                      <thead>
+                        <tr>
+                          <th>Назва</th>
+                          <th>Статус</th>
+                          <th>Дата створення</th>
+                          <th>Оцінка</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for item in eservices %}
+                          <tr>
+                            <th>
+                              <a href="/backend/eservice/{{ item.id }}">
+                                {{ item.title }}
+                              </a>
+                            </th>
+                              <td> <span class="label color-esdf {{ item.status.attr.slug }}">{{ item.status.title }}</span></td>
+                            <td>{{ item.created_at }}</td>
+                            <td>{{ item.eservicestar_set.first.average_value }}</td>
+                          </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                {%else%}
+                    * Немає послуг з даним типом оцінки
+                {%endif%}
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

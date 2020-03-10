@@ -1,0 +1,115 @@
+{% extends 'frontend/base.html' %}
+{% load group %}
+
+
+{% load static %}
+
+{% block breadcrumb %}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Створення послуги</h6>
+    </div>
+{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'lib/leaflet/css/leaflet.css' %}"/>
+    <link rel="stylesheet" href="{% static 'lib/select2/css/select2.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    {{ form.media.css }}
+    {{ form.media.js }}
+
+    <div class="box">
+        <div class="col-xs-12 step-wrapper">
+            <ul class="nav-panel backend">
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-address-card"></i></h4>
+                    <p class="list-group-item-text">Заявник</p>
+                </a>
+            </li>
+            <li class="active">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-font-awesome"></i></h4>
+                    <p class="list-group-item-text">Ділянка надр</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-edit"></i></h4>
+                    <p class="list-group-item-text">Характеристика ділянки</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-file"></i></h4>
+                    <p class="list-group-item-text">Файли послуги</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-key"></i></h4>
+                    <p class="list-group-item-text">Підпис</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-key"></i></h4>
+                    <p class="list-group-item-text">Результат</p>
+                </a>
+            </li>
+        </ul>
+        </div>
+
+
+        <form method="post" class="card card-wrapper card-without-border" enctype="multipart/form-data"
+              id="resolution_rada_project-create-form">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-12 mb-1">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <div class="btn btn-primary js-add-area">Додати область</div>
+                        <div class="btn btn-danger js-clear-area ml-1">Видалити усі області</div>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-1">
+                    <div id="map" style="padding-bottom:45%;"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="form-group col-md-12 text-right">
+                            <a href="/create/" class="btn btn-fill btn-danger"><i class="fa  fa-close"></i> Відміна</a>
+                            <button type="submit" class="btn btn-fill btn-success" id="submit">Зберегти та продовжити
+                                <i class="fa fa-angle-double-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}
+
+{% block js_footer %}
+    <script>
+        var CSRF_TOKEN = '{{ csrf_token }}';
+    </script>
+
+    <script src="{% static 'js/city_upload.js' %}"></script>
+    <script src="{% static 'js/eservice.js' %}"></script>
+
+    <script src="{% static 'lib/leaflet/js/leaflet-src.js' %}"></script>
+    <script src="{% static 'lib/leaflet/plugins/Path.Drag.js' %}"></script>
+    <script src="{% static 'lib/leaflet/plugins/Leaflet.Editable.js' %}"></script>
+    <script src="{% static 'js/area-editor.js' %}"></script>
+{% endblock %}

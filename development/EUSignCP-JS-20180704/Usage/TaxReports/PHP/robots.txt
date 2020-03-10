@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /fcgi-bin/
+Disallow: /cgi-bin/
+Disallow: /tmp/

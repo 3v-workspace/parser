@@ -1,0 +1,24 @@
+[
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "Оператори"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "Погоджувачі"
+    }
+  },
+    {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "Керівники"
+    }
+  }
+
+]

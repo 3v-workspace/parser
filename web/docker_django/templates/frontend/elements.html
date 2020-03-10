@@ -1,0 +1,1983 @@
+{% extends 'frontend/base.html' %}
+{% load staticfiles %}
+{% block extrahead %}
+  <!--<link rel="stylesheet" href="{% static 'css/slim2.css' %}">-->
+{% endblock %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Привіт, {{ request.user.first_name}}</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+        <div class="gpdk-mainpanel">
+              <div class="container">
+                <div class="gpdk-pageheader">
+                  <ol class="breadcrumb gpdk-breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Головна</a></li>
+                    <li class="breadcrumb-item"><a href="#">Форми</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Віджети</li>
+                  </ol>
+                  <h6 class="gpdk-pagetitle">Віджети</h6>
+                </div><!-- gpdk-pageheader -->
+
+
+                <div class="section-wrapper">
+          <label class="section-title">Основні форми вводу</label>
+          <p class="mg-b-20 mg-sm-b-40">Основні форми контролю вводу з режимами disabled (вимкнено, недоступно) та readonly (тільки для читання).</p>
+
+          <div class="row">
+            <div class="col-lg">
+              <input class="form-control" placeholder="Input box" type="text">
+            </div><!-- col -->
+            <div class="col-lg mg-t-10 mg-lg-t-0">
+              <input class="form-control" placeholder="Input box (readonly)" readonly="" type="text">
+            </div><!-- col -->
+            <div class="col-lg mg-t-10 mg-lg-t-0">
+              <input class="form-control" placeholder="Input box (disabled)" disabled="" type="text">
+            </div><!-- col -->
+          </div><!-- row -->
+
+          <div class="row mg-t-20">
+            <div class="col-lg">
+              <textarea rows="3" class="form-control" placeholder="Textarea"></textarea>
+            </div><!-- col -->
+            <div class="col-lg mg-t-10 mg-lg-t-0">
+              <textarea rows="3" class="form-control" placeholder="Textarea (readonly)" readonly=""></textarea>
+            </div><!-- col -->
+            <div class="col-lg mg-t-10 mg-lg-t-0">
+              <textarea rows="3" class="form-control" placeholder="Texarea (disabled)" disabled=""></textarea>
+            </div><!-- col -->
+          </div><!-- row -->
+        </div><!-- section-wrapper -->
+
+        <div class="section-wrapper mg-t-20">
+          <label class="section-title">Ввід дійсного стану</label>
+          <p class="mg-b-20 mg-sm-b-40">Форми контролю вводу з дійсним станом success (успіх), warning (попередження) та error (помилка).</p>
+
+          <div class="row">
+            <div class="col-lg">
+              <div class="form-group has-success mg-b-0">
+                <input class="form-control is-valid" placeholder="Input box (success state)" type="text">
+                <textarea rows="3" class="form-control is-valid mg-t-20" placeholder="Textarea (success state)"></textarea>
+              </div><!-- form-group -->
+            </div><!-- col -->
+            <div class="col-lg mg-t-20 mg-lg-t-0">
+              <div class="form-group has-warning mg-b-0">
+                <input class="form-control is-warning" placeholder="Input box (warning state)" type="text">
+                <textarea rows="3" class="form-control is-warning mg-t-20" placeholder="Textarea (warning state)"></textarea>
+              </div><!-- form-group -->
+            </div><!-- col -->
+            <div class="col-lg mg-t-20 mg-lg-t-0">
+              <div class="form-group has-danger mg-b-0">
+                <input class="form-control is-invalid" placeholder="Input box (danger state)" type="text">
+                <textarea rows="3" class="form-control is-invalid mg-t-20" placeholder="Textarea (danger state)"></textarea>
+              </div><!-- form-group -->
+            </div><!-- col -->
+          </div><!-- row -->
+        </div><!-- section-wrapper -->
+
+        <div class="section-wrapper mg-t-20">
+          <label class="section-title">Прапорці та радіокнопки</label>
+          <p class="mg-b-20 mg-sm-b-40">Стилізовані прапорці та радіокнопки.</p>
+
+          <div class="row">
+            <div class="col-lg-3">
+              <label class="ckbox">
+                <input type="checkbox"><span>Checkbox Unchecked</span>
+              </label>
+            </div><!-- col-3 -->
+            <div class="col-lg-3 mg-t-20 mg-lg-t-0">
+              <label class="ckbox">
+                <input type="checkbox" checked=""><span>Checkbox Checked</span>
+              </label>
+            </div><!-- col-3 -->
+            <div class="col-lg-3 mg-t-20 mg-lg-t-0">
+              <label class="ckbox">
+                <input type="checkbox" disabled=""><span>Checkbox Disabled</span>
+              </label>
+            </div><!-- col-3 -->
+          </div><!-- row -->
+
+          <div class="row mg-t-10">
+            <div class="col-lg-3">
+              <label class="rdiobox">
+                <input name="rdio" type="radio">
+                <span>Radio Unchecked</span>
+              </label>
+            </div><!-- col-3 -->
+            <div class="col-lg-3 mg-t-20 mg-lg-t-0">
+              <label class="rdiobox">
+                <input name="rdio" type="radio" checked="">
+                <span>Radio Checked</span>
+              </label>
+            </div><!-- col-3 -->
+            <div class="col-lg-3 mg-t-20 mg-lg-t-0">
+              <label class="rdiobox">
+                <input name="rdio" type="radio" disabled="">
+                <span>Radio Disabled</span>
+              </label>
+            </div><!-- col-3 -->
+          </div><!-- row -->
+        </div><!-- section-wrapper -->
+
+        <div class="section-wrapper mg-t-20">
+          <label class="section-title">Варіанти кольору активного стану</label>
+          <p class="mg-b-20 mg-sm-b-40">Стилізовані прапорці та радіокнопки із забарвленням активного стану.</p>
+
+          <div class="row">
+            <div class="col-lg-3">
+              <label class="ckbox">
+                <input type="checkbox" checked=""><span>Checkbox Primary (default)</span>
+              </label>
+
+              <label class="ckbox ckbox-success mg-t-15">
+                <input type="checkbox" checked=""><span>Checkbox Success</span>
+              </label>
+
+              <label class="ckbox ckbox-pink mg-t-15">
+                <input type="checkbox" checked=""><span>Checkbox Indigo</span>
+              </label>
+            </div><!-- col-3 -->
+            <div class="col-lg-3">
+              <label class="rdiobox">
+                <input type="radio" checked=""><span>Radio Primary (default)</span>
+              </label>
+
+              <label class="rdiobox rdiobox-success mg-t-15">
+                <input type="radio" checked=""><span>Radio Success</span>
+              </label>
+
+              <label class="rdiobox rdiobox-pink mg-t-15">
+                <input type="radio" checked=""><span>Radio Indigo</span>
+              </label>
+            </div><!-- col-3 -->
+          </div><!-- row -->
+        </div><!-- section-wrapper -->
+
+            {#   Statistics   #}
+          <div class="section-wrapper mg-t-20">
+               <label class="section-title">Cтатистика</label>
+                  <div class="nav-statistics-wrapper">
+          <nav class="nav">
+            <a href="" class="nav-link active">Нових користувачів у системі</a>
+            <a href="" class="nav-link">Швидкість опрацювання послуг</a>
+          </nav>
+          <nav class="nav">
+            <a href="" class="nav-link active">За весь час</a>
+            <a href="" class="nav-link ">За тиждень</a>
+            <a href="" class="nav-link">За місяць</a>
+          </nav>
+        </div>
+                  <div class="row row-statistics mg-b-30">
+                  <div class="col-md-5">
+                    <h1 class="tx-inverse tx-56 tx-lato tx-bold">34,100</h1>
+                    <!--<h6 class="tx-15 tx-inverse tx-bold mg-b-20">Total hours spent (7 days)</h6>-->
+                    <p>До нас приєдналося та замовило послуги понад 34,100 людей.</p>
+                    <p class="tx-12">
+                      <a href="">Про нас</a>
+                      <a href="">Контакти</a>
+                    </p>
+                  </div><!-- col-5 -->
+                  <div class="col-md-7 mg-t-20 mg-md-t-0"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                    <canvas id="chartstats" height="280" width="635" class="chartjs-render-monitor" style="display: block; width: 635px; height: 280px;"></canvas>
+                  </div><!-- col-7 -->
+                </div>
+      </div>
+            {#   Statistics END   #}
+
+        <div class="section-wrapper mg-t-20">
+                  <label class="section-title">Браузер файлів</label>
+                  <p class="mg-b-20 mg-sm-b-40">Стилізовані браузери файлів.</p>
+
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Вибрати файл</label>
+                      </div><!-- custom-file -->
+                    </div><!-- col -->
+                    <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile2">
+                        <label class="custom-file-label custom-file-label-primary" for="customFile">Вибрати файл</label>
+                      </div><!-- custom-file -->
+                    </div><!-- col -->
+                    <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile3">
+                        <label class="custom-file-label custom-file-label-inverse" for="customFile">Вибрати файл</label>
+                      </div><!-- custom-file -->
+                    </div><!-- col -->
+                  </div><!-- row -->
+                </div> <!-- section-wrapper -->
+
+                <div class="section-wrapper mg-t-20">
+                          <label class="section-title">Перемикачі</label>
+                          <p class="mg-b-20 mg-sm-b-40">Легковажний плагін jQuery, який створює легконастроювані кнопки перемикачів.</p>
+
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-light" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-light primary" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-light success" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-light warning" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-light danger" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-light info" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-light indigo" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+
+                          <div class="mg-t-20"></div>
+
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-modern" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-modern primary" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-modern success" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-modern warning" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-modern danger" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-modern info" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>
+
+                          <div class="toggle-wrapper">
+                            <div class="toggle toggle-modern indigo" style="height: 26px; width: 60px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 94px; margin-left: 0px;"><div class="toggle-on active" style="height: 26px; width: 47px; text-indent: -8.66667px; line-height: 26px;">ON</div><div class="toggle-blob" style="height: 26px; width: 26px; margin-left: -13px;"></div><div class="toggle-off" style="height: 26px; width: 47px; margin-left: -13px; text-indent: 8.66667px; line-height: 26px;">OFF</div></div></div></div>
+                          </div>  <!-- section-wrapper -->
+
+                          <p class="section-label mg-t-40">Довідник класу</p>
+                          <table class="table table-reference">
+                            <thead>
+                              <tr>
+                                <th class="wd-40p">Class</th>
+                                <th class="wd-60p">Values</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><code class="pd-0 bg-transparent">class="toggle toggle-light [value]"</code></td>
+                                <td rowspan="2">primary | success | warning | danger | info | teal | indigo | purple | pink | orange</td>
+                              </tr>
+                              <tr>
+                                <td><code class="pd-0 bg-transparent">class="toggle toggle-modern [value]"</code></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+
+        <div class="section-wrapper mg-t-20">
+          <label class="section-title">Групи вводу</label>
+          <p class="mg-b-20 mg-sm-b-40">Легко розширюйте форми контролю додаючи текст, кнопки, або групи кнопок з обох боків текстового вводу.</p>
+
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="icon ion-person tx-16 lh-0 op-6"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username">
+              </div><!-- input-group -->
+            </div><!-- col-4 -->
+            <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Recipient's username">
+                <div class="input-group-append">
+                  <span class="input-group-text">@domain.gov.ua</span>
+                </div>
+              </div><!-- input-group -->
+            </div><!-- col-4 -->
+            <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text">.00</span>
+                </div>
+              </div><!-- input-group -->
+            </div><!-- col-sm-4 -->
+          </div><!-- row -->
+
+        </div><!-- section-wrapper -->
+
+        <div class="section-wrapper mg-t-20">
+          <label class="section-title">Маска вводу</label>
+          <p class="mg-b-20 mg-sm-b-40">Маски вводу дозволяють користувачу більш легко вводити дані обмеженої довжини там, де ви бажаєте, щоб вони це робили, в визначеному форматі (дані, телефони та інше).</p>
+
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+                  </div>
+                </div>
+                <input id="dateMask" type="text" class="form-control" placeholder="ДД/ММ/РРРР">
+              </div><!-- input-group -->
+            </div><!-- col-4 -->
+            <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-phone tx-16 lh-0 op-6"></i>
+                  </div>
+                </div><!-- input-group-prepend -->
+                <input id="phoneMask" type="text" class="form-control" placeholder="(999) 99-99-999">
+              </div><!-- input-group -->
+            </div>
+            <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-plus tx-16 lh-0 op-6"></i>
+                  </div><!-- input-group-text -->
+                </div><!-- input-group-prepend -->
+                <input id="ssnMask" type="text" class="form-control" placeholder="999-99-9999">
+              </div>
+            </div>
+          </div><!-- row -->
+        </div><!-- section-wrapper -->
+
+        <div class="section-wrapper mg-t-20">
+                  <label class="section-title">Вхідні теги</label>
+                  <p class="mg-b-20 mg-sm-b-40">Користувальницький інтерфейс для управління тегами.</p>
+
+                  <div class="bootstrap-tagsinput"><span class="tag label label-info">Amsterdam<span data-role="remove"></span></span> <span class="tag label label-info">Washington<span data-role="remove"></span></span> <span class="tag label label-info">Sydney<span data-role="remove"></span></span> <span class="tag label label-info">Beijing<span data-role="remove"></span></span> <span class="tag label label-info">Cairo<span data-role="remove"></span></span> <input type="text" placeholder=""></div><input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" style="display: none;">
+                </div> <!-- section-wrapper -->
+
+                <div class="section-wrapper mg-t-20">
+                  <label class="section-title">Вибір часу</label>
+                  <p class="mg-b-20 mg-sm-b-40">Легко вибирайте час для вводу тексту, використовуючи вашу мишу або клавіатуру.</p>
+
+                  <label>Вибір часу за замовченням:</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fa fa-clock-o tx-16 lh-0 op-6"></i>
+                        </div>
+                      </div><!-- input-group-prepend -->
+                      <input id="tpBasic" type="text" class="form-control ui-timepicker-input" placeholder="Set time" autocomplete="off">
+                    </div>
+                  </div><!-- wd-150 -->
+
+                  <label>Встановіть позицію скролу на місцевий час, якщо інше не вибрано:</label>
+                  <div class="wd-150 mg-b-30">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fa fa-clock-o tx-16 lh-0 op-6"></i>
+                        </div><!-- input-group-text -->
+                      </div><!-- input-group-prepend -->
+                      <input id="tp2" type="text" class="form-control ui-timepicker-input" placeholder="Set time" autocomplete="off">
+                    </div>
+                  </div><!-- wd-150 -->
+
+                  <label>Динамічно встановлюйте час, використовуючи Javascript Date object:</label>
+                  <div class="d-flex">
+                    <div class="input-group wd-150">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fa fa-clock-o tx-16 lh-0 op-6"></i>
+                        </div><!-- input-group-text -->
+                      </div><!-- input-group-prepend -->
+                      <input id="tp3" type="text" class="form-control ui-timepicker-input" placeholder="Set time" autocomplete="off">
+                    </div><!-- input-group -->
+                    <button id="setTimeButton" class="btn btn-primary mg-l-10">Встановити поточний час</button>
+                  </div>
+                </div> <!-- section-wrapper -->
+
+                <div class="section-wrapper mg-t-20">
+              <label class="section-title">Вибір кольору</label>
+              <p class="mg-b-20 mg-sm-b-40">Простий компонент для вибору кольору в такий же спосіб, як ви вибираєте колір в Adobe Photoshop.</p>
+
+              <input type="text" id="colorpicker" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(23, 162, 184);"></div></div><div class="sp-dd">▼</div></div>
+
+              <p class="mg-t-40 mg-b-10">Ви можете вибрати прозорість. Перевірте цей приклад.</p>
+              <input type="text" id="showAlpha" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgba(23, 162, 184, 0.5);"></div></div><div class="sp-dd">▼</div></div>
+
+              <p class="mg-t-40 mg-b-10">Показати тільки палітру. Якщо ви бажаєте, спектр може відображати тільки вказані вами кольори.</p>
+              <input type="text" id="showPaletteOnly" style="display: none;"><div class="sp-replacer sp-light"><div class="sp-preview"><div class="sp-preview-inner" style="background-color: rgb(220, 53, 69);"></div></div><div class="sp-dd">▼</div></div>
+            </div> <!-- section-wrapper -->
+
+              </div>
+            </div><!-- gpdk-mainpanel -->
+
+<div class="gpdk-mainpanel">
+      <div class="container">
+        <div class="gpdk-pageheader">
+          <ol class="breadcrumb gpdk-breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Головна</a></li>
+            <li class="breadcrumb-item"><a href="#">Форми</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Сповіщення</li>
+          </ol>
+          <h6 class="gpdk-pagetitle">Сповіщення</h6>
+        </div><!-- gpdk-pageheader -->
+
+        <div class="section-wrapper">
+                  <label class="section-title">Основні сповіщення</label>
+                  <p class="mg-b-20 mg-sm-b-40">Використовуйте один з чотирьох необхідних контекстних класів</p>
+
+                  <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Молодець!</strong> Ви успішно прочитали це важливе повідомлення.
+                  </div><!-- alert -->
+
+                  <div class="alert alert-info" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Голову вгору!</strong> Це повідомлення потребує вашої уваги, але це не надто важливо.
+                  </div><!-- alert -->
+
+                  <div class="alert alert-warning" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Обережно!</strong> Краще перевірте себе, це недобре виглядає.
+                  </div><!-- alert -->
+
+                  <div class="alert alert-danger mg-b-0" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Ой лишенько!</strong> Змініть кілька речей та спробуйте надіслати повторно.
+                  </div><!-- alert -->
+
+                  <p class="section-label mg-t-20 mg-sm-t-40">Довідник класу</p>
+                  <table class="table table-reference">
+                    <thead>
+                      <tr>
+                        <th class="wd-40p">Class</th>
+                        <th class="wd-60p">Values</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code class="pd-0 bg-transparent">class="alert alert-[value]"</code></td>
+                        <td>success | info | warning | danger</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div><!-- section-wrapper -->
+
+                <div class="section-wrapper mg-t-20">
+                          <label class="section-title">Сповіщення в контурному обрамленні</label>
+                          <p class="mg-b-20 mg-sm-b-40">Використовуйте один з чотирьох необхідних контекстних класів</p>
+
+                          <div class="alert alert-outline alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                            <strong>Молодець!</strong> Ви успішно прочитали це важливе повідомлення.
+                          </div><!-- alert -->
+
+                          <div class="alert alert-outline alert-info" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                            <strong>Голову вгору!</strong> Це повідомлення потребує вашої уваги, але це не надто важливо.
+                          </div><!-- alert -->
+
+                          <div class="alert alert-outline alert-warning" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                            <strong>Обережно!</strong> Краще перевірте себе, це недобре виглядає.
+                          </div><!-- alert -->
+
+                          <div class="alert alert-outline alert-danger mg-b-0" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                            <strong>Ой лишенько!</strong> Змініть кілька речей та спробуйте надіслати повторно.
+                          </div><!-- alert -->
+
+                          <p class="section-label mg-t-20 mg-sm-t-40">Довідник класу</p>
+                          <table class="table table-reference">
+                            <thead>
+                              <tr>
+                                <th class="wd-40p">Class</th>
+                                <th class="wd-60p">Values</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><code class="pd-0 bg-transparent">class="alert alert-outline alert-[value]"</code></td>
+                                <td>success | info | warning | danger</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div><!-- section-wrapper -->
+
+                        <div class="section-wrapper mg-t-20">
+          <label class="section-title">Сповіщення суцільним кольором</label>
+          <p class="mg-b-20 mg-sm-b-40">Використовуйте один з чотирьох необхідних контекстних класів</p>
+
+          <div class="alert alert-solid alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <strong>Молодець!</strong> Ви успішно прочитали це важливе повідомлення.
+          </div><!-- alert -->
+
+          <div class="alert alert-solid alert-info" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <strong>Голову вгору!</strong> Це повідомлення потребує вашої уваги, але це не надто важливо.
+          </div><!-- alert -->
+
+          <div class="alert alert-solid alert-warning" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <strong>Обережно!</strong> Краще перевірте себе, це недобре виглядає.
+          </div><!-- alert -->
+
+          <div class="alert alert-solid alert-danger mg-b-0" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <strong>Ой лишенько!</strong> Змініть кілька речей та спробуйте надіслати повторно.
+          </div><!-- alert -->
+
+          <p class="section-label mg-t-20 mg-sm-t-40">Довідник класу</p>
+          <table class="table table-reference">
+            <thead>
+              <tr>
+                <th class="wd-40p">Class</th>
+                <th class="wd-60p">Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="pd-0 bg-transparent">class="alert alert-solid alert-[value]"</code></td>
+                <td>success | info | warning | danger</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>  <!-- section-wrapper -->
+
+      </div>
+    </div><!-- gpdk-mainpanel -->
+
+    <div class="gpdk-mainpanel">
+          <div class="container">
+            <div class="gpdk-pageheader">
+              <ol class="breadcrumb gpdk-breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Головна</a></li>
+                <li class="breadcrumb-item"><a href="#">Форми</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Кнопки</li>
+              </ol>
+              <h6 class="gpdk-pagetitle">Кнопки</h6>
+            </div><!-- gpdk-pageheader -->
+
+            <div class="section-wrapper">
+                      <label class="section-title">Кнопки за замовченням</label>
+                      <p class="mg-b-20 mg-sm-b-40">Заздалегідь визначенні стилі кнопок, кожен з яких виконує свою семантичну мету.</p>
+
+                      <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                          <div class="btn-demo">
+                            <button class="btn btn-primary btn-block mg-b-10">Основна</button>
+                            <button class="btn btn-primary active btn-block mg-b-10">Активна</button>
+                            <button class="btn btn-primary disabled btn-block mg-b-10">Вимкнена</button>
+                          </div><!-- btn-demo -->
+                        </div><!-- col-sm-3 -->
+
+                        <div class="col-sm-6 col-md-3 mg-t-20 mg-sm-t-0">
+                          <div class="btn-demo">
+                            <button class="btn-elements btn-secondary btn-block mg-b-10">Другорядна</button>
+                            <button class="btn btn-secondary active btn-block mg-b-10">Активна</button>
+                            <button class="btn btn-secondary disabled btn-block mg-b-10">Вимкнена</button>
+                          </div><!-- btn-demo -->
+                        </div><!-- col-sm-3 -->
+                      </div><!-- row -->
+                    </div>  <!-- section-wrapper -->
+
+                    <div class="section-wrapper mg-t-20">
+          <label class="section-title">Розміри кнопок</label>
+          <p class="mg-b-20 mg-sm-b-40">Кнопки з маленьким та великим розміром.</p>
+
+          <div class="row">
+            <div class="col-sm-6 col-md-3">
+              <div class="btn-demo">
+                <button class="btn btn-primary btn-sm btn-block mg-b-10">Маленька</button>
+              </div><!-- btn-demo -->
+            </div><!-- col-sm-3 -->
+            <div class="col-sm-6 col-md-3 mg-t-20 mg-sm-t-0">
+              <div class="btn-demo">
+                <button class="btn btn-secondary btn-sm btn-block mg-b-10">Маленька</button>
+              </div><!-- btn-demo -->
+            </div><!-- col-sm-3 -->
+          </div><!-- row -->
+
+          <div class="row mg-t-5">
+            <div class="col-sm-6 col-md-3">
+              <div class="btn-demo">
+                <button class="btn btn-primary btn-lg btn-block mg-b-10">Велика</button>
+              </div><!-- btn-demo -->
+            </div><!-- col-sm-3 -->
+            <div class="col-sm-6 col-md-3 mg-t-20 mg-sm-t-0">
+              <div class="btn-demo">
+                <button class="btn btn-secondary btn-lg btn-block mg-b-10">Велика</button>
+              </div><!-- btn-demo -->
+            </div><!-- col-sm-3 -->
+          </div><!-- row -->
+        </div><!-- section-wrapper -->
+
+        <div class="section-wrapper mg-t-20">
+                  <label class="section-title">Кольорові кнопки</label>
+                  <p class="mg-b-20 mg-sm-b-40">Заздалегідь визначенні стилі кнопок, кожен з яких виконує свою семантичну мету.</p>
+
+                  <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                      <div class="btn-demo">
+                        <button class="btn btn-success btn-block mg-b-10">Успіх</button>
+                        <button class="btn btn-success active btn-block mg-b-10">Активна</button>
+                        <button class="btn btn-success disabled btn-block mg-b-10">Вимкнена</button>
+                      </div><!-- btn-demo -->
+                    </div><!-- col-sm-3 -->
+
+                    <div class="col-sm-6 col-md-3 mg-t-20 mg-sm-t-0">
+                      <div class="btn-demo">
+                        <button class="btn btn-warning btn-block mg-b-10">Увага</button>
+                        <button class="btn btn-warning active btn-block mg-b-10">Активна</button>
+                        <button class="btn btn-warning disabled btn-block mg-b-10">Вимкнена</button>
+                      </div><!-- btn-demo -->
+                    </div><!-- col-sm-3 -->
+
+                    <div class="col-sm-6 col-md-3 mg-t-20 mg-md-t-0">
+                      <div class="btn-demo">
+                        <button class="btn btn-danger btn-block mg-b-10">Небезпека</button>
+                        <button class="btn btn-danger active btn-block mg-b-10">Активна</button>
+                        <button class="btn btn-danger disabled btn-block mg-b-10">Вимкнена</button>
+                      </div><!-- btn-demo -->
+                    </div><!-- col-sm-3 -->
+
+                    <div class="col-sm-6 col-md-3 mg-t-20 mg-md-t-0">
+                      <div class="btn-demo">
+                        <button class="btn btn-info btn-block mg-b-10">Інформація</button>
+                        <button class="btn btn-info active btn-block mg-b-10">Активна</button>
+                        <button class="btn btn-info disabled btn-block mg-b-10">Вимкнена</button>
+                      </div><!-- btn-demo -->
+                    </div><!-- col-sm-3 -->
+                  </div><!-- row -->
+                </div><!-- section-wrapper -->
+
+                <div class="section-wrapper mg-t-20">
+          <label class="section-title">Додаткові кольорові кнопки</label>
+          <p class="mg-b-20 mg-sm-b-40">Заздалегідь визначенні стилі кнопок, кожен з яких виконує свою семантичну мету.</p>
+
+          <div class="row">
+            <div class="col-sm-6 col-md-3">
+              <div class="btn-demo">
+                <button class="btn btn-indigo btn-block mg-b-10">Індіго</button>
+                <button class="btn btn-indigo active btn-block mg-b-10">Активна</button>
+                <button class="btn btn-indigo disabled btn-block mg-b-10">Вимкнена</button>
+              </div><!-- btn-demo -->
+            </div><!-- col-sm-3 -->
+
+            <div class="col-sm-6 col-md-3 mg-t-20 mg-sm-t-0">
+              <div class="btn-demo">
+                <button class="btn btn-purple btn-block mg-b-10">Фіолетова</button>
+                <button class="btn btn-purple active btn-block mg-b-10">Активна</button>
+                <button class="btn btn-purple disabled btn-block mg-b-10">Вимкнена</button>
+              </div><!-- btn-demo -->
+            </div><!-- col-sm-3 -->
+
+            <div class="col-sm-6 col-md-3 mg-t-20 mg-md-t-0">
+              <div class="btn-demo">
+                <button class="btn btn-teal btn-block mg-b-10">М'ятна</button>
+                <button class="btn btn-teal active btn-block mg-b-10">Активна</button>
+                <button class="btn btn-teal disabled btn-block mg-b-10">Вимкнена</button>
+              </div><!-- btn-demo -->
+            </div><!-- col-sm-3 -->
+
+            <div class="col-sm-6 col-md-3 mg-t-20 mg-md-t-0">
+              <div class="btn-demo">
+                <button class="btn btn-pink btn-block mg-b-10">Рожева</button>
+                <button class="btn btn-pink active btn-block mg-b-10">Активна</button>
+                <button class="btn btn-pink disabled btn-block mg-b-10">Вимкнена</button>
+              </div><!-- btn-demo -->
+            </div><!-- col-sm-3 -->
+          </div><!-- row -->
+        </div><!-- section-wrapper -->
+
+        <div class="section-wrapper mg-t-20">
+                  <label class="section-title">Кнопки з контуром</label>
+                  <p class="mg-b-20 mg-sm-b-40">Заздалегідь визначенні стилі кнопок, кожен з яких виконує свою семантичну мету.</p>
+
+                  <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                      <div class="btn-demo">
+                        <button class="btn-elements btn-outline-primary btn-block mg-b-10">Основна</button>
+                        <button class="btn btn-outline-primary active btn-block mg-b-10">Активна</button>
+                        <button class="btn btn-outline-primary disabled btn-block mg-b-10">Вимкнена</button>
+                      </div><!-- btn-demo -->
+                    </div><!-- col-sm-3 -->
+                    <div class="col-sm-6 col-md-3 mg-t-20 mg-sm-t-0">
+                      <div class="btn-demo">
+                        <button class="btn-elements btn-outline-secondary btn-block mg-b-10">Другорядна</button>
+                        <button class="btn-elements btn-outline-secondary active btn-block mg-b-10">Активна</button>
+                        <button class="btn-elements btn-outline-secondary disabled btn-block mg-b-10">Вимкнена</button>
+                      </div><!-- btn-demo -->
+                    </div><!-- col-sm-3 -->
+                    <div class="col-sm-6 col-md-3 mg-t-20 mg-md-t-0">
+                      <div class="btn-demo">
+                        <button class="btn-elements btn-outline-success btn-block mg-b-10">Другорядна</button>
+                        <button class="btn btn-outline-success active btn-block mg-b-10">Активна</button>
+                        <button class="btn btn-outline-success disabled btn-block mg-b-10">Вимкнена</button>
+                      </div><!-- btn-demo -->
+                    </div><!-- col-sm-3 -->
+                    <div class="col-sm-6 col-md-3 mg-t-20 mg-md-t-0">
+                      <div class="btn-demo">
+                        <button class="btn-elements btn-outline-danger btn-block mg-b-10">Другорядна</button>
+                        <button class="btn btn-outline-danger active btn-block mg-b-10">Active</button>
+                        <button class="btn btn-outline-danger disabled btn-block mg-b-10">Disabled</button>
+                      </div><!-- btn-demo -->
+                    </div><!-- col-sm-3 -->
+                  </div><!-- row -->
+
+                  <p class="section-label mg-t-20 mg-sm-t-40">Довідник класу</p>
+                  <table class="table table-reference">
+                    <thead>
+                      <tr>
+                        <th class="wd-35p">Class</th>
+                        <th class="wd-65p">Values</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code class="pd-0 bg-transparent">class="btn btn-outline-[value]"</code></td>
+                        <td>primary | success | info | warning | danger | indigo | turtle | teal | pink | orange</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div><!-- section-wrapper -->
+
+                <div class="section-wrapper mg-t-20">
+                          <label class="section-title">Заокруглені кнопки</label>
+                          <p class="mg-b-20 mg-sm-b-40">Заокруглені кути для основних та контурних кнопок.</p>
+
+                          <div class="row">
+                            <div class="col-sm-6 col-md-3">
+                              <div class="btn-demo">
+                                <button class="btn btn-oblong btn-primary btn-block mg-b-10">Основна</button>
+                                <button class="btn-elements btn-oblong btn-outline-primary btn-block mg-b-10">Основна</button>
+                              </div><!-- btn-demo -->
+                            </div><!-- col-sm-3 -->
+
+                            <div class="col-sm-6 col-md-3 mg-t-20 mg-sm-t-0">
+                              <div class="btn-demo">
+                                <button class="btn btn-oblong btn-secondary btn-block mg-b-10">Другорядна</button>
+                                <button class="btn-elements btn-oblong btn-outline-secondary btn-block mg-b-10">Другорядна</button>
+                              </div><!-- btn-demo -->
+                            </div><!-- col-sm-3 -->
+
+                            <div class="col-sm-6 col-md-3 mg-t-20 mg-md-t-0">
+                              <div class="btn-demo">
+                                <button class="btn btn-oblong btn-success btn-block mg-b-10">Успіх</button>
+                                <button class="btn-elements btn-oblong btn-outline-success btn-block mg-b-10">Успіх</button>
+                              </div><!-- btn-demo -->
+                            </div><!-- col-sm-3 -->
+
+                            <div class="col-sm-6 col-md-3 mg-t-20 mg-md-t-0">
+                              <div class="btn-demo">
+                                <button class="btn btn-oblong btn-danger btn-block mg-b-10">Небезпека</button>
+                                <button class="btn-elements btn-oblong btn-outline-danger btn-block">Небезпека</button>
+                              </div><!-- btn-demo -->
+                            </div><!-- col-sm-3 -->
+                          </div><!-- row -->
+
+                          <p class="section-label mg-t-20 mg-sm-t-40">Довідник класу</p>
+                          <table class="table table-reference">
+                            <thead>
+                              <tr>
+                                <th class="wd-40p">Class</th>
+                                <th class="wd-60p">Values</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><code class="pd-0 bg-transparent">class="btn btn-oblong btn-[value]"</code></td>
+                                <td rowspan="2" class="valign-middle-force">primary | success | warning | danger | info | teal | indigo | purple | pink | light | dark</td>
+                              </tr>
+                              <tr>
+                                <td><code class="pd-0 bg-transparent">class="btn btn-oblong btn-outline-[value]"</code></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div><!-- section-wrapper -->
+
+
+                        <div class="section-wrapper mg-t-20">
+                      <label class="section-title">Кнопки з піктограмами</label>
+                      <p class="mg-b-20 mg-sm-b-40">Основні кнопки з доданими значками.</p>
+
+                      <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                          <div class="btn-demo">
+                            <button class="btn btn-primary btn-block mg-b-10"><i class="fa fa-file-text-o mg-r-5"></i> Скласти</button>
+                            <button class="btn-elements btn-outline-primary btn-block mg-b-10"><i class="fa fa-file-text-o mg-r-5"></i> Скласти</button>
+                          </div><!-- btn-demo -->
+                        </div><!-- col-sm-3 -->
+
+                        <div class="col-sm-6 col-md-3 mg-t-20 mg-sm-t-0">
+                          <div class="btn-demo">
+                            <button class="btn btn-secondary btn-block mg-b-10"><i class="fa fa-paper-plane mg-r-5"></i> Відправити</button>
+                            <button class="btn-elements btn-outline-secondary btn-block mg-b-10"><i class="fa fa-paper-plane mg-r-5"></i> Відправити</button>
+                          </div><!-- btn-demo -->
+                        </div><!-- col-sm-3 -->
+                      </div><!-- row -->
+                      <p class="mg-b-0 mg-t-10">Щоб використати інші піктограми перейдіть на <a href="elem-icons.html"> сторінку іконок</a> цього шаблону.</p>
+                    </div><!-- section-wrapper -->
+
+                    <div class="section-wrapper mg-t-20">
+          <label class="section-title">Кнопки-значки</label>
+          <p class="mg-b-20 mg-sm-b-40">Варіанти кнопок для використання лише піктограм.</p>
+
+          <div class="row">
+            <div class="col-md-6 col-lg-4">
+              <div class="demo-btn-list">
+                <a href="#" class="btn-elements btn-primary btn-icon"><div><i class="fa fa-facebook"></i></div></a>
+                <a href="#" class="btn btn-info btn-icon"><div><i class="fa fa-twitter"></i></div></a>
+                <a href="#" class="btn btn-danger btn-icon"><div><i class="fa fa-google-plus"></i></div></a>
+                <a href="#" class="btn btn-dark btn-icon"><div><i class="fa fa-codepen"></i></div></a>
+                <a href="#" class="btn btn-warning btn-icon"><div><i class="fa fa-stack-overflow"></i></div></a>
+              </div><!-- demo-btn-list -->
+            </div><!-- col-5 -->
+            <div class="col-md-6 col-lg-4 mg-t-20 mg-md-t-0">
+              <div class="demo-btn-list">
+                <a href="#" class="btn-elements btn-outline-primary btn-icon"><div><i class="fa fa-facebook"></i></div></a>
+                <a href="#" class="btn-elements btn-outline-info btn-icon"><div><i class="fa fa-twitter"></i></div></a>
+                <a href="#" class="btn-elements btn-outline-danger btn-icon"><div><i class="fa fa-google-plus"></i></div></a>
+                <a href="#" class="btn-elements btn-outline-dark btn-icon"><div><i class="fa fa-codepen"></i></div></a>
+                <a href="#" class="btn-elements btn-outline-warning btn-icon"><div><i class="fa fa-stack-overflow"></i></div></a>
+              </div><!-- demo-btn-list -->
+            </div><!-- col-5 -->
+          </div><!-- row -->
+
+          <div class="row mg-t-20">
+            <div class="col-md-6 col-lg-4">
+              <div class="demo-btn-list">
+                <a href="#" class="btn-elements btn-primary btn-icon rounded-circle"><div><i class="fa fa-facebook"></i></div></a>
+                <a href="#" class="btn btn-info btn-icon rounded-circle"><div><i class="fa fa-twitter"></i></div></a>
+                <a href="#" class="btn btn-danger btn-icon rounded-circle"><div><i class="fa fa-google-plus"></i></div></a>
+                <a href="#" class="btn btn-dark btn-icon rounded-circle"><div><i class="fa fa-codepen"></i></div></a>
+                <a href="#" class="btn btn-warning btn-icon rounded-circle"><div><i class="fa fa-stack-overflow"></i></div></a>
+              </div><!-- demo-btn-list -->
+            </div><!-- col-5 -->
+            <div class="col-md-6 col-lg-4 mg-t-20 mg-lg-t-0">
+              <div class="demo-btn-list">
+                <a href="#" class="btn-elements btn-outline-primary btn-icon rounded-circle"><div><i class="fa fa-facebook"></i></div></a>
+                <a href="#" class="btn-elements btn-outline-info btn-icon rounded-circle"><div><i class="fa fa-twitter"></i></div></a>
+                <a href="#" class="btn-elements btn-outline-danger btn-icon rounded-circle"><div><i class="fa fa-google-plus"></i></div></a>
+                <a href="#" class="btn-elements btn-outline-dark btn-icon rounded-circle"><div><i class="fa fa-codepen"></i></div></a>
+                <a href="#" class="btn-elements btn-outline-warning btn-icon rounded-circle"><div><i class="fa fa-stack-overflow"></i></div></a>
+              </div><!-- demo-btn-list -->
+            </div><!-- col-5 -->
+          </div><!-- row -->
+        </div><!-- section-wrapper -->
+
+        <div class="section-wrapper mg-t-20">
+          <label class="section-title">Кнопки з випадаючим меню</label>
+          <p class="mg-b-20 mg-sm-b-40">Кнопки з доданим випадаючим меню.</p>
+
+          <div class="d-sm-flex">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Кнопка з випадаючим меню
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Дія</a>
+                <a class="dropdown-item" href="#">Інша дія</a>
+                <a class="dropdown-item" href="#">Щось ще</a>
+              </div><!-- dropdown-menu -->
+            </div><!-- dropdown -->
+            <div class="dropdown mg-sm-l-10 mg-t-10 mg-sm-t-0">
+              <button class="btn-elements btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Кнопка з випадаючим меню
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                <a class="dropdown-item" href="#">Дія</a>
+                <a class="dropdown-item" href="#">Інша дія</a>
+                <a class="dropdown-item" href="#">Щось ще</a>
+              </div><!-- dropdown-menu -->
+            </div><!-- dropdown -->
+          </div><!-- d-flex -->
+        </div><!-- section-wrapper -->
+
+        <div class="section-wrapper mg-t-20">
+          <label class="section-title">Групи кнопок</label>
+          <p class="mg-b-20 mg-sm-b-40">Групуйте серії кнопок разом в одну лінію.</p>
+
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary pd-x-25 active">Ліворуч</button>
+                <button type="button" class="btn btn-secondary pd-x-25">Центр</button>
+                <button type="button" class="btn btn-secondary pd-x-25">Праворуч</button>
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-lg-2 mg-t-20 mg-lg-t-0">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary active"><i class="fa fa-home"></i></button>
+                <button type="button" class="btn btn-secondary"><i class="fa fa-envelope"></i></button>
+                <button type="button" class="btn btn-secondary"><i class="fa fa-cog"></i></button>
+              </div>
+            </div><!-- col-2 -->
+            <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary active"><i class="fa fa-play"></i></button>
+                <button type="button" class="btn btn-primary"><i class="fa fa-pause"></i></button>
+                <button type="button" class="btn btn-primary"><i class="fa fa-stop"></i></button>
+              </div>
+            </div><!-- col-4 -->
+          </div><!-- row -->
+        </div><!-- section-wrapper -->
+
+
+
+                <div class="row row-sm mt-4">
+                  <div class="col-lg-4">
+                    <div class="card card-sales">
+                      <h6 class="slim-card-title tx-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Звіт про продаж</font></font></h6>
+                      <div class="row">
+                        <div class="col">
+                          <label class="tx-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сьогодні</font></font></label>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1898</font></font></p>
+                        </div><!-- col -->
+                        <div class="col">
+                          <label class="tx-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цього тижня</font></font></label>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">32,112</font></font></p>
+                        </div><!-- col -->
+                        <div class="col">
+                          <label class="tx-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цього місяця</font></font></label>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">72 067</font></font></p>
+                        </div><!-- col -->
+                      </div><!-- row -->
+
+                      <div class="progress mg-b-5">
+                        <div class="progress-bar bg-primary wd-50p" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">50%</font></font></div>
+                      </div>
+                      <p class="tx-12 mg-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Меценатський темп, замовлення та консультування.</font></font></p>
+                    </div><!-- card -->
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+                    <div class="card card-sales">
+                      <h6 class="slim-card-title tx-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Звіт про продаж</font></font></h6>
+                      <div class="row">
+                        <div class="col">
+                          <label class="tx-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сьогодні</font></font></label>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1263</font></font></p>
+                        </div><!-- col -->
+                        <div class="col">
+                          <label class="tx-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цього тижня</font></font></label>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">28 767</font></font></p>
+                        </div><!-- col -->
+                        <div class="col">
+                          <label class="tx-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цього місяця</font></font></label>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">68 324</font></font></p>
+                        </div><!-- col -->
+                      </div><!-- row -->
+
+                      <div class="progress mg-b-5">
+                        <div class="progress-bar bg-success wd-75p" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">75%</font></font></div>
+                      </div>
+                      <p class="tx-12 mg-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Меценатський темп, замовлення та консультування.</font></font></p>
+                    </div><!-- card -->
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+                    <div class="card card-sales">
+                      <h6 class="slim-card-title tx-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Звіт про продаж</font></font></h6>
+                      <div class="row">
+                        <div class="col">
+                          <label class="tx-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сьогодні</font></font></label>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1263</font></font></p>
+                        </div><!-- col -->
+                        <div class="col">
+                          <label class="tx-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цього тижня</font></font></label>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">28 767</font></font></p>
+                        </div><!-- col -->
+                        <div class="col">
+                          <label class="tx-12"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цього місяця</font></font></label>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">68 324</font></font></p>
+                        </div><!-- col -->
+                      </div><!-- row -->
+
+                      <div class="progress mg-b-5">
+                        <div class="progress-bar bg-danger wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">35%</font></font></div>
+                      </div>
+                      <p class="tx-12 mg-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Меценатський темп, замовлення та консультування.</font></font></p>
+                    </div><!-- card -->
+                  </div><!-- col-4 -->
+                </div><!-- row -->
+                  <!--end of section -->
+
+                <!--end of section -->
+
+                <div class="card-deck card-deck-sm mg-t-20 mg-x-0">
+                  <div class="card tx-center">
+                    <div class="card-body pd-40">
+                      <div class="d-flex justify-content-center mg-b-30">
+                        <img src="../img/icon1.svg" class="wd-100" alt="">
+                      </div>
+                      <h6 class="tx-md-20 tx-inverse mg-b-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Управління документами</font></font></h6>
+                      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Десь далеко-далеко, за горами слів, десь між країнами Мрій та Сновидінь. </font><font style="vertical-align: inherit;">Де навіть всемогутній Вагітан ​​не має контролю над сліпими текстами.</font></font></p>
+                      <a href="" class="btn btn-primary btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Старт</font></font></a>
+                    </div><!-- card -->
+                  </div><!-- card -->
+                  <!-- end of card-body -->
+
+                  <div class="card tx-center">
+                    <div class="card-body pd-40">
+                      <div class="d-flex justify-content-center mg-b-30">
+                        <img src="{% static 'img/icon2.svg' %}" class="wd-100" alt="">
+                      </div>
+                      <h6 class="tx-md-20 tx-inverse mg-b-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Управління часом</font></font></h6>
+                      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Десь далеко-далеко, за горами слів, десь між країнами Мрій та Сновидінь. </font><font style="vertical-align: inherit;">Де навіть всемогутній Вагітан ​​не має контролю над сліпими текстами.</font></font></p>
+                      <a href="" class="btn btn-primary btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Зробити тур</font></font></a>
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+
+                  <!-- end of card-body -->
+
+                  <div class="card card-recent-messages">
+                    <div class="card-header">
+                      <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Останні повідомлення</font></font></span>
+                      <a href=""><i class="icon ion-more"></i></a>
+                    </div><!-- card-header -->
+                    <div class="list-group list-group-flush">
+                      <div class="list-group-item">
+                        <div class="media">
+                          <img src="{% static 'img/img1.jpg' %}" alt="">
+                          <div class="media-body">
+                            <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Катерина Левчина</font></font></h6>
+                            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">годину тому</font></font></p>
+                          </div><!-- media-body -->
+                        </div><!-- media -->
+                    <!-- end of card-recent-messages -->
+
+                        <p class="msg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Європейські мови є членами однієї родини. </font><font style="vertical-align: inherit;">Їх окреме існування є міфом ...</font></font></p>
+                      </div><!-- list-group-item -->
+                      <div class="list-group-item">
+                        <div class="media">
+                          <img src="{% static 'img/img2.jpg' %}" alt="">
+                          <div class="media-body">
+                            <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Іван Піддубний</font></font></h6>
+                            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 години тому</font></font></p>
+                          </div><!-- media-body -->
+                        </div><!-- media -->
+                        <p class="msg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Європейські мови є членами однієї родини. </font><font style="vertical-align: inherit;">Їх окреме існування є міфом ...</font></font></p>
+                      </div><!-- list-group-item -->
+
+
+                    <div class="list-group-item">
+                        <div class="media">
+                          <img src="{% static 'img/img4.jpg' %}" alt="">
+                          <div class="media-body">
+                            <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Василина Вірастюк</font></font></h6>
+                            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3 години тому</font></font></p>
+                          </div><!-- media-body -->
+                       </div><!-- media -->
+                       <p class="msg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Європейські мови є членами однієї родини. </font><font style="vertical-align: inherit;">Їх окреме існування є міфом ...</font></font></p>
+
+                     </div><!-- list-group-item -->
+
+                    </div><!-- list-group -->
+                    <div class="card-footer">
+                      <a href="" class="tx-12"><i class="fa fa-angle-down mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Показати всі повідомлення</font></font></a>
+                    </div><!-- card-footer -->
+                  </div><!-- card -->
+                </div><!-- card-deck -->
+                <!-- End of card-deck -->
+
+                <div class="card-columns mg-t-20">
+                  <div class="card card-map-widget">
+                    <div id="map1"><img class="img-fluid" alt="" src="http://maps.googleapis.com/maps/api/staticmap?center=40.702247,-73.996349&amp;size=600x400&amp;sensor=true&amp;zoom=14&amp;key=AIzaSyAEt_DBLTknLexNbTVwbXyq2HSf2UbRBU8&amp;style=feature:water|saturation:43|lightness:-11|hue:0x0088ff&amp;style=feature:road|element:geometry.fill|hue:0xff0000|saturation:-100|lightness:99&amp;style=feature:road|element:geometry.stroke|color:0x808080|lightness:54&amp;style=feature:landscape.man_made|element:geometry.fill|color:0xece2d9&amp;style=feature:poi.park|element:geometry.fill|color:0xccdca1&amp;style=feature:road|element:labels.text.fill|color:0x767676&amp;style=feature:road|element:labels.text.stroke|color:0xffffff&amp;style=feature:poi|visibility:off&amp;style=feature:landscape.natural|element:geometry.fill|visibility:on|color:0xb8cb93&amp;style=feature:poi.park|visibility:on&amp;style=feature:poi.sports_complex|visibility:on&amp;style=feature:poi.medical|visibility:on&amp;style=feature:poi.business|visibility:simplified&amp;scale=1"></div>
+                    <div class="card-body">
+                      <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ThemePixels, Inc.</font></font></h6>
+                      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4975 Cambridge Road Miami Gardens, FL 33056B</font></font></p>
+                      <p><abbr title="Телефон"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">P:</font></font></abbr><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (123) 456-7890</font></font></p>
+
+                      <div class="btn-wrapper">
+                        <a href="" class="btn btn-primary"><i class="fa fa-phone mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Call</font></font></a>
+                        <a href="" class="btn btn-primary mg-l-1"><i class="fa fa-envelope mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Email</font></font></a>
+                        <a href="" class="btn btn-success mg-l-auto"><i class="fa fa-star"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.3</font></font></a>
+                      </div><!-- btn-wrapper -->
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+
+                  <div class="card card-body pd-25">
+                    <h6 class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Приєднатися</font></font></h6>
+                    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Щоб розпочати, просто виберіть будь-який доступний обліковий запис соціальної мережі.</font></font></p>
+                    <div class="tx-20">
+                      <a href="" class="tx-primary mg-r-5"><i class="fa fa-facebook"></i></a>
+                      <a href="" class="tx-info mg-r-5"><i class="fa fa-twitter"></i></a>
+                      <a href="" class="tx-danger mg-r-5"><i class="fa fa-google-plus"></i></a>
+                      <a href="" class="tx-danger mg-r-5"><i class="fa fa-pinterest"></i></a>
+                      <a href="" class="tx-inverse mg-r-5"><i class="fa fa-github"></i></a>
+                      <a href="" class="tx-pink mg-r-5"><i class="fa fa-instagram"></i></a>
+                    </div>
+                  </div><!-- card -->
+
+                  <div class="card card-body pd-25">
+                    <h6 class="slim-card-title mg-b-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Швидкий контактний формуляр</font></font></h6>
+                    <div class="form-group">
+                      <input type="text" name="name" class="form-control" placeholder="Введіть ваше ім'я">
+                    </div><!-- form-group -->
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control" placeholder="Введіть вашу адресу Email">
+                    </div><!-- form-group -->
+                    <div class="form-group">
+                      <textarea name="name" class="form-control" rows="2" placeholder="Введіть ваше повідомлення"></textarea>
+                    </div><!-- form-group -->
+                    <button class="btn btn-primary btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Відправити повідомлення</font></font></button>
+                  </div><!-- card -->
+
+                  <div class="card card-people-list">
+                    <div class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Люди, які також переглядали</font></font></div>
+                    <div class="media-list">
+                      <div class="media">
+                        <img src="{% static 'img/img2.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Андрій Шевченко</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Розробник програмного забезпечення</font></font></p>
+                        </div><!-- media-body -->
+                      </div><!-- media -->
+                      <div class="media">
+                        <img src="{% static 'img/img3.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сергій Бубка</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Архітектор</font></font></p>
+                        </div><!-- media-body -->
+                      </div><!-- media -->
+                      <div class="media">
+                        <img src="{% static 'img/img4.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Лілія Подкопаєва</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Торговий представник</font></font></p>
+                        </div><!-- media-body -->
+                      </div><!-- media -->
+                      <div class="media">
+                        <img src="{% static 'img/img15.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Богдан Ступка</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Торговий представник</font></font></p>
+                        </div><!-- media-body -->
+                      </div><!-- media -->
+                      <div class="media">
+                        <img src="{% static 'img/img14.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ганна Безсонова</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Торговий представник</font></font></p>
+                        </div><!-- media-body -->
+                      </div><!-- media -->
+                    </div><!-- media-list -->
+                  </div><!-- card -->
+
+                  <div class="card card-profile">
+                    <div class="card-body">
+                      <a href=""><img src="{% static 'img/img6.jpg' %}" alt=""></a>
+                      <h4 class="profile-name"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Олег Скрипка</font></font></h4>
+                      <p class="mg-b-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Розробник програмного забезпечення</font></font></p>
+                      <p class="mg-b-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Особистість зростає до того рівня, який не лише задовольняє його его, а розвиває його оточення і країну. </font></font></p>
+                      <p class="profile-links">
+                        <a href="" class="tx-primary"><i class="fa fa-facebook-official"></i></a>
+                        <a href="" class="tx-info"><i class="fa fa-twitter"></i></a>
+                        <a href="" class="tx-danger"><i class="fa fa-pinterest"></i></a>
+                      </p>
+                      <a href="" class="btn btn-primary btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Перейти</font></font></a>
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+
+                  <div class="card card-recommendation">
+                    <div class="card-body pd-25">
+                      <div class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Рекомендації</font></font></div>
+                      <div class="media align-items-center mg-y-25">
+                        <img src="{% static 'img/img3.jpg' %}" class="wd-40 rounded-circle" alt="">
+                        <div class="media-body mg-l-15">
+                          <h6 class="tx-14 mg-b-2"><a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Юджин Мельник</font></font></a></h6>
+                          <p class="mg-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Канадський меценат українського походження</font></font></p>
+                        </div><!-- media-body -->
+                      </div><!-- media -->
+
+                      <p class="tx-13"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Секрет успіху полягає в тому, що треба багато працювати й привертати до свого бізнесу професіоналів. </font><font style="vertical-align: inherit;">Для жителів столиці Канади клуб Ottawa Senators був об'єктом гордості і жалю. </font><font style="vertical-align: inherit;">Довелося трохи вкластися. </font><font style="vertical-align: inherit;"> Всього 120 млн доларів. Я вдихнув у нього нове життя.</font></font></p>
+                      <p class="tx-13 mg-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Успіх клубу перевершив всі очікування! </font><font style="vertical-align: inherit;">Друга сходинка рейтингу. </font><font style="vertical-align: inherit;">Всього через рік. </font><font style="vertical-align: inherit;">Він повернув жителям столиці інтерес до гри - льодову арену довелося збільшувати з 18 до 25 тисяч глядацьких місць.</font></font></p>
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+
+                  <div class="card card-people-list">
+                    <div class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Люди, яких ти можеш знати</font></font></div>
+                    <div class="media-list">
+                      <div class="media">
+                        <img src="{% static 'img/img5.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Яна Клочкова</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Розробник програмного забезпечення</font></font></p>
+                        </div><!-- media-body -->
+                        <a href=""><i class="icon ion-person-add tx-20"></i></a>
+                      </div><!-- media -->
+                      <div class="media">
+                        <img src="{% static 'img/img6.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ганна Ушеніна</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Архітектор</font></font></p>
+                        </div><!-- media-body -->
+                        <a href=""><i class="icon ion-person-add tx-20"></i></a>
+                      </div><!-- media -->
+                      <div class="media">
+                        <img src="{% static 'img/img13.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Квітка Цісик</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Торговий представник</font></font></p>
+                        </div><!-- media-body -->
+                        <a href=""><i class="icon ion-person-add tx-20"></i></a>
+                      </div><!-- media -->
+                      <div class="media">
+                        <img src="{% static 'img/img12.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Тіна Кароль</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Торговий представник</font></font></p>
+                        </div><!-- media-body -->
+                        <a href=""><i class="icon ion-person-add tx-20"></i></a>
+                      </div><!-- media -->
+                      <div class="media">
+                        <img src="{% static 'img/img11.jpg' %}" alt="">
+                        <div class="media-body">
+                          <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Андрій Кузьменко</font></font></a>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Торговий представник</font></font></p>
+                        </div><!-- media-body -->
+                        <a href=""><i class="icon ion-person-add tx-20"></i></a>
+                      </div><!-- media -->
+                    </div><!-- media-list -->
+                  </div><!-- card -->
+
+                  <div class="card card-body pd-25">
+                    <h6 class="slim-card-title mg-b-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Найбільш відвідуваний</font></font></h6>
+                    <div class="mg-b-25">
+                      <span class="peity-donut" data-peity="{ &quot;fill&quot;: [&quot;#663090&quot;,&quot;#EC1778&quot;,&quot;#5B93D3&quot;], &quot;height&quot;: 200, &quot;width&quot;: 300 }" style="display: none;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10,5,4</font></font></span><svg class="peity" height="200" width="300"><path d="M 150 0 A 100 100 0 1 1 133.54054097192662 198.63613034027225 L 141.7702704859633 149.31806517013612 A 50 50 0 1 0 150 50" data-value="10" fill="#663090"></path><path d="M 133.54054097192662 198.63613034027225 A 100 100 0 0 1 53.059973406066945 75.45145128592011 L 101.52998670303347 87.72572564296006 A 50 50 0 0 0 141.7702704859633 149.31806517013612" data-value="5" fill="#EC1778"></path><path d="M 53.059973406066945 75.45145128592011 A 100 100 0 0 1 149.99999999999997 0 L 150 50 A 50 50 0 0 0 101.52998670303347 87.72572564296006" data-value="4" fill="#5B93D3"></path></svg>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <span class="square-10 bg-purple rounded-circle"></span>
+                      <span class="mg-l-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Київ </font></font></span>
+                      <span class="mg-l-auto tx-lato tx-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9,212</font></font></span>
+                    </div>
+                    <div class="d-flex align-items-center mg-t-5">
+                      <span class="square-10 bg-pink rounded-circle"></span>
+                      <span class="mg-l-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Львів </font></font></span>
+                      <span class="mg-l-auto tx-lato tx-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">768</font></font></span>
+                    </div>
+                    <div class="d-flex align-items-center mg-t-5">
+                      <span class="square-10 bg-info rounded-circle"></span>
+                      <span class="mg-l-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Дніпро</font></font></span>
+                      <span class="mg-l-auto tx-lato tx-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">355</font></font></span>
+                    </div>
+                  </div><!-- card -->
+
+                  <div class="card card-carousel">
+                    <div id="carousel2" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators">
+                        <li data-target="#carousel2" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel2" data-slide-to="1" class=""></li>
+                        <li data-target="#carousel2" data-slide-to="2" class=""></li>
+                      </ol>
+                      <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                          <div class="carousel-item-wrapper bg-primary">
+                            <div class="carousel-item-option">
+                              <a href=""><i class="icon ion-edit tx-16"></i></a>
+                              <a href=""><i class="icon ion-stats-bars tx-20"></i></a>
+                              <a href=""><i class="icon ion-gear-a tx-20"></i></a>
+                              <a href=""><i class="icon ion-more tx-20"></i></a>
+                            </div>
+                            <div>
+                              <p class="carousel-item-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Недавня стаття</font></font></p>
+                              <h5 class="carousel-item-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">20 найкращих порад після 5 років подорожей по світу</font></font></h5>
+                              <nav class="nav flex-row">
+                                <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">12 К + Переглядів </font></font></a>
+                                <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">234 Поширень </font></font></a>
+                                <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">43 Коментарів</font></font></a>
+                              </nav>
+                            </div>
+                          </div><!-- carousel-item-wrapper -->
+                        </div>
+                        <div class="carousel-item">
+                          <div class="carousel-item-wrapper bg-danger">
+                            <div class="carousel-item-option">
+                              <a href=""><i class="icon ion-edit tx-16"></i></a>
+                              <a href=""><i class="icon ion-stats-bars tx-20"></i></a>
+                              <a href=""><i class="icon ion-gear-a tx-20"></i></a>
+                              <a href=""><i class="icon ion-more tx-20"></i></a>
+                            </div>
+                            <div>
+                              <p class="carousel-item-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Недавня стаття</font></font></p>
+                              <h5 class="carousel-item-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Як я пролетів навколо світу в бізнес класі за 1000 гривень</font></font></h5>
+                              <nav class="nav flex-row">
+                                <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Редагувати </font></font></a>
+                                <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Скасувати публікацію </font></font></a>
+                                <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Видалити</font></font></a>
+                              </nav>
+                            </div>
+                          </div><!-- d-flex -->
+                        </div>
+                        <div class="carousel-item">
+                          <div class="carousel-item-wrapper bg-purple">
+                            <div class="carousel-item-option">
+                              <a href=""><i class="icon ion-edit tx-16"></i></a>
+                              <a href=""><i class="icon ion-stats-bars tx-20"></i></a>
+                              <a href=""><i class="icon ion-gear-a tx-20"></i></a>
+                              <a href=""><i class="icon ion-more tx-20"></i></a>
+                            </div>
+                            <div>
+                              <p class="carousel-item-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Недавня стаття</font></font></p>
+                              <h5 class="carousel-item-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10 причин, чому подорож робить вас більш щасливою людиною</font></font></h5>
+                              <nav class="nav flex-row">
+                                <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Редагувати </font></font></a>
+                                <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Скасувати публікацію </font></font></a>
+                                <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Видалити</font></font></a>
+                              </nav>
+                            </div>
+                          </div><!-- d-flex -->
+                        </div>
+                      </div><!-- carousel-inner -->
+                    </div><!-- carousel -->
+                  </div><!-- card -->
+
+                  <div class="card card-blog">
+                    <figure class="card-item-img bg-mantle">
+                      <img class="img-fluid" src="{% static 'img/img24.jpg' %}" alt="Зображення">
+                    </figure>
+                    <div class="card-body">
+                      <p class="blog-category"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Фінанси</font></font></p>
+                      <h5 class="blog-title"><a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ваші фінанси не повинні бути ідеальними для роботи</font></font></a></h5>
+                      <p class="blog-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Довгий час існує факт, що читач відволікається від вмісту сторінки, при перегляді його макета.</font></font></p>
+                      <p class="blog-links">
+                        <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">12 Любить </font></font></a>
+                        <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">23 коментарів</font></font></a>
+                        <a href=""><i class="icon ion-more"></i></a>
+                      </p>
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+
+                  <div class="card-contact mg-b-20">
+                    <div class="tx-center">
+                      <a href=""><img src="{% static 'img/img12.jpg' %}" class="card-img" alt=""></a>
+                      <h5 class="mg-t-10 mg-b-5"><a href="" class="contact-name"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Соломія Крушельницька</font></font></a></h5>
+                      <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Директор продукту</font></font></p>
+                      <p class="contact-social">
+                        <a href=""><i class="fa fa-facebook"></i></a>
+                        <a href=""><i class="fa fa-twitter"></i></a>
+                        <a href=""><i class="fa fa-google"></i></a>
+                      </p>
+                    </div><!-- tx-center -->
+
+                    <p class="contact-item">
+                      <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Телефон: </font></font></span>
+                      <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">+38 099 345 67 89</font></font></span>
+                    </p><!-- contact-item -->
+                    <p class="contact-item">
+                      <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Електронна пошта: </font></font></span>
+                      <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">person1@ukr.net</font></font></a>
+                    </p><!-- contact-item -->
+                    <p class="contact-item">
+                      <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">URL: </font></font></span>
+                      <a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">http://thmpxls.me</font></font></a>
+                    </p><!-- contact-item -->
+                  </div><!-- card -->
+
+                  <div class="card card-activities">
+                    <h6 class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Останні заходи</font></font></h6>
+                    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Остання активність - 1 годину тому</font></font></p>
+
+                    <div class="media-list">
+                      <div class="media">
+                        <div class="activity-icon bg-primary">
+                          <i class="icon ion-stats-bars"></i>
+                        </div><!-- activity-icon -->
+                        <div class="media-body">
+                          <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Звіт оновлено</font></font></h6>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Якщо у вас немає гармонії — то беріть гармонь і гармонуйте!. </font><font style="vertical-align: inherit;">Змінюйте світ на краще, піклуйтеся про нього, тому що ви в ньому живете. Кузьма.</font></font></p>
+                          <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 години тому</font></font></span>
+                        </div><!-- media-body -->
+                      </div><!-- media -->
+                      <div class="media">
+                        <div class="activity-icon bg-success">
+                          <i class="icon ion-trophy"></i>
+                        </div><!-- activity-icon -->
+                        <div class="media-body">
+                          <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Досягнення розблоковано</font></font></h6>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Якщо у вас немає гармонії — то беріть гармонь і гармонуйте!. </font><font style="vertical-align: inherit;">Змінюйте світ на краще, піклуйтеся про нього, тому що ви в ньому живете. Кузьма.</font></font></p>
+                          <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 години тому</font></font></span>
+                        </div><!-- media-body -->
+                      </div><!-- media -->
+                      <div class="media">
+                        <div class="activity-icon bg-purple">
+                          <i class="icon ion-image"></i>
+                        </div><!-- activity-icon -->
+                        <div class="media-body">
+                          <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Додано нові зображення</font></font></h6>
+                          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Якщо у вас немає гармонії — то беріть гармонь і гармонуйте!. </font><font style="vertical-align: inherit;">Змінюйте світ на краще, піклуйтеся про нього, тому що ви в ньому живете. Кузьма.</font></font></p>
+                          <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 години тому</font></font></span>
+                        </div><!-- media-body -->
+                      </div><!-- media -->
+                    </div><!-- media-list -->
+                  </div><!-- card -->
+
+                  <div class="card card-todo">
+                    <h6 class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Список завдань</font></font></h6>
+                    <div class="todo-list">
+                      <div class="todo-item">
+                        <label class="ckbox">
+                          <input type="checkbox" checked=""><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Намалювати щось</font></font></span>
+                        </label>
+                      </div><!-- todo-item -->
+                      <div class="todo-item">
+                        <label class="ckbox">
+                          <input type="checkbox" checked=""><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Намалювати більше речей</font></font></span>
+                        </label>
+                      </div><!-- todo-item -->
+                      <div class="todo-item">
+                        <label class="ckbox">
+                          <input type="checkbox"><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Намалювати щось інше</font></font></span>
+                        </label>
+                      </div><!-- todo-item -->
+                      <div class="todo-item">
+                        <label class="ckbox">
+                          <input type="checkbox"><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Намалювати щось знову</font></font></span>
+                        </label>
+                      </div><!-- todo-item -->
+                      <div class="todo-item">
+                        <label class="ckbox">
+                          <input type="checkbox"><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Намалювати щось більше</font></font></span>
+                        </label>
+                      </div><!-- todo-item -->
+                    </div><!-- todo-list -->
+                  </div><!-- card -->
+
+
+                  <div class="card card-body pd-25 tx-center">
+                    <div class="card-icon-wrapper success">
+                      <i class="icon ion-ios-paper-outline"></i>
+                    </div><!-- icon-wrapper -->
+                    <h4 class="tx-gray-800 mg-b-25"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">База знань</font></font></h4>
+                    <p class="mg-b-25"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Науку часто змішують із знанням. </font><font style="vertical-align: inherit;">Це грубе непорозуміння. </font><font style="vertical-align: inherit;">Наука є не тільки знання, а й свідомість, тобто вміння користуватися знаннями як слід.</font></font></p>
+                    <a href="" class="btn btn-success btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Огляд статей</font></font></a>
+                  </div><!-- card -->
+
+                  <div class="card card-quick-post">
+                    <h6 class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поділіться своїми думками</font></font></h6>
+                    <div class="form-group">
+                      <textarea class="form-control" rows="3" placeholder="Щось замислили?"></textarea>
+                    </div><!-- form-group -->
+                    <div class="card-footer">
+                      <button class="btn btn-purple"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поділитися публікацією</font></font></button>
+                      <nav>
+                        <a href=""><i class="icon ion-images"></i></a>
+                        <a href=""><i class="icon ion-aperture"></i></a>
+                        <a href=""><i class="icon ion-calendar"></i></a>
+                      </nav>
+                    </div><!-- card-footer -->
+                  </div><!-- card -->
+
+                </div><!-- card-columns -->
+
+                <div class="card-columns column-count-2">
+                  <div class="card card-table">
+                    <div class="card-header">
+                      <h6 class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Історія транзакцій користувачів</font></font></h6>
+                    </div><!-- card-header -->
+                    <div class="table-responsive">
+                      <table class="table mg-b-0 tx-12">
+                        <thead>
+                          <tr class="tx-10">
+                            <th class="wd-10p pd-y-5">&nbsp;</th>
+                            <th class="pd-y-5"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Користувач</font></font></th>
+                            <th class="pd-y-5"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Тип</font></font></th>
+                            <th class="pd-y-5"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Дата</font></font></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img1.jpg' %}" class="wd-36 rounded-circle" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Іван Сила </font></font></a>
+                              <span class="tx-11 d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TRANSID: 1234567890</font></font></span>
+                            </td>
+                            <td class="tx-12">
+                              <span class="square-8 bg-success mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Електронна пошта підтверджена
+                            </font></font></td>
+                            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Прямо зараз</font></font></td>
+                          </tr>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img1.jpg' %}" class="wd-36 rounded-circle" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Анна Ярославна </font></font></a>
+                              <span class="tx-11 d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TRANSID: 1234567890</font></font></span>
+                            </td>
+                            <td class="tx-12">
+                              <span class="square-8 bg-warning mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Очікує на підтвердження
+                            </font></font></td>
+                            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">18 листопада 2018 року 8:34 ранку</font></font></td>
+                          </tr>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img3.jpg' %}" class="wd-36 rounded-circle" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Марко Вовчок </font></font></a>
+                              <span class="tx-11 d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Магалбок TRANSID: 1234567890</font></font></span>
+                            </td>
+                            <td class="tx-12">
+                              <span class="square-8 bg-success mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Успішне придбання
+                            </font></font></td>
+                            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">18 листопада 2018 року 16:40</font></font></td>
+                          </tr>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img5.jpg' %}" class="wd-36 rounded-circle" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Микола Леонтович </font></font></a>
+                              <span class="tx-11 d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TRANSID: 1234567890</font></font></span>
+                            </td>
+                            <td class="tx-12">
+                              <span class="square-8 bg-warning mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Оплату призупинено
+                            </font></font></td>
+                            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">18 листопада 2018 року, 6:45 вечора</font></font></td>
+                          </tr>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img4.jpg' %}" class="wd-36 rounded-circle" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Данило Галицький </font></font></a>
+                              <span class="tx-11 d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TRANSID: 1234567890</font></font></span>
+                            </td>
+                            <td class="tx-12">
+                              <span class="square-8 bg-pink mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Рахунок деактивовано
+                            </font></font></td>
+                            <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">18.11.2018 10:30 ранку</font></font></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div><!-- table-responsive -->
+                    <div class="card-footer tx-12 pd-y-15 bg-transparent">
+                      <a href=""><i class="fa fa-angle-down mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Переглянути всю історію трансакцій</font></font></a>
+                    </div><!-- card-footer -->
+                  </div><!-- card -->
+                  <div class="card card-table">
+                    <div class="card-header">
+                      <h6 class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Купівля продукту</font></font></h6>
+                    </div><!-- card-header -->
+                    <div class="table-responsive">
+                      <table class="table mg-b-0 tx-12">
+                        <thead>
+                          <tr class="tx-10">
+                            <th class="wd-10p pd-y-5">&nbsp;</th>
+                            <th class="pd-y-5"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Найменування</font></font></th>
+                            <th class="pd-y-5 tx-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Продано</font></font></th>
+                            <th class="pd-y-5"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Приріст</font></font></th>
+                            <th class="pd-y-5 tx-center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Примітка</font></font></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img28.jpg' %}" class="wd-55" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Взуття Ікос</font></font></a>
+                              <span class="tx-11 d-block"><span class="square-8 bg-danger mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20 залишається</font></font></span>
+                            </td>
+                            <td class="valign-middle tx-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3,345</font></font></td>
+                            <td class="valign-middle"><span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">33,34%</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> від минулого тижня</font></font></td>
+                            <td class="valign-middle tx-center">
+                              <a href="" class="tx-gray-600 tx-24"><i class="icon ion-android-more-horizontal"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img29.jpg' %}" class="wd-55" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">L.A.P.T.I.</font></font></a>
+                              <span class="tx-11 d-block"><span class="square-8 bg-success mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> В наявності</font></font></span>
+                            </td>
+                            <td class="valign-middle tx-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">720</font></font></td>
+                            <td class="valign-middle"><span class="tx-danger"><i class="icon ion-android-arrow-down mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">21,20%</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> від минулого тижня</font></font></td>
+                            <td class="valign-middle tx-center">
+                              <a href="" class="tx-gray-600 tx-24"><i class="icon ion-android-more-horizontal"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img30.jpg' %}" class="wd-55" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ручна сумочка TanVi</font></font></a>
+                              <span class="tx-11 d-block"><span class="square-8 bg-success mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> В наявності</font></font></span>
+                            </td>
+                            <td class="valign-middle tx-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1445</font></font></td>
+                            <td class="valign-middle"><span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">23,34%</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> від минулого тижня</font></font></td>
+                            <td class="valign-middle tx-center">
+                              <a href="" class="tx-gray-600 tx-24"><i class="icon ion-android-more-horizontal"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img31.jpg' %}" class="wd-55" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dolcedonna</font></font></a>
+                              <span class="tx-11 d-block"><span class="square-8 bg-warning mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 45 залишилися</font></font></span>
+                            </td>
+                            <td class="valign-middle tx-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2,500</font></font></td>
+                            <td class="valign-middle"><span class="tx-success"><i class="icon ion-android-arrow-up mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">28,78%</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> від минулого тижня</font></font></td>
+                            <td class="valign-middle tx-center">
+                              <a href="" class="tx-gray-600 tx-24"><i class="icon ion-android-more-horizontal"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="pd-l-20">
+                              <img src="{% static 'img/img32.jpg' %}" class="wd-55" alt="Зображення">
+                            </td>
+                            <td>
+                              <a href="" class="tx-inverse tx-14 tx-medium d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">VOVK</font></font></a>
+                              <span class="tx-11 d-block"><span class="square-8 bg-success mg-r-5 rounded-circle"></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> В наявності</font></font></span>
+                            </td>
+                            <td class="valign-middle tx-14 tx-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">223</font></font></td>
+                            <td class="valign-middle"><span class="tx-danger"><i class="icon ion-android-arrow-down mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">18,18%</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> від минулого тижня</font></font></td>
+                            <td class="valign-middle tx-center">
+                              <a href="" class="tx-gray-600 tx-24"><i class="icon ion-android-more-horizontal"></i></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div><!-- table-responsive -->
+                    <div class="card-footer tx-12 pd-y-15 bg-transparent">
+                      <a href=""><i class="fa fa-angle-down mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Переглянути всі позиції</font></font></a>
+                    </div><!-- card-footer -->
+                  </div><!-- card -->
+
+                  <div class="card card-blog-split">
+                    <div class="row no-gutters flex-row-reverse">
+                      <div class="col-md-5 col-lg-6 col-xl-5">
+                        <figure>
+                          <img src="{% static 'img/img20.jpg' %}" class="img-fit-cover" alt="">
+                        </figure>
+                      </div><!-- col-md-5 -->
+                      <div class="col-md-7 col-lg-6 col-xl-7">
+                        <p class="blog-category tx-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Наука</font></font></p>
+                        <h5 class="blog-title"><a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">П'ять беззаперечних фактів про науку мрій</font></font></a></h5>
+                        <p class="blog-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Довгий час існує припущення, що читач відволікається від вмісту сторінки при перегляді його макета. </font><font style="vertical-align: inherit;">Прагни не того, щоб добитися успіху, а того, щоб твоє життя мало сенс.</font><font style="vertical-align: inherit;"> Альберт Ейнштейн</font></font></p>
+                        <span class="blog-date"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">18 листопада 2018 року, 2:30 вечора</font></font></span>
+                      </div><!-- col-md-7 -->
+                    </div><!-- row -->
+                  </div><!-- card -->
+
+                  <div class="card card-blog-split">
+                    <div class="row no-gutters">
+                      <div class="col-md-5 col-lg-6 col-xl-5">
+                        <figure>
+                          <img src="{% static 'img/img19.jpg' %}" class="img-fit-cover" alt="">
+                        </figure>
+                      </div><!-- col-4 -->
+                      <div class="col-md-7 col-lg-6 col-xl-7">
+                        <p class="blog-category tx-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Історія</font></font></p>
+                        <h5 class="blog-title"><a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">17 блискучих коротких романів</font></font></a></h5>
+                        <p class="blog-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Успіх — це ще не крапка, невдача — це ще не кінець: єдине, що має значення, — це мужність продовжувати боротьбу.</font><font style="vertical-align: inherit;"> Вінстон Черчилль. </font><font style="vertical-align: inherit;">Далі буде...</font></font></p>
+                        <span class="blog-date"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">18 листопада 2018 року, 11:30 ранку</font></font></span>
+                      </div><!-- col-8 -->
+                    </div><!-- row -->
+                  </div><!-- card -->
+
+                  <div class="card card-blog-overlay">
+                    <img class="img-fit-cover" src="{% static 'img/img26.jpg' %}" alt="Зображення">
+                    <div class="blog-content-wrapper">
+                      <div class="blog-content">
+                        <p class="blog-category tx-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Подорож</font></font></p>
+                        <h3 class="blog-title"><a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Різниця між вулицями, бульварами, проспектами та іншими дорогами</font></font></a></h3>
+                      </div><!-- blog-content -->
+                    </div><!-- blog-content -->
+
+                    <div class="card-footer">
+                      <span class="mg-r-5"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">18 листопада 2018 р</font></font></span>
+                      <a href="" class="mg-r-10"><i class="fa fa-heart-o mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 23 Вподобаннячка</font></font></a>
+                      <a href=""><i class="fa fa-comment-o mg-r-5"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4 коментують </font></font></a>
+                      <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Автор: </font></font><a href="" class="tx-white-8 hover-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Володимир Хавкін</font></font></a></span>
+                    </div><!-- pos-absolute-bottom -->
+                  </div><!-- card -->
+
+                  <div class="card">
+                    <div class="card-body pd-30">
+                      <h6 class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Інформація про оплату</font></font></h6>
+                      <div class="form-group mg-t-20">
+                        <label class="form-control-label mg-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Оплата за допомогою:</font></font></label>
+                        <label class="rdiobox d-inline-block">
+                          <input name="radio" type="radio" checked="">
+                          <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Кредитна / дебетова картка</font></font></span>
+                        </label>
+                        <label class="rdiobox d-inline-block mg-xs-l-20">
+                          <input name="radio" type="radio">
+                          <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Paypal</font></font></span>
+                        </label>
+                      </div><!-- form-group -->
+
+                      <p class="tx-32">
+                        <i class="fa fa-cc-visa mg-r-5"></i>
+                        <i class="fa fa-cc-mastercard mg-r-5"></i>
+                        <i class="fa fa-cc-discover"></i>
+                      </p>
+
+                      <div class="form-group">
+                        <label class="form-control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Номер картки</font></font></label>
+                        <input type="text" name="cardno" class="form-control">
+                      </div><!-- form-group -->
+
+                      <div class="form-group">
+                        <label class="form-control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ім'я на картці</font></font></label>
+                        <input type="text" name="cardname" class="form-control">
+                      </div><!-- form-group -->
+
+                      <div class="row">
+                        <div class="col-sm-5">
+                          <div class="form-group">
+                            <label class="form-control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Термін дії картки</font></font></label>
+                            <div class="row">
+                              <div class="col">
+                                <input type="text" name="cardmonth" placeholder="MM" class="form-control">
+                              </div>
+                              <div class="col">
+                                <input type="text" name="cardyear" placeholder="YY" class="form-control">
+                              </div>
+                            </div>
+                          </div><!-- form-group -->
+                        </div><!-- col-5 -->
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label class="form-control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CVV </font></font></label>
+                            <input type="text" name="cardno" class="form-control">
+                          </div><!-- form-group -->
+                        </div><!-- col-4 -->
+                      </div><!-- row -->
+
+                      <p class="mg-t-25">
+                        <label class="ckbox">
+                          <input type="checkbox" checked="">
+                          <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Я прочитав(ла) та приймаю умови на цьому веб-сайті.</font></font></span>
+                        </label>
+                      </p>
+
+                      <div class="mg-t-30">
+                        <button class="btn btn-primary pd-x-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Відправити</font></font></button>
+                        <button class="btn btn-secondary pd-x-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Скасувати</font></font></button>
+                      </div>
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+
+                  <div class="card">
+                    <div class="card-body pd-30">
+                      <h6 class="slim-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Інформація про Доставку</font></font></h6>
+                      <p class="mg-b-40"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Повернути клієнта? </font></font><a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Увійти</font></font></a></p>
+
+                      <div class="form-group">
+                        <div class="row row-sm">
+                          <div class="col-sm">
+                            <input type="text" name="lastname" class="form-control" placeholder="Ім'я">
+                          </div><!-- col -->
+                          <div class="col-sm mg-t-20 mg-sm-t-0">
+                            <input type="text" name="lastname" class="form-control" placeholder="Прізвище">
+                          </div><!-- col -->
+                        </div><!-- row -->
+                      </div><!-- form-group -->
+                      <div class="form-group">
+                        <textarea class="form-control" rows="3" placeholder="Введіть адресу (назву вулиці, номер будинку)"></textarea>
+                      </div><!-- form-group -->
+                      <div class="form-group">
+                        <div class="row row-sm">
+                          <div class="col-sm">
+                            <input type="text" name="town" class="form-control" placeholder="Місто/селище">
+                          </div><!-- col -->
+                          <div class="col-sm mg-t-20 mg-sm-t-0">
+                            <input type="text" name="state" class="form-control" placeholder="Область">
+                          </div><!-- col -->
+                        </div><!-- row -->
+                      </div><!-- form-group -->
+                      <div class="form-group">
+                        <div class="row row-sm">
+                          <div class="col-sm">
+                            <input type="text" name="zip" class="form-control" placeholder="Введіть код міста">
+                          </div><!-- col -->
+                          <div class="col-sm mg-t-20 mg-sm-t-0">
+                            <input type="text" name="country" class="form-control" placeholder="Країна">
+                          </div><!-- col -->
+                        </div><!-- row -->
+                      </div><!-- form-group -->
+                      <div class="form-group">
+                        <div class="row row-sm">
+                          <div class="col-sm">
+                            <input type="text" name="phone" class="form-control" placeholder="Номер телефону">
+                          </div><!-- col -->
+                          <div class="col-sm mg-t-20 mg-sm-t-0">
+                            <input type="text" name="email" class="form-control" placeholder="Адреса Email">
+                          </div><!-- col -->
+                        </div><!-- row -->
+                      </div><!-- form-group -->
+                      <div class="form-group mg-t-30 mg-b-25">
+                        <label class="ckbox">
+                          <input type="checkbox" checked="">
+                          <span class="tx-13"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Адреса платника співпадає з адресою доставки</font></font></span>
+                        </label>
+                      </div><!-- form-group -->
+
+                      <button class="btn btn-primary pd-x-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Відправити</font></font></button>
+                      <button class="btn btn-secondary pd-x-20"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Скасувати</font></font></button>
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+
+                </div><!-- card-columns -->
+
+          </div>
+        </div>
+{% endblock %}
+{% block js_footer %}
+    <script>
+          $(function(){
+            'use strict'
+
+            // Toggles
+            $('.toggle').toggles({
+              on: true,
+              height: 26
+            });
+
+            // Input Masks
+            $('#dateMask').mask('99/99/9999');
+            $('#phoneMask').mask('(999) 999-9999');
+            $('#ssnMask').mask('999-99-9999');
+
+            // Time Picker
+            $('#tpBasic').timepicker();
+            $('#tp2').timepicker({'scrollDefault': 'now'});
+            $('#tp3').timepicker();
+
+            $('#setTimeButton').on('click', function (){
+              $('#tp3').timepicker('setTime', new Date());
+            });
+
+            // Color picker
+            $('#colorpicker').spectrum({
+              color: '#17A2B8'
+            });
+
+            $('#showAlpha').spectrum({
+              color: 'rgba(23,162,184,0.5)',
+              showAlpha: true
+            });
+
+            $('#showPaletteOnly').spectrum({
+                showPaletteOnly: true,
+                showPalette:true,
+                color: '#DC3545',
+                palette: [
+                    ['#1D2939', '#fff', '#0866C6','#23BF08', '#F49917'],
+                    ['#DC3545', '#17A2B8', '#6610F2', '#fa1e81', '#72e7a6']
+                ]
+            });
+
+          });
+        </script>
+    <script src="{% static 'lib/moment/js/moment.js' %}"></script>
+    <script src="{% static 'lib/d3/js/d3.js' %}"></script>
+    <script src="{% static 'lib/rickshaw/js/rickshaw.min.js' %}"></script>
+    <script src="{% static 'lib/gmaps/js/gmaps.js' %}"></script>
+    <script src="{% static 'lib/peity/js/jquery.peity.js' %}"></script>
+    <script src="{% static 'js/ResizeSensor.js' %}"></script>
+    <script src="{% static 'js/widgets.js' %}"></script>
+
+    <script src="{% static 'lib/chart.js/js/Chart.js' %}"></script>
+      <script>
+      window.onload = function(){
+        'use strict';
+
+        var ctx1 = document.getElementById('chartstats');
+        var myChart1 = new Chart(ctx1, {
+          type: 'bar',
+          data: {
+            labels: ['Січ', 'Лют', 'Берез', 'Квіт', 'Трав', 'Черв', 'Лип', 'Серп', 'Верес', 'Жовт', 'Листоп', 'Груд'],
+            datasets: [{
+              label: '# of Votes',
+              data: [12, 39, 20, 10, 25, 18, 12, 39, 20, 10, 25, 18],
+              backgroundColor: '#27AAC8'
+            }]
+          },
+          options: {
+            maintainAspectRatio: false,
+            legend: {
+              display: false,
+                labels: {
+                  display: false
+                }
+            },
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero:true,
+                  fontSize: 10,
+                  max: 80
+                }
+              }],
+              xAxes: [{
+                ticks: {
+                  beginAtZero:true,
+                  fontSize: 11
+                }
+              }]
+            }
+          }
+        });
+
+      };
+    </script>
+
+{% endblock %}
+

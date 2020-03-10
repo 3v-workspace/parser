@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "DOCKER CONTAINER SYSTEM VARIABLES:";
+echo "PATH=$PATH";
+echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH";
+echo "Content of $LD_LIBRARY_PATH: $(ls -la $LD_LIBRARY_PATH)"

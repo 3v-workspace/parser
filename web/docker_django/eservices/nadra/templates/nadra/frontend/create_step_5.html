@@ -1,0 +1,132 @@
+{% extends 'frontend/base.html' %}
+{% load group %}
+
+
+{% load static %}
+
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Створення послуги</h6>
+    </div>
+{% endblock %}
+
+{% block extrahead %}
+      <link rel="stylesheet" href="{% static 'lib/select2/css/select2.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{{ form.media.css }}
+{{ form.media.js }}
+
+<div class="box">
+    <div class="col-xs-12 step-wrapper">
+        <ul class="nav-panel backend">
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-address-card"></i></h4>
+                    <p class="list-group-item-text">Заявник</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-font-awesome"></i></h4>
+                    <p class="list-group-item-text">Ділянка надр</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-edit"></i></h4>
+                    <p class="list-group-item-text">Характеристика ділянки</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-file"></i></h4>
+                    <p class="list-group-item-text">Файли послуги</p>
+                </a>
+            </li>
+            <li class="active" >
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-key"></i></h4>
+                    <p class="list-group-item-text">Підпис</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-key"></i></h4>
+                    <p class="list-group-item-text">Результат</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="card card-wrapper card-without-border"  >
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="messages">
+                     {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-solid {% if message.tags %} {{ message.tags }} {% endif %} alert-error  mg-b-0" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">×</span>
+                                </button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-right">
+                        <a href="{{redirect_signature}}" class="btn btn-fill btn-success"><i class="fa fa-key"></i> Підписати і замовити</a>
+                        <button type="submit" data-toggle="modal" data-target="#edit_modal" class="btn btn-fill btn-success" id="submit">Направити за належністю
+                           </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit_modal" role="dialog" aria-labelledby="edit_modal" class="modal fade effect-super-scaled show" >
+      <div class="modal-dialog modal-dialog_check modal-dialog-vertical-center" role="eservice">
+        <div class="modal-content bd-0 tx-14">
+
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Відправка за належністю</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <form method="POST" action="/eservice/nadra/send_to_another/{{ eservice_id }}" enctype="multipart/form-data" >
+                {% csrf_token %}
+
+                <div class="form-group  col-md-12 ">
+                    <label>Email:</label>
+
+                    <input type="text" required name="email" class="form-control" placeholder="email" maxlength="200" id="id_email">
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-info" id="print">Додати</button>
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+                </div>
+            </form>
+
+        </div>
+      </div><!-- modal-dialog -->
+</div>
+{% endblock %}
+
+{% block js_footer %}
+    <script src="{% static 'js/city_upload.js' %}"></script>
+    <script src="{% static 'js/eservice.js' %}"></script>
+{% endblock %}

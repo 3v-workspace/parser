@@ -1,0 +1,48 @@
+{% extends 'backend/base.html' %}
+{% load staticfiles %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/backend/">Головна</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Необроблені послуги</li>
+        </ol>
+        <h6 class="gpdk-pagetitle">Необроблені послуги</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container section-wrapper">
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="table-responsive">
+                {% if e_services %}
+                    <table class="table mg-b-0">
+                      <thead>
+                        <tr>
+                          <th>Назва</th>
+                          <th>Статус</th>
+                          <th>Дата створення</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for e_service in e_services %}
+                          <tr>
+                            <th>
+                              <a href="/backend/eservice/{{ e_service.id }}">
+                                {{ e_service.title }}
+                              </a>
+                            </th>
+                              <td><span class="label  {{ e_service.status.attr.slug }}"> {{ e_service.status.title }}</span></td>
+                            <td>{{ e_service.created_at }}</td>
+                          </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                {%else%}
+                    * У Вас немає необроблених послуг
+                {%endif%}
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

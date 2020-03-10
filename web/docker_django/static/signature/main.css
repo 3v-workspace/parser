@@ -1,0 +1,48 @@
+.service-msg {
+    display: none;
+    margin-top: 2%;
+}
+
+.add-test-service-request-btn {
+    margin: 20px 0;
+}
+
+.has-error {
+    color: red;
+}
+
+.bg-none {
+    background-color: white !important;
+}
+
+.hl-blue {
+    background-color: #3d99e8;
+    border-color: #3d99e8;
+    height:2px;
+}
+
+#loading {
+    display: none;
+}
+.TextHeaderH3{
+    color: black;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2%;
+}
+.submit_btn{
+    font-weight: 500;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+    border: 0;
+    min-height: 40px;
+    background-color: #073b5b;
+
+}
+.submit_btn:hover{
+    background: rgba(0,0,0,0);
+	color: #073b5b;
+	box-shadow: inset 0 0 0 3px #073b5b;
+}

@@ -1,0 +1,161 @@
+{% extends 'frontend/base.html' %}
+{% load staticfiles %}
+{% load final_status %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Ваші послуги</h6>
+    </div>
+{% endblock %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/star-rating.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="nav-statistics-wrapper">
+      <nav class="nav">
+        <a href="" class="nav-link active">За весь час</a>
+        <a href="" class="nav-link">За тиждень</a>
+        <a href="" class="nav-link">За місяць</a>
+        <a href="" class="nav-link">За рік</a>
+      </nav>
+      <nav class="nav">
+
+        <a href="" class=""><i class="fa fa-close mg-r-5"></i> Скинути фільтр</a>
+      </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-lg-4">
+            <div class="p-3 bd">
+                    <ul class="nav nav-pills flex-column" role="tablist">
+                      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#" role="tab">Відхилено</a></li>
+                      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#" role="tab">На погоджені</a></li>
+                      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#" role="tab">У обробці</a></li>
+                      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#" role="tab">Послуга надана</a></li>
+                    </ul>
+                  </div>
+            <div class="mt-4 fc-datepicker hasDatepicker" id="dp1553248472185"><div class="ui-datepicker-inline ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" style="display: block;"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" data-handler="prev" data-event="click" title="Prev"><span class="ui-icon ui-icon-circle-triangle-w">Поп</span></a><a class="ui-datepicker-next ui-corner-all" data-handler="next" data-event="click" title="Next"><span class="ui-icon ui-icon-circle-triangle-e">Наст</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-month">Березень</span>&nbsp;<span class="ui-datepicker-year">2019</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th scope="col" class="ui-datepicker-week-end"><span title="Sunday">Нд</span></th><th scope="col"><span title="Monday">ПН</span></th><th scope="col"><span title="Tuesday">ВТ</span></th><th scope="col"><span title="Wednesday">СР</span></th><th scope="col"><span title="Thursday">Чт</span></th><th scope="col"><span title="Friday">Пт</span></th><th scope="col" class="ui-datepicker-week-end"><span title="Saturday">Сб</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="1" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">24</a></td><td class=" ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="1" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">25</a></td><td class=" ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="1" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">26</a></td><td class=" ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="1" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">27</a></td><td class=" ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="1" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">28</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">1</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">2</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">3</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">4</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">5</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">6</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">7</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">8</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">9</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">10</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">11</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">12</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">13</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">14</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">15</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">16</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">17</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">18</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">19</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">20</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">21</a></td><td class=" ui-datepicker-days-cell-over  ui-datepicker-current-day ui-datepicker-today" data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default ui-state-highlight ui-state-active" href="#">22</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">23</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">24</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">25</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">26</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">27</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">28</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">29</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">30</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="2" data-year="2019"><a class="ui-state-default" href="#">31</a></td><td class=" ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="3" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">1</a></td><td class=" ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="3" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">2</a></td><td class=" ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="3" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">3</a></td><td class=" ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="3" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">4</a></td><td class=" ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="3" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">5</a></td><td class=" ui-datepicker-week-end ui-datepicker-other-month " data-handler="selectDay" data-event="click" data-month="3" data-year="2019"><a class="ui-state-default ui-priority-secondary" href="#">6</a></td></tr></tbody></table></div></div>
+        </div>
+        <div class="col-md-8 col-lg-8">
+            <div class="table-responsive">
+                <div id="estimation_refresh">
+                <table class="table mg-b-0">
+                  <thead>
+                    <tr>
+                      <th>Назва</th>
+                      <th>Статус</th>
+                      <th>Дата створення</th>
+                      <th>Оцінка</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in my_eservices %}
+                      <tr>
+                        <th>
+                          <a href="/eservice/{{ item.id }}">
+                            {{ item.title }}
+                          </a>
+                        </th>
+                        <td> {{ item.status.title }}</td>
+                        <td>{{ item.created_at }}</td>
+                        <td>
+                            {% load exist_estimation %}
+                            {% if request.user|exist_estimation:item.id  or request.user|exist_estimation:item.id == 0%}
+                                {{ request.user|exist_estimation:item.id }}
+                            {%else%}
+                                {% if request.user|final_status:item.status %}
+                                <button data-toggle="modal" data-estimation="{{ item.id }}" data-effect="effect-just-me" class="btn btn_e_cabinet open_popup submit_btn" > Оцінити надану послугу </button>
+                                {%else%}
+                                    *Здійснити оцінку можливо тільки у фінальному статусі
+                                {%endif%}
+                            {% endif %}
+                        </td>
+                      </tr>
+                    {%endfor%}
+                  </tbody>
+                </table>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <div id="check_modal" class="modal fade effect-super-$('.send_data_estimation_id')scaled show" >
+        <div class="modal-dialog modal-dialog_check modal-dialog-vertical-center" role="document">
+        <div class="modal-content bd-0 tx-14 height_fix">
+          <div class="modal-header pd-y-20 pd-x-25">
+            <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">
+                Оцінювання наданої послуги
+            </h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+            <div class="col-12">
+                <form method="post" enctype="multipart/form-data" id="send_data_estimation" role="form" action="/eservice/estimation_service/">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {{ field.errors }}
+                    <div class="form-group">
+                        <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+                        {{ field }}
+
+                    </div>
+                    {% endfor %}
+                    <input type="hidden" name="submitted-form" class="send_data_estimation_id">
+                    <div class="modal-footer">
+                        <button class="btn btn-info" type="submit">Відправити відгук з оцінками</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+                    </div>
+
+                </form>
+
+        </div>
+        </div><!-- modal-dialog -->
+    </div>
+    </div>
+{% endblock %}
+
+{% block js_footer %}
+    <script src="{% static 'js/star-rating.js' %}"></script>
+    <script src="{% static 'js/ua.js' %}"></script>
+<script>
+    $("#input-id").rating();
+    $("#quality").rating();
+    $("#easy_ordering").rating();
+    $("#term_service").rating();
+</script>
+
+<script>
+$(document).ready(function() {
+    $('#send_data_estimation').submit(function(e) {
+        e.preventDefault();
+        var sumbittedFormId = $(this).find('.send_data_estimation_id').val();
+         $.ajax({
+            cache: false,
+            type: 'POST',
+            data: $(this).serialize(),
+            url: "/eservice/estimation_service/"+sumbittedFormId,
+            success: function(data) {
+                $('#estimation_refresh').html(data.refresh_html);
+                $('#check_modal').modal('hide');
+            }
+        });
+       });
+
+       $('.open_popup').on('click', function(e){
+        var formID = $(this).data('estimation');
+        $('.send_data_estimation_id').val(formID);
+        $('#check_modal').modal('show');
+       });
+
+
+       } );
+</script>
+
+{% endblock %}
+

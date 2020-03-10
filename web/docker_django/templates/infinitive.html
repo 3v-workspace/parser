@@ -1,0 +1,24 @@
+{% extends 'frontend/base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div class="infinite-container">
+    {% for number in numbers %}
+      <div class="infinite-item">{{ number }}</div>
+    {% endfor %}
+  </div>
+
+  {% if numbers.has_next %}
+    <a class="infinite-more-link" href="?page={{ numbers.next_page_number }}">More</a>
+  {% endif %}
+
+{#{% block js_footer %}#}
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0]
+    });
+  </script>
+{#{% endblock %}#}
+{% endblock %}
