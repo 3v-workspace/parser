@@ -1,0 +1,160 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-10 06:13+0000\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: apps.py:10 templates/users/department_users.html:7
+#: templates/users/menu.html:4
+msgid "Users"
+msgstr "Працівники"
+
+#: forms.py:8
+msgid "manager"
+msgstr "керівник"
+
+#: forms.py:26
+msgid "position"
+msgstr "посада"
+
+
+#: models.py:11
+msgid "code"
+msgstr "код штатної одиниці"
+
+#: models.py:12
+msgid "name"
+msgstr "Ім'я"
+
+#: models.py:15 models.py:27 models.py:42
+msgid "department"
+msgstr "Відділ"
+
+#: models.py:16
+msgid "departments"
+msgstr "відділи"
+
+#: models.py:26 models.py:41 models.py:65 models.py:75 models.py:91
+msgid "employee"
+msgstr "працівники"
+
+#: models.py:28 models.py:43 models.py:77 models.py:93
+msgid "from"
+msgstr "з"
+
+#: models.py:29 models.py:44 models.py:78 models.py:94
+msgid "to"
+msgstr "по"
+
+#: models.py:34
+msgid "department employee"
+msgstr "працівник відділу"
+
+#: models.py:35
+msgid "department users"
+msgstr "працівники відділу"
+
+#: models.py:49
+msgid "department manager"
+msgstr "керівник відділу"
+
+#: models.py:50
+msgid "department managers"
+msgstr "керівники відділів"
+
+#: models.py:66 views.py:137
+msgid "users"
+msgstr "працівники"
+
+
+#: models.py:92 models.py:99
+msgid "title"
+msgstr "посада"
+
+#: models.py:100
+msgid "titles"
+msgstr "посади"
+
+#: templates/users/change_manager.html:7
+msgid "Change Manager"
+msgstr "Змінити керівника відділу"
+
+
+#: templates/users/change_salary.html:14 views.py:39
+msgid "Salary History"
+msgstr "История зарплаты"
+
+#: templates/users/change_salary.html:43
+msgid "Set new Salary"
+msgstr "Установить новую зарплату"
+
+#: templates/users/change_title.html:7
+msgid "Change Title"
+msgstr "Изменить должность"
+
+#: templates/users/change_title.html:16
+#: templates/users/employee_detail.html:29
+msgid "Positions"
+msgstr "Должности"
+
+#: templates/users/change_title.html:20
+#: templates/users/employee_detail.html:33
+msgid "Position"
+msgstr "Должность"
+
+#: templates/users/change_title.html:21
+#: templates/users/department_detail.html:42
+#: templates/users/employee_detail.html:34
+#: templates/users/employee_detail.html:60
+#: templates/users/employee_detail.html:85
+msgid "Since"
+msgstr "С"
+
+#: templates/users/change_title.html:22
+#: templates/users/employee_detail.html:35
+#: templates/users/employee_detail.html:61
+msgid "To"
+msgstr "По"
+
+#: templates/users/change_title.html:38
+#: templates/users/department_detail.html:29
+#: templates/users/department_detail.html:56
+#: templates/users/employee_detail.html:23
+#: templates/users/employee_detail.html:50
+#: templates/users/employee_detail.html:99
+msgid "Change"
+msgstr "Изменить"
+
+#: templates/users/department_detail.html:28
+#: templates/users/employee_detail.html:22
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/users/department_detail.html:37
+msgid "Department Managers"
+msgstr "Менеджеры отделов"
+
+#: templates/users/department_detail.html:41
+msgid "Manager"
+msgstr "Менеджер"
+
+#: templates/users/employee_detail.html:55 templates/users/menu.html:3
+msgid "Departments"
+msgstr "Департаменты"
+
+#: templates/users/employee_detail.html:59
+msgid "Department"
+msgstr "Департаменты"
+
+#: templates/users/employee_detail.html:80
+#: templates/users/employee_detail.html:84
+msgid "Salary"
+msgstr "Зарплата"

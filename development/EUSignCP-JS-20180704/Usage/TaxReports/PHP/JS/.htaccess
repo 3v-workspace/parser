@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteCond %{HTTP:Accept-encoding} gzip
+RewriteCond %{REQUEST_FILENAME}.gz -s
+RewriteRule ^(.*)$ $1.gz [QSA,L]
+
+<FilesMatch "\.js\.gz$">
+	AddEncoding gzip .gz
+	ForceType "text/javascript"
+</FilesMatch>

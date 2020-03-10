@@ -1,0 +1,23 @@
+{% load static %}
+<label class="control-label">Місто*:</label>
+<i style="visibility: hidden;" class="ajax_spinner fas fa-spinner fa-spin fa fa-fw" ></i>
+<select name="city" class="form-control" style="width: 100%;"  required="" aria-required="true">
+    <option value="" selected="">Виберіть місто</option>
+    {% for city in city_list %}
+        <option value="{{ city}}">{{ city }}</option>
+    {% endfor %}
+</select>
+
+<script>
+
+     $(function(){
+        'use strict';
+
+        $('select').select2({
+
+
+        });
+
+      });
+
+</script>

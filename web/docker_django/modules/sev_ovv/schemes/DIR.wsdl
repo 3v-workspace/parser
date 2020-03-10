@@ -1,0 +1,307 @@
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IntegrationService" targetNamespace="http://tempuri.org/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://tempuri.org/Imports">
+			<xsd:import namespace="http://tempuri.org/" schemaLocation="DIR.xsd"/>
+			<xsd:import namespace="http://schemas.datacontract.org/2004/07/Cover.Contracts" schemaLocation="Common.xsd"/>
+			<xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="XSDTypes.xsd"/>
+			<xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" schemaLocation="ArrayOfLong.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="ICoverIntegrationService_OpenUploadingSession_InputMessage">
+		<wsdl:part name="parameters" element="tns:OpenUploadingSession"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_OpenUploadingSession_OutputMessage">
+		<wsdl:part name="parameters" element="tns:OpenUploadingSessionResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_OpenUploadingSession_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q1:CommunicationError" xmlns:q1="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_UploadMessageChunk_InputMessage">
+		<wsdl:part name="parameters" element="tns:UploadMessageChunk"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_UploadMessageChunk_OutputMessage">
+		<wsdl:part name="parameters" element="tns:UploadMessageChunkResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_UploadMessageChunk_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q2:CommunicationError" xmlns:q2="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_OpenDownloadingSession_InputMessage">
+		<wsdl:part name="parameters" element="tns:OpenDownloadingSession"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_OpenDownloadingSession_OutputMessage">
+		<wsdl:part name="parameters" element="tns:OpenDownloadingSessionResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_OpenDownloadingSession_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q3:CommunicationError" xmlns:q3="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_DownloadMessageChunk_InputMessage">
+		<wsdl:part name="parameters" element="tns:DownloadMessageChunk"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_DownloadMessageChunk_OutputMessage">
+		<wsdl:part name="parameters" element="tns:DownloadMessageChunkResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_DownloadMessageChunk_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q4:CommunicationError" xmlns:q4="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetMessageValidationInfo_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMessageValidationInfo"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetMessageValidationInfo_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMessageValidationInfoResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetMessageValidationInfo_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q5:CommunicationError" xmlns:q5="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_EndProcessingDownloadedMessage_InputMessage">
+		<wsdl:part name="parameters" element="tns:EndProcessingDownloadedMessage"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_EndProcessingDownloadedMessage_OutputMessage">
+		<wsdl:part name="parameters" element="tns:EndProcessingDownloadedMessageResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_EndProcessingDownloadedMessage_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q6:CommunicationError" xmlns:q6="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetSessionsInfo_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetSessionsInfo"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetSessionsInfo_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetSessionsInfoResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetSessionsInfo_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q7:CommunicationError" xmlns:q7="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetSessionInfo_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetSessionInfo"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetSessionInfo_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetSessionInfoResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetSessionInfo_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q8:CommunicationError" xmlns:q8="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetInputMessages_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetInputMessages"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetInputMessages_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetInputMessagesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetInputMessages_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q9:CommunicationError" xmlns:q9="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetHistory_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetHistory"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetHistory_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetHistoryResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetHistory_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q10:CommunicationError" xmlns:q10="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetVersion_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetVersion"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetVersion_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetVersionResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICoverIntegrationService_GetVersion_CommunicationErrorFault_FaultMessage">
+		<wsdl:part name="detail" element="q11:CommunicationError" xmlns:q11="http://schemas.datacontract.org/2004/07/Cover.Contracts"/>
+	</wsdl:message>
+	<wsdl:portType name="ICoverIntegrationService">
+		<wsdl:operation name="OpenUploadingSession">
+			<wsdl:input message="tns:ICoverIntegrationService_OpenUploadingSession_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/OpenUploadingSession"/>
+			<wsdl:output message="tns:ICoverIntegrationService_OpenUploadingSession_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/OpenUploadingSessionResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_OpenUploadingSession_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/OpenUploadingSessionCommunicationErrorFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UploadMessageChunk">
+			<wsdl:input message="tns:ICoverIntegrationService_UploadMessageChunk_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/UploadMessageChunk"/>
+			<wsdl:output message="tns:ICoverIntegrationService_UploadMessageChunk_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/UploadMessageChunkResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_UploadMessageChunk_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/UploadMessageChunkCommunicationErrorFault "/>
+		</wsdl:operation>
+		<wsdl:operation name="OpenDownloadingSession">
+			<wsdl:input message="tns:ICoverIntegrationService_OpenDownloadingSession_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/OpenDownloadingSession"/>
+			<wsdl:output message="tns:ICoverIntegrationService_OpenDownloadingSession_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/OpenDownloadingSessionResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_OpenDownloadingSession_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/OpenDownloadingSessionCommunicationErrorFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DownloadMessageChunk">
+			<wsdl:input message="tns:ICoverIntegrationService_DownloadMessageChunk_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/DownloadMessageChunk"/>
+			<wsdl:output message="tns:ICoverIntegrationService_DownloadMessageChunk_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/DownloadMessageChunkResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_DownloadMessageChunk_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/DownloadMessageChunkCommunicationErrorFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMessageValidationInfo">
+			<wsdl:input message="tns:ICoverIntegrationService_GetMessageValidationInfo_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetMessageValidationInfo"/>
+			<wsdl:output message="tns:ICoverIntegrationService_GetMessageValidationInfo_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetMessageValidationInfoResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_GetMessageValidationInfo_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetMessageValidationInfoCommunicationErrorFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="EndProcessingDownloadedMessage">
+			<wsdl:input message="tns:ICoverIntegrationService_EndProcessingDownloadedMessage_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/EndProcessingDownloadedMessage"/>
+			<wsdl:output message="tns:ICoverIntegrationService_EndProcessingDownloadedMessage_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/EndProcessingDownloadedMessageResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_EndProcessingDownloadedMessage_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/EndProcessingDownloadedMessageCommunicationErrorFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetSessionsInfo">
+			<wsdl:input message="tns:ICoverIntegrationService_GetSessionsInfo_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetSessionsInfo"/>
+			<wsdl:output message="tns:ICoverIntegrationService_GetSessionsInfo_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetSessionsInfoResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_GetSessionsInfo_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetSessionsInfoCommunicationErrorFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetSessionInfo">
+			<wsdl:input message="tns:ICoverIntegrationService_GetSessionInfo_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetSessionInfo"/>
+			<wsdl:output message="tns:ICoverIntegrationService_GetSessionInfo_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetSessionInfoResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_GetSessionInfo_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetSessionInfoCommunicationErrorFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetInputMessages">
+			<wsdl:input message="tns:ICoverIntegrationService_GetInputMessages_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetInputMessages"/>
+			<wsdl:output message="tns:ICoverIntegrationService_GetInputMessages_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetInputMessagesResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_GetInputMessages_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetInputMessagesCommunicationErrorFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetHistory">
+			<wsdl:input message="tns:ICoverIntegrationService_GetHistory_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetHistory"/>
+			<wsdl:output message="tns:ICoverIntegrationService_GetHistory_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetHistoryResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_GetHistory_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetHistoryCommunicationErrorFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetVersion">
+			<wsdl:input message="tns:ICoverIntegrationService_GetVersion_InputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetVersion"/>
+			<wsdl:output message="tns:ICoverIntegrationService_GetVersion_OutputMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetVersionResponse"/>
+			<wsdl:fault name="CommunicationErrorFault" message="tns:ICoverIntegrationService_GetVersion_CommunicationErrorFault_FaultMessage" wsaw:Action="http://tempuri.org/ICoverIntegrationService/GetVersionCommunicationErrorFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BasicHttpBinding_ICoverIntegrationService" type="tns:ICoverIntegrationService">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="OpenUploadingSession">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/OpenUploadingSession" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UploadMessageChunk">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/UploadMessageChunk" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="OpenDownloadingSession">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/OpenDownloadingSession" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DownloadMessageChunk">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/DownloadMessageChunk" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMessageValidationInfo">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/GetMessageValidationInfo" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="EndProcessingDownloadedMessage">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/EndProcessingDownloadedMessage" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSessionsInfo">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/GetSessionsInfo" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSessionInfo">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/GetSessionInfo" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetInputMessages">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/GetInputMessages" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetHistory">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/GetHistory" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetVersion">
+			<soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/GetVersion" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CommunicationErrorFault">
+				<soap:fault name="CommunicationErrorFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="IntegrationService">
+		<wsdl:port name="BasicHttpBinding_ICoverIntegrationService" binding="tns:BasicHttpBinding_ICoverIntegrationService">
+			<soap:address location="http://213.156.91.42:4435/csp/dirbus/bus.esb.IntegrationService.cls"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

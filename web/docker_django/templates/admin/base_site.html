@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+
+{% block title %}eSDF. Панель адміністрування | {{ site_title|default:_('eSDF. Панель адміністрування') }}{% endblock %}
+
+{% block extrahead %}
+    <style>
+        #header {
+            background: #073b5b;
+        }
+        .module h2, .module caption, .inline-group h2 {
+            background: #073b5b;
+        }
+        div.breadcrumbs {
+            background: #073b5b;
+        }
+        a:link, a:visited {
+            color: #073b5b;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">eSDF. Панель адміністрування</a></h1>
+{% endblock %}
+
+{% block usertools %}
+
+    <div id="user-tools">
+        Вітаємо,
+        <strong>{{request.user.last_name}} {{request.user.first_name|make_list|first}}.{{request.user.middle_name|make_list|first}}. </strong>
+            <a href="/">Дивитися сайт</a> /
+            <a href="/_admin/logout/">Вийти</a>
+    </div>
+
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'frontend/base.html' %}
+{% load group %}
+
+
+{% load static %}
+
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Створення послуги</h6>
+    </div>
+{% endblock %}
+
+{% block extrahead %}
+      <link rel="stylesheet" href="{% static 'lib/select2/css/select2.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{{ form.media.css }}
+{{ form.media.js }}
+
+<div class="box">
+    <div class="col-xs-12 step-wrapper">
+        <ul class="nav-panel backend">
+            <li class="active">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-edit"></i></h4>
+                    <p class="list-group-item-text">Заповнення форми</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-key"></i></h4>
+                    <p class="list-group-item-text">Результат</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <form method="post" class="card card-wrapper"  enctype="multipart/form-data" id="resolution_rada_project-create-form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group {% if form.title.errors %}has-error{% endif %} col-md-12">
+                    <label>Заголовок або короткий зміст послуги:</label>
+                    {{ form.title.errors }}
+                    {{ form.title }}
+                </div>
+
+                <div class="form-group {% if form.deadline.errors %}has-error{% endif %} col-md-12 ">
+                    <label>Строк виконання послуги:</label>
+                    {{ form.deadline.errors }}
+                    {{ form.deadline }}
+                </div>
+
+                <!--<div class="form-group {% if form.resolutioner.errors %}has-error{% endif %} col-md-12 ">-->
+                    <!--<label>Резолюціонер:</label>-->
+                    <!--{{ form.resolutioner.errors }}-->
+                    <!--{{ form.resolutioner }}-->
+                <!--</div>-->
+
+                <div class="form-group {% if form.type_license.errors %}has-error{% endif %} col-md-12 ">
+                    <label>Тип ліцензії:</label>
+                    {{ form.type_license.errors }}
+                    {{ form.type_license }}
+                </div>
+
+                <div class="form-group {% if form.payment.errors %}has-error{% endif %} col-md-12 ">
+                    <label>Оплата:</label>
+                    {{ form.payment.errors }}
+                    {{ form.payment }}
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group {% if form.type_license.errors %}has-error{% endif %} col-md-12 ">
+                        <label>Область:</label>
+                        {{ form.region.errors }}
+                        {{ form.region }}
+                </div>
+
+                <div class="form-group {% if form.type_license.errors %}has-error{% endif %} col-md-12 ">
+                    <div id="city">
+                        <label>Місто:</label>
+                        <i class="ajax_spinner fas fa-spinner fa-spin fa fa-fw" ></i>
+                        {{ form.city.errors }}
+                        {{ form.city }}
+                    </div>
+                </div>
+
+
+                <div class="form-group {% if form.comment.errors %}has-error{% endif %} col-md-12 ">
+                    <label>Докладний опис:</label>
+                    {{ form.comment.errors }}
+                    {{ form.comment }}
+                </div>
+
+                <div class="form-group {% if form.file.errors %}has-error{% endif %} col-md-12 ">
+                    <label>Заватажте довідку про склад сім'ї, страхівку, мед.довідку, диплом або атестат, виписку з банку за останніх 30 років:</label>
+                    {{ form.file.errors }}
+                    <div class="file_upload">
+                        <!--<span>Завантажити</span>-->
+                        {{ form.file }}
+                    </div>
+                </div>
+
+        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-right">
+                        <a href="/create/" class="btn btn-fill btn-danger"><i class="fa  fa-close"></i> Відміна</a>
+                        <button type="submit" class="btn btn-fill btn-success" id="submit">Зберегти та продовжити
+                            <i class="fa fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
+
+{% block js_footer %}
+    <script src="{% static 'js/city_upload.js' %}"></script>
+{% endblock %}

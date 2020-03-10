@@ -1,0 +1,183 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block extrahead %}
+    <link href="{% static 'css/nav_tabs.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/backend/">Головна</a></li>
+            <li class="breadcrumb-item"><a href="/eservice/my_eservices/">Список послуг</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Картка послуги</li>
+        </ol>
+        <h6 class="gpdk-pagetitle">
+            {{ e_service.type.title }} №{{ e_service.internal_id }}
+            <small> Статус:
+                <div class="label label-title  {{ e_service.status.attr.slug }}">{{ e_service.status.title }}</div>
+            </small>
+
+        </h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="ht-md-60 pd-x-20 bg-gray-200 mb-4 d-flex align-items-center justify-content-center">
+    <ul class="nav nav-underline align-items-center flex-column flex-md-row" role="tablist">
+      <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#home" role="tab" aria-selected="false">Реєстраційно-контрольна картка послуги</a></li>
+      <li class="nav-item"><a class="nav-link  " data-toggle="tab" href="#monitoring" role="tab" aria-selected="true">Моніторинг</a></li>
+
+    </ul>
+</div>
+<div class="">
+
+    <div class="container black_color">
+        <div class="tab-content">
+        <div class="tab-pane active" id="home">
+            <div class="row mt-2 mb-2">
+                <div class="col-md-6 ">
+                    <div class="form-group pd-l-35">
+                        <label class="bold_title"><b>Дата реєстрації послуги:</b></label>
+                        {{ e_service.created_at|date:"d.m.Y" }}
+                    </div>
+                    <div class="form-group pd-l-35">
+                        <label class="bold_title"><b>Заголовок або короткий зміст послуги:</b></label>
+                        {{ e_service.title|default:"Не вказано" }}
+                    </div>
+                    <div class="form-group pd-l-35">
+                        <label class="bold_title"><b>Автор послуги:</b></label>
+                        {{ e_service.created_by.last_name|default:"Не вказано" }}
+                        {{ e_service.created_by.first_name|default:"Не вказано" }}
+                    </div>
+                </div>
+                <div class="col-md-6 pd-l-35">
+                    <div class="form-group pd-l-35">
+                        <label class="bold_title"><b>Тип ліцензії:</b></label>
+                        {{ e_service.type_license|default:"Не вказано" }}
+                    </div>
+                    <div class="form-group pd-l-35">
+                        <label class="bold_title"><b>Тип оплати:</b></label>
+                        {{ e_service.payment|default:"Не вказано" }}
+                    </div>
+                    <div class="form-group pd-l-35">
+                        <label class="bold_title"><b>Область:</b></label>
+                        {{ e_service.created_by.region|default:"Не вказано" }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2 mb-2">
+                <div class="col-md-4">
+                    <div class="box without_box-primary event">
+                        <div class="header_with-border">
+                            <h5 class="box-title h5_not_weight">Файли послуги:</h5>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            {% if e_service.eservicefile_set.all %}
+                                {% for file in e_service.eservicefile_set.all %}
+                                <div class="col-md-4">
+                                    <div class="eservice">
+                                        <div class="eservice-icon" id="eservice-icon">
+                                            <a href="/media/{{ file.file }}"> <img
+                                                    src=""></a>
+                                        </div>
+                                        <span >
+                                            <a target="_blank"
+                                                href="/media/{{ file.file }}">{{ file.filename }}</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {%else%}
+                            <div class="wrap_no_data">
+                                * Файли відсутні
+                            </div>
+
+                            {%endif%}
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+
+                        <div class="header_with-border">
+                            <h5 class="box-title">Результат обробки :</h5>
+                        </div>
+                        {%if false%}
+                            <div class="card-content ">
+                                <table id="table_bounded" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                    <th class="th_white">Номер</th>
+                                    <th class="th_white">Короткий опис</th>
+                                    <th class="th_white">Тип послуги</th>
+                                    <th class="th_white">Видалити?</th>
+                                    </tr></thead>
+                                    <tbody id="table-body-eservices">
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                        {%else%}
+                            <div class="wrap_no_data">
+                                * Немає даних
+                            </div>
+                        {%endif%}
+                    </div>
+        </div>
+    </div>
+
+        </div>
+
+    <div class="tab-pane" id="monitoring">
+        <div class="box without_box-primary p-3 mt-3">
+
+            <div class="card-content clearfix ">
+                {% if dict_with_log %}
+                    <div class="timeline-group">
+                        {%for item in dict_with_log%}
+                            <div class="timeline-item timeline-day">
+                              <div class="timeline-time">&nbsp;</div>
+                              <div class="timeline-body">
+                                <p class="timeline-date">{{item.date.val_date}}</p>
+                              </div><!-- timeline-body -->
+                            </div><!-- timeline-item -->
+
+                            {%for item_time in item.date.time%}
+                                <div class="timeline-item">
+                                  <div class="timeline-time">{{item_time.val_time}}</div>
+                                  <div class="timeline-body">
+                                    <p class="timeline-title"><a href="">{{item_time.user}}</a></p>
+                                    <p class="timeline-text">{{item_time.desk}}</p>
+                                  </div><!-- timeline-body -->
+                                </div><!-- timeline-item -->
+
+
+
+                            {%endfor%}
+
+                        {%endfor%}
+
+                    </div>
+
+                {%else%}
+                    * Не має логів
+                {%endif%}
+
+            </div>
+        </div>
+    </div>
+    </div>
+ </div>
+ </div>
+
+{% endblock %}
+

@@ -1,0 +1,219 @@
+[
+  {
+    "model": "eservice.eservicemeta",
+    "pk": 1,
+    "fields": {
+      "eservice_type": 1,
+      "category_index": "1.0",
+      "lft": 1,
+      "rght": 4,
+      "tree_id": 1,
+      "level": 0,
+      "title": "Тип ліцензії"
+    }
+  },
+    {
+    "model": "eservice.eservicemeta",
+    "pk": 2,
+    "fields": {
+      "eservice_type": 1,
+      "category_index": "1.1",
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 1,
+      "level": 1,
+      "title": "Будівельна",
+      "parent": 1
+    }
+  },
+    {
+    "model": "eservice.eservicemeta",
+    "pk": 3,
+    "fields": {
+      "category_index": "2.0",
+      "lft": 1,
+      "rght": 4,
+      "tree_id": 2,
+      "level": 0,
+      "title": "Оплата"
+    }
+  },
+  {
+    "model": "eservice.eservicemeta",
+    "pk": 4,
+    "fields": {
+      "category_index": "2.1",
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 2,
+      "level": 1,
+      "title": "Готівка",
+      "parent": 3
+    }
+  },
+
+  {
+    "model": "eservice.eservicemeta",
+    "pk": 5,
+    "fields": {
+      "category_index": "3.0",
+      "lft": 1,
+      "rght": 10,
+      "tree_id": 3,
+      "level": 0,
+      "title": "Статуси послуг"
+    }
+  },
+
+  {
+    "model": "eservice.eservicemeta",
+    "pk": 6,
+    "fields": {
+      "category_index": "3.1",
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 3,
+      "level": 1,
+      "title": "У обробці",
+      "parent": 5,
+      "attr": "{\"slug\": \"label-primary\"}"
+    }
+  },
+  {
+    "model": "eservice.eservicemeta",
+    "pk": 7,
+    "fields": {
+      "category_index": "3.2",
+      "lft": 4,
+      "rght": 5,
+      "tree_id": 3,
+      "level": 1,
+      "title": "Відхилено",
+      "parent": 5,
+      "attr": "{\"slug\": \"label-red\", \"final\": 1}"
+    }
+  },
+
+  {
+    "model": "eservice.eservicemeta",
+    "pk": 8,
+    "fields": {
+      "category_index": "3.3",
+      "lft": 6,
+      "rght": 7,
+      "tree_id": 3,
+      "level": 1,
+      "title": "На погодженні",
+      "parent": 5,
+      "attr": "{\"slug\": \"label-yellow\"}"
+    }
+  },
+
+  {
+    "model": "eservice.eservicemeta",
+    "pk": 9,
+    "fields": {
+      "category_index": "3.4",
+       "lft": 8,
+      "rght": 9,
+      "tree_id": 3,
+      "level": 1,
+      "title": "Послуга надана",
+      "parent": 5,
+      "attr": "{\"slug\": \"label-green\", \"final\": 1}"
+
+    }
+  },
+
+
+  {
+    "model": "eservice.eservicemeta",
+    "pk": 10,
+    "fields": {
+      "category_index": "3.5",
+       "lft": 8,
+      "rght": 9,
+      "tree_id": 3,
+      "level": 1,
+      "title": "На доопрацюванні",
+      "parent": 5,
+       "attr": "{\"slug\": \"label-yellow\"}"
+
+    }
+  },
+  {
+    "model": "eservice.eservicestatus",
+    "pk": 1,
+    "fields": {
+      "title": "У обробці",
+      "slug": "processing",
+      "color": "blue"
+    }
+  },
+  {
+    "model": "eservice.eservicestatus",
+    "pk": 2,
+    "fields": {
+      "title": "Відхилено",
+      "slug": "rejected",
+      "color": "red"
+    }
+  },
+    {
+    "model": "eservice.eservicestatus",
+    "pk": 3,
+    "fields": {
+      "title": "На погодженні",
+      "slug": "confirmation",
+      "color": "green"
+    }
+  },
+      {
+    "model": "eservice.eservicestatus",
+    "pk": 4,
+    "fields": {
+      "title": "Послуга надана",
+      "slug": "done",
+      "color": "green"
+    }
+  },
+    {
+    "model": "eservice.eservicestatus",
+    "pk": 5,
+    "fields": {
+      "title": "На доопрацюванні",
+      "slug": "on_fix",
+      "color": "green"
+    }
+  },
+  {
+    "model": "eservice.eservicetype",
+    "pk": 1,
+    "fields": {
+      "title": "0100043",
+      "category": "0100043",
+      "controller": "eservice0100043",
+      "model": "EService0100043"
+    }
+  },
+    {
+    "model": "eservice.eservicetype",
+    "pk": 2,
+    "fields": {
+      "title": "0100044",
+      "category": "0100044",
+      "controller": "eservice0100044",
+      "model": "EService0100044"
+    }
+  },
+    {
+    "model": "eservice.eservicetype",
+    "pk": 3,
+    "fields": {
+      "title": "nadra",
+      "category": "nadra",
+      "controller": "nadra",
+      "model": "NadraModel"
+    }
+  }
+]

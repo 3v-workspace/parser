@@ -1,0 +1,29 @@
+[
+  {
+    "model": "users.department",
+    "pk": 1,
+    "fields": {
+      "dept_no": "Кабінет державного органу",
+      "dept_name": "Електронний кабінет державного органу",
+      "lft": 1,
+      "rght": 4,
+      "tree_id": 1,
+      "level": 0,
+      "priority": 0
+    }
+  },
+  {
+    "model": "users.department",
+    "pk": 2,
+    "fields": {
+      "dept_no": "Тестовий",
+      "dept_name": "Тестовий відділ",
+      "priority": 0,
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 3,
+      "level": 1,
+      "parent": "Кабінет державного органу"
+    }
+  }
+]

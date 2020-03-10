@@ -1,0 +1,80 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Створення послуги</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="box">
+        <div class="text-center">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <ul class="nav nav-pills nav-justified thumbnail-top setup-panel">
+                        <li><a href="/eservice/update/{{ eservice.id }}/1">
+                            <h4 class="list-group-item-heading"><i class="fa fa-edit"></i></h4>
+                            <p class="list-group-item-text">Картка послуги</p>
+                        </a></li>
+
+                        <li><a href="/eservice/update/{{ eservice.id }}/3">
+                            <h4 class="list-group-item-heading"><i class="fa  fa-chain"></i></h4>
+                            <p class="list-group-item-text">Пов'язані послуги</p>
+                        </a></li>
+
+                        <li class="active"><a href="/eservice/update/{{ eservice.id }}/4">
+                            <h4 class="list-group-item-heading"><i class="fa fa-users"></i></h4>
+                            <p class="list-group-item-text">Виконавці</p>
+                        </a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-body">
+
+
+            <div class="col-md-12">
+                {% if eservice.status.id == 8 %}
+                    {% if helper.is_new_participants %}
+
+                        <a href="/workflow/{{ eservice.id }}/to_appoint"
+                           class="btn btn-fill btn-primary btn-block"><i
+                                class="fa fa-refresh"></i> В роботу</a>
+                    {% else %}
+                        <a href="/workflow/{{ eservice.id }}/to_appoint"
+                           class="btn btn-fill btn-primary btn-block disabled"><i
+                                class="fa fa-refresh"></i> Оновити відповідальних<br/>
+                            <small>(Відсутні нові відповідальні)</small>
+                        </a>
+                    {% endif %}
+                {% endif %}
+
+                {% if eservice.status.id == 4 %}
+                    {% if helper.is_new_participants %}
+                        <a href="/workflow/{{ eservice.id }}/to_work/" type="button"
+                           class="btn btn-block btn-primary"
+                           onClick="this.disabled=true; this.value='Зачекайте…';"><i
+                                class="fa fa-gears"></i> Відправити у роботу
+                        </a>
+                    {% else %}
+                        <button type="button" class="btn btn-block btn-primary disabled">
+                            Відправити у роботу
+                        </button>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+<script>
+
+</script>
+
+
+{% endblock %}
+
+

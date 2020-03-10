@@ -1,0 +1,113 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block css %}
+    {{ block.super }}
+    <link href="{% static "support/css/main.css" %}" rel="stylesheet" type="text/css">
+{% endblock css %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Підтримка</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container container-messages top-messages" style="height: 600px; top:0;">
+        <div class="messages-right" style="left: 0;">
+          <div class="message-header">
+            <a href="" class="message-back"><i class="fa fa-angle-left"></i></a>
+            <div class="media">
+                {% if active_dialog.opponent.is_male %}
+                    <img src="{% static 'img/avatars/man.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% elif active_dialog.opponent.is_female %}
+                    <img src="{% static 'img/avatars/famale.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% else %}
+                    <img src="{% static 'img/avatars/undefined.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% endif %}
+              <div class="media-body">
+                <h6>Оператор підтримки</h6>
+                <p>{% if active_dialog.messages.last %}Останнє повідомлення: {{ active_dialog.messages.last.created }}{% endif %}</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+            <div class="message-option">
+
+              <div class="d-sm-none">
+                <a href=""><i class="icon ion-more"></i></a>
+              </div>
+            </div>
+          </div><!-- message-header -->
+        <div id="message-body" class="message-body ps ps--theme_default" data-ps-id="548edcf9-cff5-2e41-3167-1aeb0081ecf5">
+        </div>
+{#          {% include 'frontend/messages_user_body.html' %}#}
+          <div class="message-footer">
+            <div class="row row-sm">
+              <div class="col-9 col-sm-8 col-xl-9">
+                  <form action="{% url 'get_message' %}" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      {{ form }}
+{#                <input type="text" class="form-control" name="message" placeholder="Введіть щось тут...">#}
+              </div><!-- col-8 -->
+              <div class="col-3 col-sm-4 col-xl-3 tx-right">
+                 <div class="d-none d-sm-block">
+                  <a href="#" id="upload"><i class="icon ion-paperclip mr-2"></i></a>
+                    <button type="submit" class="btn btn-primary">Відправити</button>
+                  </form>
+{#                  <a href="#" id="upload"><i class="icon ion-paperclip"></i></a>#}
+{#                  <a href=""><i class="icon ion-ios-camera-outline"></i></a>#}
+{#                  <a href=""><i class="icon ion-ios-mic-outline"></i></a>#}
+                </div>
+                <div class="d-sm-none">
+                  <a href=""><i class="icon ion-more"></i></a>
+                </div>
+              </div><!-- col-4 -->
+            </div><!-- row -->
+          </div><!-- message-footer -->
+        </div><!-- messages-right -->
+</div>
+{#    автооновлення кожні 5 секунд#}
+{#    <script>#}
+{#    setTimeout(function () { location.reload(1); }, 5000);#}
+{#    </script>#}
+<script src="{% static 'js/jquery.js' %}"></script>
+    <script>
+        var fileupload = document.getElementById("id_file");
+        var signupload = document.getElementById("upload");
+        signupload.onclick = function () {
+            fileupload.click();
+        }
+    </script>
+    <script>
+$(document).ready(function reload(){
+$.ajax({
+  url: '{% url 'reloaduser' %}',
+  type: "GET",
+  success: function(data) {
+  $('#message-body').html(data);
+  setTimeout(function(){
+                reload(); //this will send request again and again;
+            }, 5000);
+  $('#message-body').scrollTop($('#message-body')[0].scrollHeight);
+  }
+
+});
+});
+</script>
+<script>
+    $("input[name=file]").change(function() {
+    $(this).closest("form").submit();
+});
+</script>
+<script>
+    window.onload = function (){
+        $('.messages-right')[0].scrollIntoView(true);
+        {#alert('je');#}
+    {#window.scrollTop(0, document.body.scrollHeight);#}
+    }
+</script>
+
+{% endblock %}
+
+

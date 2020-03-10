@@ -1,0 +1,89 @@
+{% extends "base_signature.html" %}
+{% load static %}
+
+{% block content %}
+<div class="col-xs-12 step-wrapper">
+    <ul class="nav-panel">
+        <li >
+            <a href="#">
+                <h4 class="list-group-item-heading"><i class="fa fa-edit"></i></h4>
+                <p class="list-group-item-text">Заповнення форми</p>
+            </a>
+        </li>
+        <li class="disabled border-div active">
+            <a href="#">
+                <h4 class="list-group-item-heading"><i class="fa fa-key"></i></h4>
+                <p class="list-group-item-text">Вибір ключа </p>
+            </a>
+        </li>
+
+        <li class="disabled">
+            <a href="/document/update//3">
+                <h4 class="list-group-item-heading"><i class="fa  fa-chain"></i></h4>
+                <p class="list-group-item-text">Дякуємо, ваш xml</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="card card-wrapper">
+    {% if messages %}
+        {% for message in messages %}
+
+            <script>
+                swal(
+                    '',
+                    '{{ message }}',
+                    {% if message.tags %}'{{ message.tags }}'{% endif %}
+                )
+            </script>
+        {% endfor %}
+    {% endif %}
+
+
+<input id="id_test_service" type="hidden" value="{{ id_test_service }}">
+<div id="inprogress" style="display: none;" class="service-msg alert alert-success alert-dismissible">
+    Опрацювання ...
+</div>
+<div id="key-error-form" style="display: none;" class="service-msg alert alert-danger alert-dismissible">
+    Перевірте ЦСК, Ключ і пароль! Щось із цього не правильне!
+</div>
+{% include 'signature/iit_sign.html' %}
+</div>
+{% endblock content %}
+
+{% block extrahead %}
+<link href="{% static 'signature/styles.css' %}" rel="stylesheet"/>
+<link href="{% static 'signature/main.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block js_footer %}
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+
+<script type="text/javascript" src="{% static 'signature/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/euutils.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/euscpt.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/euscpm.js' %}"></script>
+<script async type="text/javascript" src="{% static 'signature/euscp.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/euscptest.js' %}?v=2"></script>
+<script type="text/javascript" src="{% static 'signature/qr/qrcodedecode.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/qr/reedsolomon.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'signature/fs/Blob.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/fs/FileSaver.js' %}"></script>
+<script type="text/JavaScript">
+function onBodyLoad() {
+    MM_preloadImages('{% static "signature/Images/ButtonHover.png" %}', '{% static "signature/Images/ButtonHover.png" %}');
+    pageLoaded();
+}
+onBodyLoad();
+</script>
+
+<!--<script type="text/javascript" src="{% static 'signature/jquery.inputmask.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'signature/jquery.inputmask.date.extensions.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'signature/custom_validation_forms.js' %}"></script>-->
+
+<!--<script type="text/javascript" src="{% static 'signature/main.js' %}"></script>-->
+{% endblock %}

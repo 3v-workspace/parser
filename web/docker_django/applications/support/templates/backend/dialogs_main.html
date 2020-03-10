@@ -1,0 +1,176 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load count_unreaded_messages %}
+{% block css %}
+    {{ block.super }}
+    <link href="{% static "support/css/main.css" %}" rel="stylesheet" type="text/css">
+{% endblock css %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+        </ol>
+        <h6 class="gpdk-pagetitle">Підтримка користувачів</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container container-messages top-messages">
+        {% if active_dialog %}
+        <div class="messages-left">
+{#          <div class="slim-pageheader">#}
+{#            <h6 class="slim-pagetitle">Повідомлення</h6>#}
+{#            <a href="" class="messages-compose"><i class="icon ion-compose"></i></a>#}
+{#          </div><!-- slim-pageheader -->#}
+          <div class="messages-list ps ps--theme_default ps--active-y" data-ps-id="87e7a640-924d-f4ad-74e7-68222143beaa">
+          <div class="infinite-container">
+            {% for dialog in dialogs %}
+            <div class="infinite-item">
+              <a href="{% url 'dialogs' %}?chat={{ dialog.id }}" class="media">
+              <div class="media-left">
+                {% if dialog.owner.is_male %}
+                    <img src="{% static 'img/avatars/man.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% elif dialog.owner.is_female %}
+                    <img src="{% static 'img/avatars/famale.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% else %}
+                    <img src="{% static 'img/avatars/undefined.png' %}" class="wd-50 rounded-circle" alt="">
+            {% endif %}
+                <span class="square-10 bg-success"></span>
+              </div><!-- media-left -->
+              <div class="media-body">
+                <div>
+                  <h6>{{ dialog.owner.first_name }} {{dialog.owner.last_name}}</h6>
+                  <p>{% if dialog.messages.last.text %}{{ dialog.messages.last.text }}{% else %}...{% endif %}</p>
+                </div>
+                <div>
+                  <span>{% if active_dialog.messages.last %}{{ active_dialog.messages.last.created|date:'d M' }}{% endif %}</span>
+                  {% if dialog|unreaded_chat:request.user %}<span>{{ dialog|unreaded_chat:request.user|length }}</span>{% endif %}
+                </div>
+              </div><!-- media-body -->
+            </a><!-- media -->
+            </div>
+              {% endfor %}
+          </div>
+                {% if dialogs.has_next %}
+                    <a class="infinite-more-link" href="?page={{ dialogs.next_page_number }}">Зачекайте, йде завантаження</a>
+                {% endif %}
+          <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 0px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div><!-- messages-list -->
+
+{#          <div class="messages-left-footer">#}
+{#            <button class="btn btn-slim btn-uppercase-sm btn-block">Завантажити старіші повідомлення</button>#}
+{#          </div><!-- messages-left-footer -->#}
+        </div><!-- messages-left -->
+
+        <div class="messages-right">
+          <div class="message-header">
+            <a href="" class="message-back"><i class="fa fa-angle-left"></i></a>
+            <div class="media">
+            {% if active_dialog.owner.is_male %}
+                    <img src="{% static 'img/avatars/man.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% elif active_dialog.owner.is_female %}
+                    <img src="{% static 'img/avatars/famale.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% else %}
+                    <img src="{% static 'img/avatars/undefined.png' %}" class="wd-50 rounded-circle" alt="">
+            {% endif %}
+              <div class="media-body">
+                <h6>{{ active_dialog.owner.first_name }} {{active_dialog.owner.last_name}}</h6>
+                <p>{% if active_dialog.messages.last %}Останнє повідомлення: {{ active_dialog.messages.last.created }}{% endif %}</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+            <div class="message-option">
+              <div class="d-sm-none">
+                <a href=""><i class="icon ion-more"></i></a>
+              </div>
+            </div>
+          </div><!-- message-header -->
+        <div id="message-body" class="message-body ps ps--theme_default" data-ps-id="548edcf9-cff5-2e41-3167-1aeb0081ecf5">
+        </div>
+{#          {% include 'backend/messages_body.html' %}#}
+          <div class="message-footer">
+            <div class="row row-sm">
+              <div class="col-9 col-sm-9 col-xl-9">
+                  <form action="{% url 'get_message' %}" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input type="hidden" name="chat" value="{{ active_dialog.id }}">
+                      {{ form }}
+{#                      <button type="submit">nuu</button>#}
+{#                <input type="text" class="form-control" name="message" placeholder="Введіть щось тут...">#}
+{#                  <form action="{% url 'get_message' %}" method="post">#}
+{#                      {% csrf_token %}#}
+{#                    <input type="text" class="form-control" name="message" placeholder="Напишіть тут щось...">#}
+{#                  </form>#}
+              </div><!-- col-8 -->
+              <div class="col-3 col-sm-3 col-xl-3 tx-right">
+                <div class="d-none d-sm-block">
+                  <a href="#" id="upload"><i class="icon ion-paperclip mr-2"></i></a>
+                    <button type="submit" class="btn btn-primary">Відправити</button>
+                  </form>
+                </div>
+{#                <div class="d-sm-none">#}
+{#                  <a href=""><i class="icon ion-more"></i></a>#}
+{#                </div>#}
+              </div><!-- col-4 -->
+            </div><!-- row -->
+          </div><!-- message-footer -->
+        </div><!-- messages-right -->
+      </div>
+    {% else %}
+            <div class="col-md-12 col-sm-12 col-lg-12">
+{#<div class="container container-messages">#}
+            <div class="card">
+                        <div class="card-body ml-4">
+                            <h3><i class="fa fa-podcast"></i> Повідомлень немає</h3>
+                        </div>
+                    </div>
+</div>
+{#            </div>#}
+    {% endif %}
+
+{#{% block js_footer %}#}
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0]
+    });
+  </script>
+<script>
+        var fileupload = document.getElementById("id_file");
+        var signupload = document.getElementById("upload");
+        signupload.onclick = function () {
+            fileupload.click();
+        }
+    </script>
+<script>
+$(document).ready(function reload(){
+    var chat_id = location.search.split('chat=')[1];
+$.ajax({
+  url: '{% url 'reloadmain' %}',
+  type: "GET",
+  data: {chat: chat_id},
+  success: function(data) {
+  {#$('#message-body').scrollTo(100);#}
+  $('#message-body').html(data);
+  setTimeout(function(){
+                reload(); //this will send request again and again;
+            }, 5000);
+  {#$('#message-body').scrollTo(100);#}
+  $('#message-body').scrollTop($('#message-body')[0].scrollHeight);
+  }
+
+});
+});
+</script>
+<script>
+    $("input[name=file]").change(function() {
+    $(this).closest("form").submit();
+});
+</script>
+{#    автооновлення кожні 5 секунд#}
+{#<script>#}
+{#    setTimeout(function () { location.reload(1); }, 5000);#}
+{#</script>#}
+{#{% endblock %}#}
+{% endblock %}
+

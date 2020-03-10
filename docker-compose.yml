@@ -1,0 +1,137 @@
+version: "2"
+
+services:
+
+  gunicorn:
+    image: esdf_django_image
+    restart: always
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8081"
+    expose:
+      - "8081"
+    volumes:
+      - ./web:/app
+      - ./utils:/utils
+    depends_on:
+      - db
+      - redis
+    cap_add:
+      - SYS_PTRACE
+    env_file:
+      - ./.env
+    command: bash -c ". /utils/runserver.sh"
+
+  db:
+    restart: always
+    image: postgres
+    ports:
+      - "${POSTGRES_PORT_}:5432"
+    expose:
+      - "5432"
+    volumes:
+      - esdf_pgdata:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+
+
+  nginx:
+    restart: always
+    image: nginx:stable
+    ports:
+      - "80:80"
+      - "443:443"
+    expose:
+      - "80"
+      - "443"
+    volumes:
+      - ./web/docker_django:/src
+      - "./config/nginx/${NGINX_MODE}:/etc/nginx/conf.d"
+      - ./config/nginx/includes:/etc/nginx/includes
+      - ./config/certbot/conf:/etc/letsencrypt
+      - ./config/certbot/www:/var/www/certbot
+    depends_on:
+      - gunicorn
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    env_file:
+      - ./.env
+
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./config/certbot/conf:/etc/letsencrypt
+      - ./config/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    env_file:
+      - ./.env
+
+
+  rabbitmq:
+    restart: always
+    image: "rabbitmq:3-management"
+    hostname: "rabbitmq"
+    ports:
+      - "${RABBITMQ_PORT_}:5672"
+      - "${RABBITMQ_WEB_PORT_}:15672"  # here, we can access rabbitmq management plugin
+    expose:
+      - 5672
+      - 15672
+    environment:
+      - HOSTNAME=rabbitmq
+    env_file:
+      - ./.env
+
+
+  celeryworker:
+    image: esdf_django_image
+    restart: always
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    volumes:
+      - ./web:/app
+      - ./utils:/utils
+    depends_on:
+     - db
+     - rabbitmq
+    command: "celery -A docker_django.system.celery_init:app worker -E -l debug -c ${CELERY_WORKERS} --pidfile=/opt/celeryd.pid"
+    env_file:
+      - ./.env
+
+
+  celerybeat:
+    image: esdf_django_image
+    restart: always
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    volumes:
+      - ./web:/app
+      - ./utils:/utils
+    depends_on:
+      - db
+      - rabbitmq
+    command: "celery -A docker_django.system.celery_init:app beat -l debug --pidfile=/opt/celeryd.pid"
+    env_file:
+      - ./.env
+
+
+  redis:
+    restart: always
+    image: redis:latest
+    ports:
+      - "${REDIS_PORT_}:6379"
+    expose:
+      - 6379
+    volumes:
+      - ./data/redis:/data
+    env_file:
+      - ./.env
+
+
+volumes:
+  esdf_pgdata:
+    driver: local
