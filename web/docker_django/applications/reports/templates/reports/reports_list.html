@@ -1,0 +1,29 @@
+{% extends 'backend/base.html' %}
+{% load staticfiles %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Виберіть послугу</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container section-wrapper">
+      <div class="row">
+        <div class="col-md-2">
+            <a href="/backend/reports/service_status/">
+                <div class="eservice">
+                    <div class="eservice-icon">
+                        <i class="fa fa-file-o fa-5x" aria-hidden="true"></i>
+                    </div>
+                    <span>По статусам за періор</span>
+                </div>
+            </a>
+        </div>
+
+      </div>
+    </div>
+
+{% endblock %}

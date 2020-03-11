@@ -1,0 +1,52 @@
+{% load staticfiles %}
+{#<div id="message-body" class="message-body ps ps--theme_default" data-ps-id="548edcf9-cff5-2e41-3167-1aeb0081ecf5">#}
+            <div class="media-list">
+                {% for msg in active_dialog.messages.all %}
+              <div class="media">
+              {% if not msg.sender.is_operator %}
+                  {% if msg.sender.is_male %}
+                    <img src="{% static 'img/avatars/man.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% elif msg.sender.is_female %}
+                    <img src="{% static 'img/avatars/famale.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% else %}
+                    <img src="{% static 'img/avatars/undefined.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% endif %}
+                <div class="media-body">
+                  <div class="msg">
+                  {% if msg.text %}
+                    <p>{{ msg.text }}</p>
+                  {% endif %}
+                  </div>
+                        <div class="msg">
+                 {% if msg.file %}
+                        <p><a href="/media/{{ msg.file }}" target="_blank" style="color: white"><i class="icon ion-document"></i> {{ msg.file }}</a></p>
+                    {% endif %}
+                          </div>
+                </div><!-- media-body -->
+              {% else %}
+               <div class="media-body reverse">
+                  <div class="msg">
+                  {% if msg.text %}
+                    <p>{{ msg.text }}</p>
+                  {% endif %}
+                  </div>
+                <div class="msg">
+                    {% if msg.file %}
+                            <p><a href="/media/{{ msg.file }}" target="_blank"><i class="icon ion-document"></i> {{ msg.filename }}</a></p>
+                    {% endif %}
+                </div>
+                </div>
+                  {% if msg.sender.is_male %}
+                    <img src="{% static 'img/avatars/man.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% elif msg.sender.is_female %}
+                    <img src="{% static 'img/avatars/famale.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% else %}
+                    <img src="{% static 'img/avatars/undefined.png' %}" class="wd-50 rounded-circle" alt="">
+                          {% endif %}<!-- media-body -->
+              {% endif %}
+              </div><!-- media -->
+                {% endfor %}
+            </div><!-- media-list -->
+          <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div>
+          <div class="ps__scrollbar-y-rail" style="top: 0px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
+{#          </div><!-- message-body -->#}

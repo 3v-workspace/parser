@@ -1,0 +1,507 @@
+{% extends 'frontend/base.html' %}
+{% load staticfiles %}
+{% block extrahead %}
+  <!--<link rel="stylesheet" href="{% static 'css/slim2.css' %}">-->
+{% endblock %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Документація розробника. QuickStart</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h2 class="color-esdf">Зміст:</h2>
+    <ul class="list-group">
+            <li class="list-group-item">
+              <p class="mg-b-0"><i class="fa fa-gears color-esdf tx-success mg-r-8"></i><strong class="tx-inverse tx-medium"><a href="#install">Встановлення</a></strong></p>
+            </li>
+            <li class="list-group-item">
+              <p class="mg-b-0"><i class="fa fa-gears color-esdf tx-success mg-r-8"></i><strong class="tx-inverse tx-medium"><a href="#system">Тека "System"</a></strong></p>
+            </li>
+            <li class="list-group-item">
+              <p class="mg-b-0"><i class="fa fa-gears color-esdf tx-success mg-r-8"></i><strong class="tx-inverse tx-medium"><a href="#applications">Тека "Applications"</a></strong></p>
+            </li>
+            <li class="list-group-item">
+              <p class="mg-b-0"><i class="fa fa-gears color-esdf tx-success mg-r-8"></i><strong class="tx-inverse tx-medium"><a href="#eservices">Тека "EServices"</a></strong></p>
+            </li>
+            <li class="list-group-item">
+              <p class="mg-b-0"><i class="fa fa-gears color-esdf tx-success mg-r-8"></i><strong class="tx-inverse tx-medium"><a href="#modules">Тека "Modules"</a></strong></p>
+            </li>
+            <li class="list-group-item">
+              <p class="mg-b-0"><i class="fa fa-gears color-esdf tx-success mg-r-8"></i><strong class="tx-inverse tx-medium"><a href="#media">Media та StaticFiles</a></strong></p>
+            </li>
+            <li class="list-group-item">
+              <p class="mg-b-0"><i class="fa fa-gears color-esdf tx-success mg-r-8"></i><strong class="tx-inverse tx-medium"><a href="#testservice">Опис модульного бізнес-процесу EService0100043</a></strong></p>
+            </li>
+      </ul>
+
+ <div id="install" class="section-wrapper mg-t-20">
+          <label class="section-title">Встановлення</label>
+          <p class="mg-b-20 mg-sm-b-40">Покроковий опис встановлення</p>
+            <p>Ідея ESDF:
+ІС SDF призначена для спрощення процедури отримання послуг, що надаються державними органами виконавчої влади та органами місцевого самоврядування, шляхом трансформації процедури їх надання в електронну форму.
+реалізації набору типових функцій та інтеграцій, необхідних органам влади в процесі надання електронних послуг.</p>
+     <p>Інсталяція системи:</p>
+     <ul>
+         <li>Клонувати собі репозиторій https://gitlab.com/tapasproject/esdf</li>
+         <li>Створити нову БД</li>
+         <li>Скопіювати /system/settings/settings_local_sample.py в /system/settings_local.py . Поміняти параметри БД та пошти на свої локальні</li>
+         <li>Поставити модулі через pip3 install -r requirements/development.txt</li>
+         <li>Позначити відповідну структуру проекту:</li>
+         <figure>
+                  <img src="{% static 'documentation/install1.png' %}" class="img-fit-cover" alt="">
+                </figure>
+     </ul>
+     <ul>
+         <li>Зробити міграції: python3 manage.py makemigrations</li>
+         <li>Встановити міграції python3 manage.py migrate</li>
+         <li>Підвантажити фікстури (демо дані):</li>
+         <li>python3 manage.py  loaddata document_data</li>
+         <li>python3 manage.py  loaddata user_data</li>
+         <li>python3 manage.py  loaddata user_department</li>
+         <li>Встановити криптобібліотеки ІІТ (Харківський інститут інформаційних технологій) по мануалу https://docs.google.com/document/d/1754c9pm93JI9wcDxP3ulIjBtWxTGfIBdhMGkJcSo0cg/edit</li>
+         <li>Додати до локального серверу змінну (для коректної роботи криптографічних бібліотек):</li>
+         <figure>
+                  <img src="{% static 'documentation/install2.png' %}" class="img-fit-cover" alt="">
+                </figure>
+     </ul>
+    <p>У випадку OC Linux Ubuntu — LD_LIBRARY_PATH=/Users/uginpo/Cloud/Projects/esdf/development/EUSignCP-MAC-Python-20180613/Modules/64
+(залежить від вашої ОС. Також змініть абсолютний шлях на ваш)</p>
+     <figure>
+                  <img src="{% static 'documentation/install3.png' %}" alt="">
+                </figure>
+    <p>Налаштування Pycharm:</p>
+    <p>Прописати для Python Console</p>
+    <p>import sys; import sys;  print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])
+basedir = os.path.abspath(os.path.dirname(file))
+sys.path.append(os.path.join(basedir, "modules"))
+sys.path.append(os.path.join(basedir, "applications”))
+sys.path.append(os.path.join(basedir, "documents”))
+sys.path.append(os.path.join(basedir, "system/cryptography”))</p>
+    <p>У Django console:</p>
+    <p>import sys;
+import os;
+print('Python %s on %s' % (sys.version, sys.platform))
+import django; print('Django %s' % django.get_version())
+sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])
+if 'setup' in dir(django): django.setup()
+import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)
+sys.path.append("modules")
+sys.path.append("applications")
+sys.path.append("documents")
+sys.path.append("system/cryptography")</p>
+            <figure>
+                  <img src="{% static 'documentation/install4.png' %}" class="img-fit-cover" alt="">
+                </figure>
+        </div><!-- section-wrapper -->
+<div id="system" class="section-wrapper mg-t-20">
+          <label class="section-title">Тека System</label>
+          <p class="mg-b-20 mg-sm-b-40">Опис головних структурних одиниць теки system</p>
+            <div class="card card-blog-split">
+            <div class="row no-gutters">
+              <div class="col-md-5 col-lg-6 col-xl-5">
+                <figure>
+                  <img src="{% static 'documentation/system.png' %}" class="img-fit-cover h-75" alt="">
+                </figure>
+              </div><!-- col-4 -->
+              <div class="col-md-7 col-lg-6 col-xl-7">
+                <p class="blog-category tx-danger">Головні файли</p>
+
+{#            <div class="col-md-8 col-lg-6">#}
+              <div class="list-group">
+                <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека settings</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>settings-local.py - обов'язковий файл із налаштуваннями БД, усіх ключів доступів, DEBUG-режим. По замовчуванню занесений в gitignore</li>
+                    <li>base.py - файл налаштувань загального користування. Стандартний файл конфігурацій Django, з налаштуваннями локалей, часового поясу та інших дрібних деталей для проекту</li>
+                    </ul>
+                  </p>
+                </div><!-- list-group-item -->
+                  <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека cryptography</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Файли _EUSignCP.so та EUSignCP.py мають бути обов'язково присутніми. Тека знаходиться у gitignore. Це для криптографічної бібліотеки, брати необхідно під свою ОС</li>
+                    </ul>
+                  </p>
+                </div>
+               <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека requirements</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Головну роль грає файл development(вимоги для локального встановлення). Запуск автоматичного встановлення pip -r requirements/development.txt. Запуск встановлення модулів з файлу base.py відбувається автоматично та рекурсивно</li>
+                    </ul>
+                  </p>
+                </div>
+              <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека templategs</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>templategs - додаткові загально-модульні файли</li>
+                    </ul>
+                  </p>
+                </div>
+              <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Загальні файли</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>urls.py, admin.py ,views.py, models.py, wsgi.py - стандартні файли для функціонування системи належним чином</li>
+                    </ul>
+                  </p>
+                </div>
+              </div><!-- list-group -->
+{#            </div><!-- col-6 -->#}
+          </div>
+
+            </div><!-- row -->
+          </div>
+
+        </div><!-- section-wrapper -->
+
+<div id="applications" class="section-wrapper mg-t-20">
+          <label class="section-title">Тека Applications</label>
+          <p class="mg-b-20 mg-sm-b-40">Опис головних модульних тек проекту</p>
+
+            <div class="card card-blog-split">
+            <div class="row no-gutters">
+              <div class="col-md-5 col-lg-6 col-xl-5">
+                <figure>
+                  <img src="{% static 'documentation/applications.png' %}" class="img-fit-cover h-50" alt="">
+                </figure>
+              </div><!-- col-4 -->
+              <div class="col-md-7 col-lg-6 col-xl-7">
+                <p class="blog-category tx-danger">Інтегровані Модулі</p>
+
+{#            <div class="col-md-8 col-lg-6">#}
+              <div class="list-group">
+                <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека authorization(connectors)</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>id_gov_ua - містить у собі файли для конекту із сайтом id.gov.ua</li>
+                    <li>privatbank - конектор для сповіщень та входу від ПриватБанку</li>
+                    </ul>
+                  </p>
+                </div><!-- list-group-item -->
+                  <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека backend</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Тека із файлами для кабінету оператора(він же backend)</li>
+                    </ul>
+                  </p>
+                </div>
+               <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека eservice</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>В головній теці eservices є child-cервіси. Дана тека з файлами слугують основою(шаблоном) для усіх наступних</li>
+                    </ul>
+                  </p>
+                </div>
+              <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека support</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>backend тека - модуль чату підтримки для сторони оператора</li>
+                    <li>frontend тека - модуль чату підтримки для користувача</li>
+                    </ul>
+                  </p>
+                </div>
+              <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека client_api</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Усі підключення через api відбуваються у файлах даної теки</li>
+                    </ul>
+                  </p>
+                </div>
+              </div><!-- list-group -->
+{#            </div><!-- col-6 -->#}
+          </div>
+
+            </div><!-- row -->
+          </div>
+
+        </div><!-- section-wrapper -->
+
+<div id="eservices" class="section-wrapper mg-t-20">
+          <label class="section-title">Тека Eservices</label>
+          <p class="mg-b-20 mg-sm-b-40">Опис бізнес-процесів системи(дозволи, ліцензії, покрокові заяви)</p>
+
+            <div class="card card-blog-split">
+            <div class="row no-gutters">
+              <div class="col-md-5 col-lg-6 col-xl-5">
+                <figure>
+                  <img src="{% static 'documentation/eservices.png' %}" class="img-fit-cover" alt="">
+                </figure>
+              </div><!-- col-4 -->
+              <div class="col-md-7 col-lg-6 col-xl-7">
+                <p class="blog-category tx-danger">Бізнес-процеси</p>
+
+{#            <div class="col-md-8 col-lg-6">#}
+              <div class="list-group">
+               <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Загальні важливі відомості про теку</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Frontend частина - частина для користувача</li>
+                    <li>Backend частина - частина для оператора</li>
+                    </ul>
+                  </p>
+                </div>
+                <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека eservice0100043</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Eservice0100043 - головний бізнес-процес, перший у системі ESDF, тому в першу чергу змін зазнає саме він</li>
+                    <li>Містить в собі: покроковий функціонал, підпис ЕЦП(електронним цифровим підписом) та автоматичний редірект на картку замовлення</li>
+                    </ul>
+                  </p>
+                </div><!-- list-group-item -->
+               <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Тека nadra</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Бізнес-процес взятий з системи Enadra</li>
+                    <li>Особливістю є: покрокове заповнення, підпис ЕЦП, а також інегровані в собі OpenStreetMap зі збереженням полігонів в окрему теку</li>
+                    </ul>
+                  </p>
+                </div>
+              </div><!-- list-group -->
+{#            </div><!-- col-6 -->#}
+          </div>
+
+            </div><!-- row -->
+          </div>
+
+        </div><!-- section-wrapper -->
+
+        <div id="modules" class="section-wrapper mg-t-20">
+          <label class="section-title">Тека Modules</label>
+          <p class="mg-b-20 mg-sm-b-40">Варто звернути увагу на 3 теки: sev_ovv, trembita, user_sessions</p>
+
+            <div class="card card-blog-split">
+            <div class="row no-gutters">
+              <div class="col-md-5 col-lg-6 col-xl-5">
+                <figure>
+                  <img src="{% static 'documentation/modules.png' %}" class="img-fit-cover h-25" alt="">
+                </figure>
+              </div><!-- col-4 -->
+              <div class="col-md-7 col-lg-6 col-xl-7">
+                <p class="blog-category tx-danger">Системні Модулі</p>
+
+{#            <div class="col-md-8 col-lg-6">#}
+              <div class="list-group">
+               <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">SEV OVV</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>SEV_OVV - інтеграціний модуль "СЕВ ОВВ". Ідея заключається в державному документооббігу</li>
+                    <li>У ESDF слугує лише як конектор для під'єднання до головного серверу із усіма налаштуваннями</li>
+                    <li>Технічне: запити на xml, wsdl, для конекту найкраще підходить бібліотека zeep або requests</li>
+                    </ul>
+                  </p>
+                </div>
+                <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Trembita</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Trembita - інтеграційний модуль, який діє майже по аналогічному принципу до SEV OVV</li>
+                    <li>Технічне: xml запити. На відміну від SEV OVV використовує явні endpoints формату .php на стороні серверу. Найкраще підходить бібліотека requests</li>
+                    <li>Усе розкидано по внутрініх теках. Використовується зміна параметрів при виклику функцій у views.py.</li>
+                    </ul>
+                  </p>
+                </div><!-- list-group-item -->
+               <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">User Sessions</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Модуль керування сесіями користувача</li>
+                    <li>Показує актуальну інформацію із ip, браузером, країною. Можна закривати усі сесії, крім поточної, разом або поокремості</li>
+                    </ul>
+                  </p>
+                </div>
+              </div><!-- list-group -->
+{#            </div><!-- col-6 -->#}
+          </div>
+
+            </div><!-- row -->
+          </div>
+
+        </div><!-- section-wrapper -->
+    <div id="media" class="section-wrapper mg-t-20">
+          <label class="section-title">Media та Static</label>
+          <p class="mg-b-20 mg-sm-b-40">Загальна інфомація про збереження медіа файлів та конфігурацію statics(*у даній конфігурації фреймворку усе налагоджено та працює за умови відсутності змін)</p>
+
+            <div class="card card-blog-split">
+            <div class="row no-gutters">
+              <div class="col-md-5 col-lg-6 col-xl-5">
+                <figure>
+                  <img src="{% static 'documentation/static.png' %}" class="img-fit-cover" alt="">
+                </figure>
+              </div><!-- col-4 -->
+              <div class="col-md-7 col-lg-6 col-xl-7">
+                <p class="blog-category tx-danger">Media та Staticfiles</p>
+
+{#            <div class="col-md-8 col-lg-6">#}
+              <div class="list-group">
+               <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Static</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Static Files працюватимуть коректно якщо у urls.py підключений шлях до відповідної теки з файлами, а на сторінку html файлу виведений тег  'load static' </li>
+                    </ul>
+                  </p>
+                </div>
+                <div class="list-group-item pd-y-20">
+                  <h6 class="lh-3 mg-b-10"><a href="" class="tx-inverse hover-primary">Media</a></h6>
+                  <p class="tx-13 mg-b-0">
+                    <ul>
+                    <li>Media - тека з медіа файлами слугує для збереження усіх завантажених файлів у систему</li>
+                    <li>У головній теці усе розбито на підтеки. В окремих випадках для файлів створюються ще зменшенні копії зображень для кращого візуального ефекту на сторінках фреймворку </li>
+                    </ul>
+                  </p>
+                </div><!-- list-group-item -->
+              </div><!-- list-group -->
+{#            </div><!-- col-6 -->#}
+          </div>
+
+            </div><!-- row -->
+          </div>
+
+        </div><!-- section-wrapper -->
+    <div id="testservice" class="section-wrapper mg-t-20">
+          <label class="section-title">Опис тестового бізнес-процесу на прикладі модуля EService0100043</label>
+          <p class="mg-b-20 mg-sm-b-40">Опис усіх файлів та тек модульного бізнес-процесу eservice0100043</p>
+
+
+                <table class="table table-bordered mg-b-0">
+              <thead>
+                <tr>
+                  <th>Тека</th>
+                  <th>Файл</th>
+                  <th>Роль у бізнес-процесі</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"></th>
+                  <td>admin.py</td>
+                  <td>ініціалізація усіх моделей та кастомних функціональних полів бізнес-процесу</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>apps.py</td>
+                  <td>системна інформація про теку модуля</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>context_processors.py</td>
+                  <td>підключена заготовки, яка може бути використана для зовнішнього редагування системного тестового бізнес-процесу</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>decorators.py</td>
+                  <td>підключена заготовки, яка може бути використана для зовнішнього редагування системного тестового бізнес-процесу</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>exeptions.py</td>
+                  <td>підключена заготовки з вийнятками, яка може бути використана для зовнішнього редагування системного тестового бізнес-процесу</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>forms.py</td>
+                  <td>головний файл форм, з описами полів, їхніми значення та прив'язкою до моделей</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>helpers.py</td>
+                  <td>заготовка допоміжного файлу, яка вже є підключеною до модуля</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>managers.py</td>
+                  <td>файл із можливими менеджерами моделей для зручної кастомізації функції та обробки даних</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>models.py</td>
+                  <td>головний файл із описаними полями, які вносять у базу даних у формі таблиць. Практично, майже кожна модель = нова таблиця</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>signals.py</td>
+                  <td>файл із можливим опрацюванням сигналів. Також слугує для кращої кастомізації системи фреймворку</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>urls.py</td>
+                  <td>головний модульний файл, який поєднує адрес та функцію, яка виконує певну дію. Містить у собі як окремі виклики з файлу views.py, так і include методи з інших модулів</td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td>views.py</td>
+                  <td>функції модуля, обробка, зберігання даних та рендеринг на сторінки</td>
+                </tr>
+                <tr>
+                  <th scope="row">backend</th>
+                  <td>forms.py</td>
+                  <td>опис форм, полів та інших деталей форм, які використовуються в операторській частині</td>
+                </tr>
+                <tr>
+                  <th scope="row">backend</th>
+                  <td>views.py</td>
+                  <td>опис методів обробки інформації, рендеринг, взаємодія з іншими модулями, функціями, які використовуються в операторській частині</td>
+                </tr>
+                <tr>
+                  <th scope="row">frontend</th>
+                  <td>forms.py</td>
+                  <td>опис форм, полів та інших деталей форм, які використовуються в користувацькій частині</td>
+                </tr>
+                <tr>
+                  <th scope="row">frontend</th>
+                  <td>views.py</td>
+                  <td>опис методів обробки інформації, рендеринг, взаємодія з іншими модулями, функціями, які використовуються в користувацькій частині</td>
+                </tr>
+                <tr>
+                  <th scope="row">migrations</th>
+                  <td>*</td>
+                  <td>міграції даного модуля</td>
+                </tr>
+                <tr>
+                  <th scope="row">restapi</th>
+                  <td>endpoints.py</td>
+                  <td>файл із подальшим підключенням endpoint'ів для експорту в файли у вигляді константних змінних</td>
+                </tr>
+                <tr>
+                  <th scope="row">restapi</th>
+                  <td>serializers.py</td>
+                  <td>функції обробки даних, серіалізація даних</td>
+                </tr>
+                <tr>
+                  <th scope="row">templates</th>
+                  <td>*.html</td>
+                  <td>тека із шаблонами будь-якої сторінки, яка стосується даного бізнес-процесу</td>
+                </tr>
+                <tr>
+                  <th scope="row">templatetags</th>
+                  <td>*.py</td>
+                  <td>допоміжні скрипти, функції, які необхідні для обробки інформації здебільшого з частини фронтенду</td>
+                </tr>
+                <tr>
+                  <th scope="row">tests</th>
+                  <td>tests.py</td>
+                  <td>файл тестування, успішне виконання якого свідчить про правильно налаштований бізнес-процес</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+{% endblock %}
+

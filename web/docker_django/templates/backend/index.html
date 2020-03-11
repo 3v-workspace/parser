@@ -1,0 +1,108 @@
+{% extends 'backend/base.html' %}
+{% load staticfiles %}
+{% load color_tag %}
+
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+        </ol>
+        <h6 class="gpdk-pagetitle">Мій робочий стіл</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+ <div class="container section-wrapper_without_pd">
+    <div class="card-dash-chart-one ">
+    <div class="row">
+        <div class="col-lg-5 ">
+          <div class="left-panel p-3">
+            <nav class="nav">
+              <a href="/backend/" class="nav-link {% if not 'filter' in request.GET %}active{% endif %}">За весь час</a>
+              <a href="/backend/?filter=last_week" class="nav-link {% if 'filter' in request.GET %}{% ifequal request.GET.filter 'last_week' %}active{% endifequal %}{% endif %}">За тиждень</a>
+              <a href="/backend/?filter=last_month" class="nav-link {% if 'filter' in request.GET %}{% ifequal request.GET.filter 'last_month' %}active{% endifequal %}{% endif %}">За місяць</a>
+            </nav>
+
+            <div class="active-visitor-wrapper tx-center">
+              <h1>{{e_services_all}}</h1>
+              <p>Замовлених послуг в системі</p>
+            </div><!-- active-visitor-wrapper -->
+
+            <hr class="mg-t-30 mg-b-40">
+
+            <h6 class="visitor-operating-label">Прогрес обробки</h6>
+
+            <label class="mg-b-5">У обробці ({{percentage_in_work}}%)</label>
+            <div class="progress mg-b-15">
+              <div class="progress-bar label-primary progress-bar-xs wd-{{percentage_in_work}}p" style="width: {{percentage_in_work}}%;" role="progressbar" aria-valuenow="{{percentage_in_work}}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div><!-- progress -->
+
+            <label class="mg-b-5">Відхилено ({{percentage_in_rejected}}%)</label>
+            <div class="progress mg-b-15">
+              <div class="progress-bar label-red progress-bar-xs " style="width: {{percentage_in_rejected}}%;" role="progressbar" aria-valuenow="{{percentage_in_rejected}}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div><!-- progress -->
+
+            <label class="mg-b-5">На погоджені ({{percentage_on_approval}}%)</label>
+            <div class="progress mg-b-15">
+              <div class="progress-bar label-yellow progress-bar-xs" role="progressbar" style="width: {{percentage_on_approval}}%;" aria-valuenow="{{percentage_on_approval}}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div><!-- progress -->
+
+            <label class="mg-b-5">Послуга надана ({{percentage_done}}%)</label>
+            <div class="progress mg-b-15">
+              <div class="progress-bar label-green progress-bar-xs" role="progressbar" style="width: {{percentage_done}}%;" aria-valuenow="{{percentage_done}}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div><!-- progress -->
+
+          </div><!-- left-panel -->
+        </div>
+        <div class="col-md-7 col-lg-7">
+        <div class="last_service_p">
+            <label class="section-title">Останні замовлені послуги:</label>
+            <div class="table-responsive">
+                <table class="table mg-b-0">
+                  <thead>
+                    <tr>
+                      <th>Назва</th>
+                      <th>Статус</th>
+                      <th>Дата створення</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in e_services %}
+                      <tr>
+                        <th>
+                          <a href="/backend/eservice/{{ item.id }}">
+                            {{ item.title }}
+                          </a>
+                        </th>
+                          <td> <span class="label  {{ item.status.attr.slug }}">{{ item.status.title }}</span></td>
+                        <td>{{ item.created_at }}</td>
+                      </tr>
+                    {%endfor%}
+                  </tbody>
+                </table>
+              </div>
+        </div>
+        </div>
+        <!--<div class="col-lg-4 col-md-4 mg-t-20 mg-lg-t-0">-->
+            <!--<div class="card card-sales">-->
+              <!--<h6 class="gpdk-card-title tx-title">Оперативний звіт</h6>-->
+              <!--<div class="row">-->
+                <!--<div class="col">-->
+                  <!--<label class="tx-12">Виконано</label>-->
+                  <!--<p>{{e_services_final}}</p>-->
+                <!--</div>&lt;!&ndash; col &ndash;&gt;-->
+                <!--<div class="col">-->
+                  <!--<label class="tx-12">У роботі</label>-->
+                  <!--<p>{{e_services_in_work}}</p>-->
+                <!--</div>&lt;!&ndash; col &ndash;&gt;-->
+              <!--</div>&lt;!&ndash; row &ndash;&gt;-->
+
+              <!--<div class="progress mg-b-5">-->
+
+              <!--</div>-->
+              <!--<p class="tx-12 mg-b-0">Прогрес оброблених послуг.</p>-->
+            <!--</div>&lt;!&ndash; card &ndash;&gt;-->
+      <!--</div>-->
+    </div>
+    </div>
+</div>
+{% endblock %}

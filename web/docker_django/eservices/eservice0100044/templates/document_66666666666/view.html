@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load mimetypes %}
+{% load static %}
+{% load group_access %}
+{% block head_title %}
+    <section class="content-header">
+        <h1>
+            <i class="fa fa-barcode"></i> {{ document.type.title }} №{{ document.internal_id }}
+            <small> Статус:
+                <div class="label {{ document.status.color }}">{{ document.status.title }}</div>
+            </small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-home"></i>Головна</a></li>
+            <li class="active"><a href="/my_eservices/">Мої послуги</a></li>
+        </ol>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <div class="nav-tabs-custom">
+        <!-- Tabs within a box -->
+        <ul class="nav nav-tabs text-center ui-sortable-handle">
+            <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-sticky-note-o"></i>
+                Реєстраційно-контрольна картка послуги</a></li>
+
+            <li><a href="#monitoring" data-toggle="tab"><i class="fa fa-fw fa-crosshairs"></i> Моніторинг</a></li>
+        </ul>
+
+        <div class="tab-content">
+
+            <div class="tab-pane active" id="home">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="col-md-6">
+
+                                {% if document.status.id == 12 and document.edit_comment%}
+                                    <div class="form-group col-md-12">
+                                        <label><b>Причина повернення на доопрацювання:</b></label><br/>
+                                        {{ document.edit_comment }}
+                                    </div>
+                                    {% endif %}
+
+                                    <div class="form-group col-md-12">
+                                        <label><b>Категорія послуги:</b></label>
+                                        {{ document.type.category }}
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label><b>Внутрішній номер послуги:</b></label>
+                                        {{ document.internal_id }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label><b>Заголовок або короткий зміст послуги:</b></label>
+                                        {{ document.title }}
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group col-md-12">
+
+                                        <label><b>Автор картки послуги:</b></label>
+                                        {{ document.created_by }}
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label><b>Картку було створено:</b></label>
+                                        {{ document.created_at|date:"d.m.Y, H:m" }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label><b>Виконання (переведення у "Опрацьовано"):</b></label>
+                                        {% if document.close_at == null %}
+                                            Послугу не виконано
+                                        {% else %}
+                                            {{ document.close_at|date:"d.m.Y, H:m" }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                                   {% if document.parent %}
+                                            <a href="/document/{{ document.parent.id }}" class="btn btn-default"><i class="fa fa-mail-reply"></i> Переглянути ранню версію</a>
+
+                                         {% endif %}
+                                         {% if document.child %}
+                                            <a href="/document/{{ document.child.id }}" class="btn btn-default">Переглянути cвіжу версію <i class="fa fa-mail-forward"></i></a>
+                                             {% endif %}
+                                    </div>
+
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-8">
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h4 class="box-title">Файли послуги:</h4>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        {% for file in document.documentfile_set.all %}
+                                            <div class="col-md-4">
+                                                <div class="document">
+                                                    <div class="document-icon" id="document-icon">
+                                                        <a href="/media/{{ file.file }}"> <img src="{% icon file.mime %}"></a>
+                                                    </div>
+                                                    <span>  <a target="_blank" href="/media/{{ file.file }}">{{ file.filename }}</a></span>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" id="box-dii">
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h4 class="box-title">Можливі дії:</h4>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        {%if request.user == document.created_by or request.user|has_group:"Адміністратори"%}
+                                            {% if document.status.id == 4  %}
+                                                    <a href="/document/update/{{ document.id }}/1" type="button"
+                                                       class="btn btn-block btn-primary"><i class="fa fa-edit"></i>
+                                                        Редагувати</a>
+                                            {% endif %}
+
+                                            {% if document.status.id == 4 %}
+                                                    <a href="/document/delete/{{ document.id }}" type="button"
+                                                       class="btn btn-block btn-danger"><i class="fa fa-remove"></i>
+                                                        Видалити послугу</a>
+                                            {% endif %}
+
+
+                                            {% if document.status.id == 18 and not document.is_archival  %}
+                                                <a href="/workflow/{{ document.id }}/create_new_document_version" type="button"
+                                                   class="btn btn-block btn-primary"><i class="fa fa-edit"></i>
+                                                    Зробити нову версію послуги</a>
+                                            {% endif %}
+
+                                        {% endif %}
+                                         {% if document.status.id == 8 %}
+                                      {% if  helper.document_permissions.can_approve %}
+                                            <a href="/workflow/{{ document.id }}/approve" type="button"
+                                               class="btn btn-block btn-success"><i class="fa fa-thumbs-up"></i>
+                                                Погодити послугу</a>
+                                        {% endif %}
+                                    {% if helper.document_permissions.can_done_work %}
+                                            <a href="/workflow/{{ document.id }}/work_done/" type="button"
+                                               class="btn btn-block btn-primary"><i class="fa fa-check-square-o"></i>
+                                                Виконано
+                                            </a>
+                                        {% endif %}
+                                        {% if helper.document_permissions.can_approve  %}
+                                            <button data-toggle="modal" data-target="#decline_approveModal"
+                                               class="btn btn-block btn-danger"><i class="fa fa-thumbs-down"></i>
+                                                Не погоджувати послугу</button>
+                                        {% endif %}
+                                    {% endif %}
+                                        {% if document.status.id != 7 and document.status.id != 12 and document.status.id != 18 and document.status.id != 13%}
+                                                {% if helper.is_new_participants %}
+
+                                                <a href="/workflow/{{ document.id }}/to_appoint"
+                                                   class="btn btn-fill btn-primary btn-block"><i
+                                                        class="fa fa-refresh"></i> Оновити відповідальних</a>
+                                            {% else %}
+                                                <a href="/workflow/{{ document.id }}/to_appoint"
+                                                   class="btn btn-fill btn-primary btn-block disabled"><i
+                                                        class="fa fa-refresh"></i> Оновити відповідальних<br/>
+                                                    <small>(Відсутні нові відповідальні)</small>
+                                                </a>
+                                            {% endif %}
+                                        {% endif %}
+                                    <button type="button" id="print" class="btn btn-block btn-default">
+                                <i class="fa fa-print" aria-hidden="true"></i>
+                                        Друк картки
+                                    </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- Home tab -->
+            </div>
+                {% include 'chanks/_bounded_docs_table.html' %}
+                {% include 'chanks/_workers_table.html' %}
+                {% include 'chanks/_familiarizators_table.html' %}
+
+</div>
+            <div class="tab-pane" id="monitoring">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                        {% if logs.object_list %}
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>№п/п</th>
+                                    <th>Подія</th>
+                                    <th>Працівник</th>
+                                    <th>Дата та час події</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for log in logs.object_list %}
+                                    <tr>
+                                        <td>{{ log.id }}</td>
+                                        <td>{{ log.activity }}</td>
+                                        <td>{{ log.created_by.get_full_name }}</td>
+                                        <td>{{ log.created_at|date:"d-m-Y, H.m" }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            Записи у таблиці логування відсутні
+                        {% endif %}
+
+                        {% if logs.paginator.count > 5 %}
+                            <div class="text-center">
+                                {{ logs.render }}
+                            </div>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% include 'chanks/_bounded_docs_js.html' %}
+<script>
+    {% include 'chanks/_workers_js.html' %}
+</script>
+<script>
+    {% include 'chanks/_familiarizators_js.html' %}
+</script>
+    {% include 'chanks/_common_js.html' %}
+
+{% endblock %}
+

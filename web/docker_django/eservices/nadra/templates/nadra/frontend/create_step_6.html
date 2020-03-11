@@ -1,0 +1,150 @@
+{% extends "base_signature.html" %}
+{% load group %}
+
+
+{% load static %}
+
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Створення послуги</h6>
+    </div>
+{% endblock %}
+
+{% block extrahead %}
+    <link href="{% static 'signature/styles.css' %}" rel="stylesheet"/>
+    <link href="{% static 'signature/main.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+
+    <div class="col-xs-12 step-wrapper">
+        <ul class="nav-panel backend">
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-address-card"></i></h4>
+                    <p class="list-group-item-text">Заявник</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-font-awesome"></i></h4>
+                    <p class="list-group-item-text">Ділянка надр</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-edit"></i></h4>
+                    <p class="list-group-item-text">Характеристика ділянки</p>
+                </a>
+            </li>
+            <li class="disabled border-div ">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-file"></i></h4>
+                    <p class="list-group-item-text">Файли послуги</p>
+                </a>
+            </li>
+            <li class="active">
+                <a href="#">
+                    <h4 class="list-group-item-heading"><i class="fa fa-key"></i></h4>
+                    <p class="list-group-item-text">Підпис</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <input id="id_test_service" type="hidden" value="{{ id_test_service }}">
+    <input id="eservice_type" type="hidden" value="{{ eservice_type }}">
+    <input id="apps" type="hidden" value="{{ apps }}">
+    <div id="inprogress" style="display: none;" class="service-msg alert alert-success alert-dismissible">
+        Опрацювання ...
+    </div>
+    <div id="key-error-form" style="display: none;" class="service-msg alert alert-danger alert-dismissible">
+        Перевірте ЦСК, Ключ і пароль! Щось із цього не правильне!
+    </div>
+
+
+    {% include 'signature/iit_sign.html' %}
+
+{% endblock %}
+
+
+{% block js_footer %}
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+{% block sign_js %}
+<script type="text/javascript" src="{% static 'signature/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/euutils.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/euscpt.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/euscpm.js' %}"></script>
+<script async type="text/javascript" src="{% static 'signature/euscp.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/euscptest.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/qr/qrcodedecode.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/qr/reedsolomon.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'signature/fs/Blob.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'signature/fs/FileSaver.js' %}"></script>
+<script type="text/JavaScript">
+function onBodyLoad() {
+    MM_preloadImages('{% static "signature/Images/ButtonHover.png" %}', '{% static "signature/Images/ButtonHover.png" %}');
+    pageLoaded();
+}
+onBodyLoad();
+</script>
+
+<script src="{% static 'lib/select2/js/select2.full.min.js' %}"></script>
+
+<script>
+  $(document).ready(function() {
+          $('select').select2({
+          });
+  } );
+</script>
+<script>
+    function intro() {
+          introJs().start();
+      }
+</script>
+<script src="{% static 'js/intro.js' %}"></script>
+
+<script type="application/javascript">
+
+  $(document).ready(function() {
+
+      var logo = $('.main-logo');
+      var modalBackground = $('.modal-background');
+      var modalGov = $('#modal-gov');
+      var close = $('#modal-gov .close');
+
+      $(logo).on('click', function(event) {
+          event.preventDefault();
+          $(modalBackground).fadeIn(200, function() {
+              $(modalGov).fadeIn(200);
+          });
+      });
+
+      $(modalBackground).on('click', function() {
+          $(modalGov).fadeOut('400');
+          $(modalBackground).fadeOut('400');
+      });
+
+      $(close).on('click', function() {
+          $(modalGov).fadeOut('400');
+          $(modalBackground).fadeOut('400');
+      });
+
+  });
+</script>
+
+{% endblock sign_js %}
+<!--<script type="text/javascript" src="{% static 'signature/jquery.inputmask.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'signature/jquery.inputmask.date.extensions.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'signature/custom_validation_forms.js' %}"></script>-->
+
+<!--<script type="text/javascript" src="{% static 'signature/main.js' %}"></script>-->
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'frontend/base.html' %}
+{% load staticfiles %}
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Виберіть послугу</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12 col-lg-12">
+        <div class="row">
+            <div class="col-lg">
+              <div class="pricing-item">
+                <div class="pricing-icon"><i class="fa fa-key"></i></div>
+                <h5 class="pricing-title">Тестова ліцензія</h5>
+                <h1 class="pricing-price">500 грн.</h1>
+                <a href="/eservice/create/eservice0100043" class="btn btn-primary btn-pricing">Замовити</a>
+              </div><!-- pricing-item -->
+            </div><!-- col -->
+            <div class="col-lg pricing-border mg-t-30 mg-lg-t-0">
+              <div class="pricing-item">
+                <div class="pricing-icon"><i class="fa fa-globe"></i></div>
+                <h5 class="pricing-title">Тестовий дозвіл</h5>
+                <h1 class="pricing-price">600 грн.</h1>
+                <a href="/eservice/create/nadra" class="btn btn-primary btn-pricing">Замовити</a>
+              </div><!-- pricing-item -->
+            </div>
+            <div class="col-lg mg-t-30 mg-lg-t-0">
+              <div class="pricing-item">
+                <div class="pricing-icon"><i class="icon ion-plane"></i></div>
+                <h5 class="pricing-title">Тест</h5>
+                <h1 class="pricing-price">200 грн.</h1>
+                <a href="#" class="btn btn-primary btn-pricing">Замовити</a>
+              </div><!-- pricing-item -->
+            </div>
+          </div>
+    </div>
+
+{% endblock %}

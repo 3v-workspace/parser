@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<table class="table mg-b-0">
+  <thead>
+    <tr>
+      <th>Назва</th>
+      <th>Статус</th>
+      <th>Дата створення</th>
+      <th>Оцінка</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in e_services %}
+      <tr>
+        <th>
+          <a href="/backend/eservice/{{ item.id }}">
+            {{ item.title }}
+          </a>
+        </th>
+        <td> {{ item.status.title }}</td>
+        <td>{{ item.created_at }}</td>
+        <td>
+            {% load exist_estimation %}
+            {% load final_status %}
+            {% if request.user|exist_estimation:item.id  or request.user|exist_estimation:item.id == 0%}
+                {{ request.user|exist_estimation:item.id }}
+            {%else%}
+                {% if request.user|final_status:item.status %}
+            {{item.id}}
+                <button data-toggle="modal" data-estimation="{{ item.id }}" data-effect="effect-just-me" class="btn btn_e_cabinet open_popup submit_btn" > Оцінити надану послугу </button>
+                {%else%}
+                    *Здійснити оцінку можливо тільки у фінальному статусі
+                {%endif%}
+            {% endif %}
+        </td>
+      </tr>
+    {%endfor%}
+  </tbody>
+</table>
+<script>
+$(document).ready(function() {
+       $('.open_popup').on('click', function(e){
+        var formID = $(this).data('estimation');
+        $('.send_data_estimation_id').val(formID);
+        $('#check_modal').modal('show');
+       });
+       } );
+</script>
+

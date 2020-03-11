@@ -1,0 +1,312 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% load final_status %}
+
+{% block extrahead %}
+    <link href="{% static 'css/nav_tabs.css' %}" rel="stylesheet"/>
+    <link href="{% static 'jstree/themes/default/style.min.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/backend/">Головна</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Картка послуги</li>
+        </ol>
+        <h6 class="gpdk-pagetitle">
+            {{ e_service.type.title }} №{{ e_service.internal_id }}
+            <small> Статус:
+                <div class="label label-title  {{ e_service.status.attr.slug }}">{{ e_service.status.title }}</div>
+            </small>
+
+        </h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+
+                    <li class="nav-item">
+                      <a class="nav-link active show" href="#home" data-toggle="tab">Реєстраційно контрольна картка послуги</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="#monitoring" data-toggle="tab">Моніториг</a>
+                    </li>
+
+                  </ul>
+                </div><!-- card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active show" id="home">
+                        <div class="row mt-2 mb-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bold_title"><b>Дата реєстрації послуги:</b></label>
+                                    {{ e_service.created_at|date:"d.m.Y" }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="bold_title"><b>Заголовок або короткий зміст послуги:</b></label>
+                                    {{ e_service.title|default:"Не вказано" }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="bold_title"><b>Автор послуги:</b></label>
+                                    {{ e_service.created_by.last_name|default:"Не вказано" }}
+                                    {{ e_service.created_by.first_name|default:"Не вказано" }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bold_title"><b>Тип ліцензії:</b></label>
+                                    {{ e_service.type_license|default:"Не вказано" }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="bold_title"><b>Тип оплати:</b></label>
+                                    {{ e_service.payment|default:"Не вказано" }}
+                                </div>
+                                <div class="form-group">
+                                    <label class="bold_title"><b>Область:</b></label>
+                                    {{ e_service.created_by.region|default:"Не вказано" }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-md-7">
+                                <div class="box without_box-primary event">
+                                    <div class="header_with-border">
+                                        <h5 class="box-title h5_not_weight">Файли послуги:</h5>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        {% for file in e_service.eservicefile_set.all %}
+                                        <div class="col-md-4">
+                                            <div class="eservice">
+                                                <div class="eservice-icon" id="eservice-icon">
+                                                    <a href="/media/{{ file.file }}"> <img
+                                                            src=""></a>
+                                                </div>
+                                                <span >
+                                                    <a target="_blank"
+                                                        href="/media/{{ file.file }}">{{ file.filename }}</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                            <div class="col-md-5 box box-primary event">
+                                <div class="header_with-border">
+                                    <h5 class="box-title h5_not_weight">Можливі дії:</h5>
+                                </div>
+                                {% if request.user|final_status:e_service.status %}
+                                    * На даному етапі не можливі жодні дії з документом
+                                {%endif%}
+
+
+                                {% if helper.eservice_permissions.can_approve and not request.user|final_status:e_service.status and e_service.status.id != 10 %}
+                                    <a href="/backend/workflow/{{ e_service.id }}/approve/"
+                                        class="btn btn-block btn-primary"><i
+                                        class="fa fa-check-circle-o"></i> Погодити
+                                    </a>
+                                {%endif%}
+                                {% if not request.user|final_status:e_service.status %}
+                                    <a href="/backend/workflow/{{ e_service.id }}/reject/"
+                                        class="btn btn-block btn-danger"><i
+                                        class="fa fa-check-circle-o"></i> Відхилити
+                                    </a>
+                                {%endif%}
+
+                                {% if helper.eservice_permissions.can_approve and e_service.status.id != 10 and e_service.status.id != 7  and not request.user|final_status:e_service.status%}
+                                    <button type="button" class="btn btn-fill btn-primary btn-block"
+                                            data-toggle="modal" data-target="#edit_modal"
+                                            id=""><i class="fa fa-check-square-o"></i>
+                                        Відправити на доопрацювання
+                                    </button>
+                                {%endif%}
+                            </div>
+                        </div>
+                        {% if helper.key_info%}
+                            <div class="row mt-4 mb-2">
+                                <div class="col-md-12">
+                                    <div class="box box-primary">
+                                        <div class="header_with-border">
+                                            <h5 class="box-title h5_not_weight"><a href="#workers">Підписано ЕЦП. Дані для
+                                                перевірки:</a></h5>
+                                        </div>
+                                        <div class="card-content clearfix ">
+                                            <div class="row ">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label><b>ПІБ підписанта:</b></label>
+                                                        {{ helper.key_info.pszSubjFullName }}
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label><b>Область:</b></label>
+                                                        {{ helper.key_info.pszSubjState }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label><b>Телефон:</b></label>
+                                                        {{ helper.key_info.pszSubjPhone }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label><b>Email:</b></label>
+                                                        {{ helper.key_info.pszSubjEMail }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {%endif%}
+                        <div class="row mt-4 mb-2">
+                            <div class="col-md-12">
+                                <div class="box box-primary">
+                                    <div class="header_with-border">
+                                        <h5 class="box-title h5_not_weight"><a href="#workers"> Погоджувачі:</a></h5>
+                                    </div>
+                                        <div class="card-content clearfix ">
+                                            {% if approvers %}
+                                            <table id="table_workers" class="table table-striped tbody_without_border">
+                                                <thead>
+                                                <th class="th_white">Погоджувач</th>
+                                                <th class="th_white">Призначив</th>
+                                                <th class="th_white">Коментар</th>
+                                                </thead>
+                                                <tbody id="table-body-workers">
+                                                </tbody>
+
+                                                {% for item in approvers %}
+                                                    <tr>
+                                                        <td>
+                                                            {{item.assign_to|default:"Не вказано"}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.created_by|default:"Не вказано"}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.comment|default:"Не вказано"}}
+                                                        </td>
+                                                    </tr>
+                                                {%endfor%}
+                                            </table>
+
+                                            {%else%}
+                                                <div class="wrap_no_data">
+                                                    * Не вибрано жодного погоджувача
+                                                </div>
+
+                                            {%endif%}
+
+                                            <div class="box-footer">
+                                                <div class="btn-group pull-right">
+
+                                                    {% if  not request.user|final_status:e_service.status %}
+                                                        <button type="button" class="btn btn-fill btn-primary"
+                                                                data-toggle="modal"
+                                                                data-target="#pickListModal" id="workersButton"><i
+                                                                class="fa fa-plus-square"></i> Додати нових погоджувачів
+                                                        </button>
+                                                    {%endif%}
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- tab-pane -->
+                    <div class="tab-pane" id="monitoring">
+                        <div class="box without_box-primary p-3 mt-3">
+                            <div class="card-content clearfix ">
+                                {% if dict_with_log %}
+                                    <div class="timeline-group">
+                                        {%for item in dict_with_log%}
+                                            <div class="timeline-item timeline-day">
+                                              <div class="timeline-time">&nbsp;</div>
+                                              <div class="timeline-body">
+                                                <p class="timeline-date">{{item.date.val_date}}</p>
+                                              </div><!-- timeline-body -->
+                                            </div><!-- timeline-item -->
+
+                                            {%for item_time in item.date.time%}
+                                                <div class="timeline-item">
+                                                  <div class="timeline-time">{{item_time.val_time}}</div>
+                                                  <div class="timeline-body">
+                                                    <p class="timeline-title"><a href="">{{item_time.user}}</a></p>
+                                                    <p class="timeline-text">{{item_time.desk}}</p>
+                                                  </div><!-- timeline-body -->
+                                                </div><!-- timeline-item -->
+
+
+
+                                            {%endfor%}
+
+                                        {%endfor%}
+
+                                    </div>
+
+                                {%else%}
+                                    * Не має логів
+                                {%endif%}
+
+
+
+                            </div>
+                         </div>
+                    </div><!-- tab-pane -->
+                  </div><!-- tab-content -->
+                </div><!-- card-body -->
+              </div>
+
+<div id="edit_modal" role="dialog" aria-labelledby="edit_modal" class="modal fade effect-super-scaled show" >
+      <div class="modal-dialog modal-dialog_check modal-dialog-vertical-center" role="eservice">
+        <div class="modal-content bd-0 tx-14">
+
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Відправка на доопрацювання</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <form method="POST" action="/backend/workflow/{{ e_service.id }}/to_edit/" enctype="multipart/form-data" >
+                {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Напишіть будь ласка коментарій</label>
+                        <textarea name="comment" class="form-control" rows="3"
+                                  placeholder="Ваш коментарій"></textarea>
+                    </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-info" id="print">Додати</button>
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+                </div>
+            </form>
+
+        </div>
+      </div><!-- modal-dialog -->
+</div>
+
+
+
+{% include 'eservice/backend/_modal_department.html' %}
+{% endblock %}
+
+{% block js_footer %}
+    <script src="{% static 'jstree/jstree.min.js' %}"></script>
+    <script src="{% static 'jstree/jstree_customization.js' %}"></script>
+{% endblock %}

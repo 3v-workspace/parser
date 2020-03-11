@@ -1,0 +1,424 @@
+{% load staticfiles %}
+{% load cache %}
+
+<!DOCTYPE html>
+<html lang="uk-UA">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Twitter вигляд акаунту має бути: @акаунт -->
+    <meta name="twitter:site" content="@акаунт">
+    <meta name="twitter:creator" content="@акаунт">
+    <meta name="twitter:card" content="велика картинка">
+    <meta name="twitter:title" content="GPDK">
+    <meta name="twitter:description" content="Описова частина">
+    <meta name="twitter:image" content="#">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="https://github.com/e-republic/GPDK">
+    <meta property="og:title" content="GPDK">
+    <meta property="og:description" content="Описова частина">
+    <meta property="og:image" content="#">
+    <meta property="og:image:secure_url" content="#">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <!-- Meta -->
+    <meta name="description" content="Описова частина вашого проекту">
+    <meta name="author" content="Ваша організація">
+
+    <title>Робочий стіл оператора</title>
+
+    <!-- CSS-->
+    <link href="{% static 'lib/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/Ionicons/css/ionicons.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/rickshaw/css/rickshaw.min.css' %}" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form_element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/introjs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/toggles-full.css' %}">
+    <link rel="stylesheet" href="{% static 'css/spectrum.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/jt.timepicker/css/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/bootstrap-tagsinput/css/bootstrap-tagsinput.css' %}">
+
+    <link rel="stylesheet" href="{% static 'lib/select2/css/select2.min.css' %}">
+    {% block extrahead %}{% endblock %}
+
+  </head>
+  <body>
+  <div class="gpdk-header-back">
+      <div class="container">
+        <div class="gpdk-header-left">
+          <h2 class="gpdk-logo"><a href="/backend/"><b>eSDF</b> </a></h2>
+
+          <div class="search-box">
+            <input type="text" class="form-control" placeholder="Пошук">
+            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+          </div><!-- search-box -->
+        </div><!-- slim-header-left -->
+        <div class="gpdk-header-right">
+        <div class="dropdown dropdown-a">
+                <div style="width: 40px; height: 40px;"><a href="{% url 'dialogs'%}" class="header-notification intro-begin">
+                    <i class="fa fa-envelope"></i>
+                </a>
+                </div>
+        </div><!-- dropdown -->
+
+        <div class="dropdown dropdown-a">
+          <div style="width: 40px; height: 40px;"><a href="#" class="header-notification intro-begin" onclick="intro()">
+            <i class="fa fa-question"></i>
+          </a>
+          </div>
+
+        </div><!-- dropdown -->
+
+        <div class="dropdown dropdown-a">
+          <div style="width: 40px; height: 40px;"><a href="/" class="header-notification intro-begin">
+            <i class="fa fa-home" aria-hidden="true"></i>
+          </a>
+          </div>
+        </div><!-- dropdown -->
+
+          <div class="dropdown dropdown-c">
+            <a href="#" class="logged-user" data-toggle="dropdown">
+              <img src="../img/img1.jpg" alt="">
+              <span> {{request.user.last_name}} {{request.user.first_name|make_list|first}}.{{request.user.middle_name|make_list|first}}. </span>
+              <i class="fa fa-angle-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <nav class="nav">
+                <a href="#" class="nav-link"><i class="icon ion-forward"></i> Мій профіль</a>
+                <a href="/auth/logout" class="nav-link"><i class="icon ion-forward"></i> Вийти з акаунту</a>
+              </nav>
+            </div><!-- dropdown-menu -->
+          </div><!-- dropdown -->
+        </div><!-- header-right -->
+      </div><!-- container -->
+    </div>
+
+
+    <div class="gpdk-mainpanel">
+    {% if 'dialogs-main' in request.path %}
+      <div class="container" style="height: 650px;">
+      {% else %}
+      <div class="container">
+      {% endif %}
+
+        {% block breadcrumb%}{% endblock %}
+
+        <div class="manager-wrapper">
+          <div class="manager-right">
+                  <!--<div class="messages">-->
+                     <!--{% if messages %}-->
+                        <!--{% for message in messages %}-->
+                            <!--<div class="alert alert-solid  {% if message.tags %} {{ message.tags }} {% endif %} alert-error  mg-b-0" role="alert">-->
+                                <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+                                  <!--<span aria-hidden="true">×</span>-->
+                                <!--</button>-->
+                                <!--{{ message }}-->
+                            <!--</div>-->
+                        <!--{% endfor %}-->
+                    <!--{% endif %}-->
+                  <!--</div>-->
+
+                  {% block content %}
+
+
+                  {% endblock %}
+
+
+          </div><!-- manager-right -->
+        {% if not 'dialogs-main' in request.path %}
+          {% with request.resolver_match.url_name as url_name %}
+          <div class="manager-left">
+            <a href="/backend/eservice/create/" class="btn btn-contact-new">Створити іншу послугу</a>
+            <nav class="nav">
+              <a href="/backend/" class="nav-link {% if url_name == 'index_backend' %}active{% endif %}">
+                <span>Робочий стіл</span>
+                <span></span>
+              </a>
+              <a href="/backend/not_processed_eservice" class="nav-link {% if url_name == 'not_processed_eservice' %}active{% endif %}">
+                <span>Необроблені послуги</span>
+                <span></span>
+              </a>
+              <a href="/backend/my_eservices" class="nav-link {% if url_name == 'my_eservices' %}active{% endif %}">
+                <span>Мої послуги</span>
+                <span></span>
+              </a>
+              <a href="/backend/reports/reports_list/" class="nav-link {% if url_name == 'reports_list' %}active{% endif %}">
+                <span>Мої звіти</span>
+                <span></span>
+              </a>
+              <a href="/backend/eservices" class="nav-link {% if url_name == 'eservices' %}active{% endif %}">
+                <span>Послуги організації</span>
+                <span></span>
+              </a>
+            </nav>
+
+            <!--<label class="section-label-sm mg-t-25">Location</label>-->
+            <div id="accordion2" class=" mt-4 accordion-one accordion-one-primary" role="tablist" aria-multiselectable="true">
+            <div class="card card-without-border">
+              <div class="card-header" role="tab" id="headingOne2">
+                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2" class="tx-gray-800 transition">
+                 Фільтр по cтатусу
+                </a>
+              </div><!-- card-header -->
+
+              <div id="collapseOne2" class="collapse {% if request.session.status %}show{% endif %}" role="tabpanel" aria-labelledby="headingOne2">
+
+              <a href="?status=rejected" class="nav-link {% if request.session.status == "rejected" %}active{% endif %}">
+                {% if request.session.status == "rejected" %}<i class="fa fa-times" aria-hidden="true"></i>{% endif %}
+                <span>Відхилено</span>
+              </a>
+              <a href="?status=confirmation" class="nav-link {% if request.session.status == "confirmation" %}active{% endif %}">
+                {% if request.session.status == "confirmation" %}<i class="fa fa-times" aria-hidden="true"></i>{% endif %}
+                <span>На погоджені</span>
+              </a>
+              <a href="?status=processing" class="nav-link {% if request.session.status == "processing" %}active{% endif %}">
+                {% if request.session.status == "processing" %}<i class="fa fa-times" aria-hidden="true"></i>{% endif %}
+                <span>У обробці</span>
+              </a>
+              <a href="?status=done" class="nav-link {% if request.session.status == "done" %}active{% endif %}">
+                {% if request.session.status == "done" %}<i class="fa fa-times" aria-hidden="true"></i>{% endif %}
+                <span>Послуга надана</span>
+              </a>
+              </div>
+            </div>
+          </div>
+
+          </div><!-- manager-left -->
+           {% endwith %}
+        {% endif %}
+
+        </div><!-- manager-wrapper -->
+
+      </div><!-- container -->
+    </div>
+
+
+  <footer>
+    <div class="container mt-footer">
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="description">
+            <div class="item">
+              <div class="icon"></div>
+              <span class="first">
+
+                          Власність #######. Проект реалізовано
+                            <a href="#" target="_blank">
+                               Фондом "Східна Європа"
+                            </a>
+                            та
+                            <a href="#" target="_blank">
+                                Державним агентством з питань електронного урядування України
+                            </a>
+                            у межах програми міжнародної
+                            технічної допомоги
+                            <a href="#" target="_blank">
+                                 "Електронне врядування задля підзвітності влади та участі громади"
+                            </a> (TAPAS) ,
+                            за фінансової підтримки
+                            <a href="#" target="_blank">
+                                 Швейцарської агенції розвитку та співробітництва
+                            </a>
+                        </span>
+            </div>
+            <div class="item">
+              <div class="icon"></div>
+              <span>
+                         Портал працює в тестовому режимі.
+                         Якщо ви маєте зауваження або пропозиції, будь ласка, напишіть нам:
+                        <a href="#">support@hsc.gov.ua</a>
+                    </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <ul class="menu_footer">
+            <li><a href="">1. Меню </a></li>
+            <li><a href="">2. Меню </a></li>
+            <li><a href="">3. Меню </a></li>
+            <li><a href="">4. Меню </a></li>
+            <li><a href="">5. Меню </a></li>
+            <li><a href="">6. Меню </a></li>
+          </ul>
+          <div class="links second">
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="col-md-4 right_footer_block">
+          <div class="social-links">
+            <ul>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa fa-2x fa-facebook-square"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa fa-2x fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa fa-2x fa-youtube-play"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="change_footer">
+            <img class="icon_change" src="" alt="">
+            <span><a href="">Людям із порушенням зору</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="developer">
+            <div class="license">
+              <div class="icon"></div>
+              <span>
+                         Весь контент доступний за ліцензією
+                        <a target="_blank" href="#">Creative Commons Attribution 4.0 International license</a>, якщо не зазначено інше
+                    </span>
+            </div>
+
+            <div class="clearfix"></div>
+          </div>
+
+        </div>
+      </div>
+
+    <script src="{% static 'lib/jquery/js/jquery.js' %}"></script>
+    <script src="{% static 'lib/popper.js/js/popper.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'lib/jquery.cookie/js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'lib/jquery.sparkline.bower/js/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'js/ResizeSensor.js' %}"></script>
+
+      <script src="{% static 'js/main.js' %}"></script>
+
+
+    <script src="{% static 'lib/jquery-toggles/js/toggles.min.js' %}"></script>
+    <script src="{% static 'lib/jt.timepicker/js/jquery.timepicker.js' %}"></script>
+    <script src="{% static 'lib/spectrum/js/spectrum.js' %}"></script>
+    <script src="{% static 'lib/jquery.maskedinput/js/jquery.maskedinput.js' %}"></script>
+    <script src="{% static 'lib/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"></script>
+    <script src="{% static 'js/slim.js' %}"></script>
+
+    <script src="{% static 'lib/select2/js/select2.full.min.js' %}"></script>
+    <script>
+      $(document).ready(function() {
+              $('select').select2({
+              });
+      } );
+    </script>
+
+    <script>
+          $(function(){
+            'use strict'
+
+            // Toggles
+            $('.toggle').toggles({
+              on: true,
+              height: 26
+            });
+
+            // Input Masks
+            $('#dateMask').mask('99/99/9999');
+            $('#phoneMask').mask('(999) 999-9999');
+            $('#ssnMask').mask('999-99-9999');
+
+            // Time Picker
+            $('#tpBasic').timepicker();
+            $('#tp2').timepicker({'scrollDefault': 'now'});
+            $('#tp3').timepicker();
+
+            $('#setTimeButton').on('click', function (){
+              $('#tp3').timepicker('setTime', new Date());
+            });
+
+            // Color picker
+            $('#colorpicker').spectrum({
+              color: '#17A2B8'
+            });
+
+            $('#showAlpha').spectrum({
+              color: 'rgba(23,162,184,0.5)',
+              showAlpha: true
+            });
+
+            $('#showPaletteOnly').spectrum({
+                showPaletteOnly: true,
+                showPalette:true,
+                color: '#DC3545',
+                palette: [
+                    ['#1D2939', '#fff', '#0866C6','#23BF08', '#F49917'],
+                    ['#DC3545', '#17A2B8', '#6610F2', '#fa1e81', '#72e7a6']
+                ]
+            });
+
+          });
+        </script>
+
+
+
+
+
+    <!--<script src="{% static 'lib/moment/js/moment.js' %}"></script>-->
+    <!--<script src="{% static 'lib/d3/js/d3.js' %}"></script>-->
+    <!--&lt;!&ndash;<script src="{% static 'lib/rickshaw/js/rickshaw.min.js' %}"></script>&ndash;&gt;-->
+    <!--<script src="{% static 'lib/gmaps/js/gmaps.js' %}"></script>-->
+    <!--<script src="{% static 'lib/peity/js/jquery.peity.js' %}"></script>-->
+    <!--<script src="{% static 'js/ResizeSensor.js' %}"></script>-->
+    <!--<script src="{% static 'js/widgets.js' %}"></script>-->
+
+    <!-- IntroJS -->
+    <script>
+      function intro() {
+              introJs().start();
+          }
+    </script>
+    <script src="{% static 'js/intro.js' %}"></script>
+  <!--<script type="application/javascript">-->
+
+      <!--$(document).ready(function() {-->
+
+          <!--var logo = $('.main-logo');-->
+          <!--var modalBackground = $('.modal-background');-->
+          <!--var modalGov = $('#modal-gov');-->
+          <!--var close = $('#modal-gov .close');-->
+
+          <!--$(logo).on('click', function(event) {-->
+              <!--event.preventDefault();-->
+              <!--$(modalBackground).fadeIn(200, function() {-->
+                  <!--$(modalGov).fadeIn(200);-->
+              <!--});-->
+          <!--});-->
+
+          <!--$(modalBackground).on('click', function() {-->
+              <!--$(modalGov).fadeOut('400');-->
+              <!--$(modalBackground).fadeOut('400');-->
+          <!--});-->
+
+          <!--$(close).on('click', function() {-->
+              <!--$(modalGov).fadeOut('400');-->
+              <!--$(modalBackground).fadeOut('400');-->
+          <!--});-->
+
+      <!--});-->
+  <!--</script>-->
+  {% block js_footer %}{% endblock %}
+    </div>
+  </footer>
+
+  </body>
+</html>
+

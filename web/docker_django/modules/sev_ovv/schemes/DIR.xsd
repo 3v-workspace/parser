@@ -1,0 +1,174 @@
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<xs:schema xmlns:tns="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:q1="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q2="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q3="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q4="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q5="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q6="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q7="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q8="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q9="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q10="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q11="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q12="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q13="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q14="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q15="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q17="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q18="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q19="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q20="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q21="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q22="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q23="http://schemas.datacontract.org/2004/07/Cover.Contracts" targetNamespace="http://tempuri.org/" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.datacontract.org/2004/07/Cover.Contracts" schemaLocation="Common.xsd"/>
+	<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" schemaLocation="ArrayOfLong.xsd"/>
+	<xs:element name="OpenUploadingSession">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q1:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="messageInfo" type="q2:MessageInfo" nillable="true" minOccurs="0"/>
+				<xs:element name="hash" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="signature" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OpenUploadingSessionResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OpenUploadingSessionResult" type="q3:SessionInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UploadMessageChunk">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q4:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="sessionId" type="xs:long" minOccurs="0"/>
+				<xs:element name="messageChunk" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UploadMessageChunkResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="UploadMessageChunkResult" type="q5:SessionInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OpenDownloadingSession">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q6:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="messageId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OpenDownloadingSessionResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OpenDownloadingSessionResult" type="q7:SessionInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DownloadMessageChunk">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q8:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="sessionId" type="xs:long" minOccurs="0"/>
+				<xs:element name="fromPosition" type="xs:long" minOccurs="0"/>
+				<xs:element name="count" type="xs:long" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DownloadMessageChunkResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DownloadMessageChunkResult" type="q9:DownloadChunkResponse" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetMessageValidationInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q10:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="sessionId" type="xs:long" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetMessageValidationInfoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetMessageValidationInfoResult" type="q11:MessageValidationInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EndProcessingDownloadedMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q12:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="sessionInfo" type="q13:SessionInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EndProcessingDownloadedMessageResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="EndProcessingDownloadedMessageResult" type="q14:SessionInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetSessionsInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q15:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="sessionsIds" type="q16:ArrayOflong" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetSessionsInfoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetSessionsInfoResult" type="q17:ArrayOfSessionInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetSessionInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q18:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="sessionId" type="xs:long" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetSessionInfoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetSessionInfoResult" type="q19:SessionInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetInputMessages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q20:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="сount" type="xs:int" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetInputMessagesResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetInputMessagesResult" type="q21:ArrayOfMessageInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetHistory">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q22:Identity" nillable="true" minOccurs="0"/>
+				<xs:element name="fromDateTime" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="toDateTime" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="count" type="xs:int" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetHistoryResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetHistoryResult" type="q23:ArrayOfMessageInfo" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetVersion">
+		<xs:complexType>
+			<xs:sequence/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetVersionResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetVersionResult" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

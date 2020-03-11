@@ -1,0 +1,293 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% load final_status %}
+
+{% block extrahead %}
+    <link href="{% static 'css/nav_tabs.css' %}" rel="stylesheet"/>
+    <link href="{% static 'jstree/themes/default/style.min.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">
+            {{ document.type.title }} №{{ document.internal_id }}
+            <small> Статус:
+                <div class="label {{ document.status.color }}">{{ document.status.title }}</div>
+            </small>
+
+        </h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="nav-tabs-custom ">
+
+    <ul class="nav nav-tabs text-center ui-sortable-handle">
+        <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-sticky-note-o"></i>
+            Реєстраційно-контрольна картка послуги</a></li>
+
+        <li><a href="#monitoring" data-toggle="tab"><i class="fa fa-fw fa-crosshairs"></i> Моніторинг</a></li>
+
+    </ul>
+
+    <div class="container ">
+        <div class="tab-content">
+        <div class="tab-pane active" id="home">
+            <div class="row mt-2 mb-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><b>Дата реєстрації послуги:</b></label>
+                        {{ document.created_at|date:"d.m.Y" }}
+                    </div>
+                    <div class="form-group">
+                        <label><b>Заголовок або короткий зміст послуги:</b></label>
+                        {{ document.title }}
+                    </div>
+                    <div class="form-group">
+                        <label><b>Автор послуги:</b></label>
+                        {{ document.created_by.last_name }}
+                        {{ document.created_by.first_name }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><b>Тип ліцензії:</b></label>
+                        {{ document.type_license }}
+                    </div>
+                    <div class="form-group">
+                        <label><b>Тип оплати:</b></label>
+                        {{ document.payment }}
+                    </div>
+                    <div class="form-group">
+                        <label><b>Область:</b></label>
+                        {{ document.created_by.region }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2 mb-2">
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">Файли послуги:</h4>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            {% for file in document.documentfile_set.all %}
+                            <div class="col-md-4">
+                                <div class="document">
+                                    <div class="document-icon" id="document-icon">
+                                        <a href="/media/{{ file.file }}"> <img
+                                                src=""></a>
+                                    </div>
+                                    <span >
+                                        <a target="_blank"
+                                            href="/media/{{ file.file }}">{{ file.filename }}</a>
+                                    </span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">Можливі дії:</h4>
+                    </div>
+                    {% if request.user|final_status:document.status %}
+                        * На даному етапі не можливі жодні дії з документом
+                    {%endif%}
+
+
+                    {% if helper.document_permissions.can_approve and not request.user|final_status:document.status and document.status.id != 10 %}
+                        <a href="/backend/workflow/{{ document.id }}/approve/" type="button"
+                            class="btn btn-block btn-primary"><i
+                            class="fa fa-check-circle-o"></i> Погодити
+                        </a>
+                    {%endif%}
+                    {% if not request.user|final_status:document.status %}
+                        <a href="/backend/workflow/{{ document.id }}/reject/" type="button"
+                            class="btn btn-block btn-danger"><i
+                            class="fa fa-check-circle-o"></i> Відхилити
+                        </a>
+                    {%endif%}
+
+                    {% if helper.document_permissions.can_approve and document.status.id != 10 and document.status.id != 7  and not request.user|final_status:document.status%}
+                        <button type="button" class="btn btn-fill btn-primary btn-block"
+                                data-toggle="modal" data-target="#edit_modal"
+                                id=""><i class="fa fa-check-square-o"></i>
+                            Відправити на доопрацювання
+                        </button>
+                    {%endif%}
+                </div>
+
+            </div>
+            <div class="row key-info">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><b>ПІБ підписанта:</b></label>
+                        {{ helper.key_info.pszSubjFullName }}
+                    </div>
+
+                    <div class="form-group">
+                        <label><b>Область:</b></label>
+                        {{ helper.key_info.pszSubjState }}
+                    </div>
+                </div>
+                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label><b>Телефон:</b></label>
+                        {{ helper.key_info.pszSubjPhone}}
+                    </div>
+                    <div class="form-group">
+                        <label><b>Email:</b></label>
+                        {{  helper.key_info.pszSubjEMail }}
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 mb-2">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h4 class="box-title"><a href="#workers"> Погоджувачі:</a></h4>
+                        </div>
+                            <div class="card-content clearfix ">
+                                {% if approvers %}
+                                <table id="table_workers" class="table table-striped">
+                                    <thead>
+                                    <th>Погоджувач</th>
+                                    <th>Призначив</th>
+                                    <th>Коментар</th>
+                                    </thead>
+                                    <tbody id="table-body-workers">
+                                    </tbody>
+
+                                    {% for item in approvers %}
+                                        <tr>
+                                            <td>
+                                                {{item.assign_to|default:"Не вказано"}}
+                                            </td>
+                                            <td>
+                                                {{item.created_by|default:"Не вказано"}}
+                                            </td>
+                                            <td>
+                                                {{item.comment|default:"Не вказано"}}
+                                            </td>
+                                        </tr>
+                                    {%endfor%}
+                                </table>
+
+                                {%else%}
+                                    * Не вибрано жодного погоджувача
+                                {%endif%}
+
+                                <div class="box-footer">
+                                    <div class="btn-group pull-right">
+
+                                        {% if  not request.user|final_status:document.status %}
+                                            <button type="button" class="btn btn-fill btn-primary"
+                                                    data-toggle="modal"
+                                                    data-target="#pickListModal" id="workersButton"><i
+                                                    class="fa fa-plus-square"></i> Додати нових погоджувачів
+                                            </button>
+                                        {%endif%}
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="tab-pane" id="monitoring">
+        <div class="box box-primary mt-4">
+
+            <div class="card-content clearfix ">
+
+                {% if logs %}
+                <table  class="table table-striped">
+                    <thead>
+                    <th>Номер</th>
+                    <th>Подія</th>
+                    <th>Користувач</th>
+                    <th>Дата</th>
+                    </thead>
+                    <tbody >
+                    </tbody>
+
+                    {% for item in logs %}
+                        <tr>
+                            <td>
+                                {{item.id|default:"Не вказано"}}
+                            </td>
+                            <td>
+                                {{item.activity|default:"Не вказано"}}
+                            </td>
+                            <td>
+                                {{item.created_by|default:"Не вказано"}}
+                            </td>
+                            <td>
+                                {{item.created_at|default:"Не вказано"}}
+                            </td>
+                        </tr>
+                    {%endfor%}
+                </table>
+
+                {%else%}
+                    * Не має логів
+                {%endif%}
+
+            </div>
+        </div>
+    </div>
+    </div>
+ </div>
+ </div>
+
+
+<div id="edit_modal" role="dialog" aria-labelledby="edit_modal" class="modal fade effect-super-scaled show" >
+      <div class="modal-dialog modal-dialog_check modal-dialog-vertical-center" role="document">
+        <div class="modal-content bd-0 tx-14">
+
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Відправка на доопрацювання</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <form method="POST" action="/backend/workflow/{{ document.id }}/to_edit/" enctype="multipart/form-data" >
+                {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Напишіть будь ласка коментарій</label>
+                        <textarea name="comment" class="form-control" rows="3"
+                                  placeholder="Ваш коментарій"></textarea>
+                    </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-info" id="print">Додати</button>
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+                </div>
+            </form>
+
+        </div>
+      </div><!-- modal-dialog -->
+</div>
+
+
+
+{% include 'eservice/backend/_modal_department.html' %}
+{% endblock %}
+
+{% block js_footer %}
+    <script src="{% static 'jstree/jstree.min.js' %}"></script>
+    <script src="{% static 'jstree/jstree_customization.js' %}"></script>
+{% endblock %}

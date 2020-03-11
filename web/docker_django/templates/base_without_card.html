@@ -1,0 +1,567 @@
+{% load staticfiles %}
+{% load cache %}
+{% load compress %}
+<!DOCTYPE html>
+<html lang="uk-UA">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %} {% endblock %}Електронний кабінет водія</title>
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/faicon.png' %}"/>
+    <!-- Facebook -->
+    <meta property="og:url" content="#">
+    <meta property="og:title" content="Кабінет автовласника">
+    <meta property="og:description" content="Електронний кабінет автовласника Головного Сервісного Центру">
+
+    <meta property="og:image" content="http://#">
+    <meta property="og:image:secure_url" content="#">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <!-- Meta -->
+    <meta name="description" content="Електронний кабінет автовласника Головного Сервісного Центру">
+    <meta name="author" content="Головний Сервісний Центр">
+
+{% compress css %}
+    <!-- vendor css -->
+    <link href="{% static 'lib/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/Ionicons/css/ionicons.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/chartist/css/chartist.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/rickshaw/css/rickshaw.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/jquery.steps/css/jquery.steps.css' %}" rel="stylesheet">
+
+    <!-- eDriver CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+{% endcompress %}
+  {% compress js %}
+    <!-- Intro CSS -->
+    <link rel="stylesheet" href="{% static 'css/introjs.css' %}">
+  {% endcompress %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+     {% block extrahead %}{% endblock %}
+
+  </head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="{% static 'js/googletagmanager.js' %}"></script>
+  <body id="body">
+    <div class="edriver-header">
+      <div class="container container_wrap">
+        <div class="edriver-header-left">
+
+            <a class="main-logo main-logo-light" href="#">
+        <div class="icon-flag">
+            <div class="yellow"></div>
+            <div class="blue"></div>
+        </div>
+        <div class="wrap-text">
+            <span class="one">gov.ua</span>
+            <span class="light">Державні сайти України</span>
+        </div>
+    </a>
+        </div>
+        <div class="edriver-header-left dis-flex">
+
+
+        <div class="trezub">
+         <a href="/" title="Головна сторінка"> <img src="{% static 'img/trezub.png' %}" alt="Головна сторінка"></a>
+        </div>
+
+        <div class="wrap-text">
+          <a href="/" title="Головна сторінка">   <span class="big-fat">Електронний кабінет водія</span></a>
+        </div>
+
+        </div>
+        <!-- edriver-header-left -->
+        <div class="edriver-header-right">
+        <div class="change" id="change">
+            <img class="icon_change" src="{% static '/img/icn-accessability.svg' %}" alt="">
+            <div class="fontchangers " id="fonts">
+            <span>
+                <a class="increase"><i class="fa fa-plus"></i></a>
+                <a class="decrease"><i class="fa fa-minus"></i></a>
+              <a class="reset" id="reset">скинути</a>
+            </span>
+            </div>
+        </div>
+
+            <div class="dropdown dropdown-a">
+
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-header">
+                <h6 class="dropdown-menu-title">Activity Logs</h6>
+
+              </div><!-- dropdown-menu-header -->
+              <div class="dropdown-activity-list">
+                <div class="activity-label">Today, December 13, 2017</div>
+                <div class="activity-item">
+                  <div class="row no-gutters">
+                    <div class="col-2 tx-right">10:15am</div>
+                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
+                    <div class="col-8">Purchased christmas sale cloud storage</div>
+                  </div><!-- row -->
+                </div><!-- activity-item -->
+                <div class="activity-item">
+                  <div class="row no-gutters">
+                    <div class="col-2 tx-right">9:48am</div>
+                    <div class="col-2 tx-center"><span class="square-10 bg-danger"></span></div>
+                    <div class="col-8">Login failure</div>
+                  </div><!-- row -->
+                </div><!-- activity-item -->
+                <div class="activity-item">
+                  <div class="row no-gutters">
+                    <div class="col-2 tx-right">7:29am</div>
+                    <div class="col-2 tx-center"><span class="square-10 bg-warning"></span></div>
+                    <div class="col-8">(D:) Storage almost full</div>
+                  </div><!-- row -->
+                </div><!-- activity-item -->
+                <div class="activity-item">
+                  <div class="row no-gutters">
+                    <div class="col-2 tx-right">3:21am</div>
+                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
+                    <div class="col-8">1 item sold <strong>Christmas bundle</strong></div>
+                  </div><!-- row -->
+                </div><!-- activity-item -->
+                <div class="activity-label">Yesterday, December 12, 2017</div>
+                <div class="activity-item">
+                  <div class="row no-gutters">
+                    <div class="col-2 tx-right">6:57am</div>
+                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
+                    <div class="col-8">Earn new badge <strong>Elite Author</strong></div>
+                  </div><!-- row -->
+                </div><!-- activity-item -->
+              </div><!-- dropdown-activity-list -->
+              <div class="dropdown-list-footer">
+                <a href="page-activity.html"><i class="fa fa-angle-down"></i> Show All Activities</a>
+              </div>
+            </div><!-- dropdown-menu-right -->
+          </div><!-- dropdown -->
+            <!-- For IntroJS -->
+            <div style="width: 40px; height: 40px;"><a href="#" class="header-notification intro-begin" onclick="introJs().start();">
+              <i class="icon ion-help"></i>
+            </a></div>
+            <div class="icon" id="searching" data-toggle="modal" data-target="#search_modal" data-effect="effect-just-me"></div>
+
+          <div class="dropdown dropdown-c">
+            <a href="#" class="logged-user" data-toggle="dropdown">
+            <span>{{request.user.last_name}} {{request.user.first_name|make_list|first}}.{{request.user.middle_name|make_list|first}}. </span>
+              <i class="fa fa-angle-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <nav class="nav">
+                <a href="/profile" class="nav-link"><i class="icon ion-forward"></i> Мій профіль</a>
+                <a href="/auth/logout" class="nav-link"><i class="icon ion-forward"></i> Вийти з акаунту</a>
+              </nav>
+            </div><!-- dropdown-menu -->
+          </div><!-- dropdown -->
+            <div class="social_box">
+                <ul >
+                    <li>
+                        <a href="#" target="_blank">
+                            <i class="fa fa-facebook-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">
+                            <i class="fa fa-youtube-play"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div><!-- header-right -->
+
+        <div class="modal-gov" id="modal-gov">
+        <div class="close"></div>
+        <div class="wrap">
+            <ul class="wrap-link">
+                <li>
+                    <a href="https://www.president.gov.ua/" target="_blank">Президент України</a>
+                </li>
+                <li>
+                    <a href="https://www.kmu.gov.ua/" target="_blank">Кабінет Міністрів України</a>
+                </li>
+                <li>
+                    <a href="http://rada.gov.ua/" target="_blank">Верховна Рада України</a>
+                </li>
+            </ul>
+            <ul class="wrap-link">
+                <li>
+                    <a href="http://www.hsc.gov.ua/" target="_blank">Головний Сервісний Центр</a>
+                </li>
+                <li>
+                    <a href="http://www.ccu.gov.ua/" target="_blank">Конституційний суд України</a>
+                </li>
+                <li>
+                    <a href="http://www.rnbo.gov.ua/" target="_blank">Рада національної безпеки і оборони України</a>
+                </li>
+
+            </ul>
+            <ul class="wrap-link" target="_blank">
+                <li>
+                    <a href="https://www.kmu.gov.ua/ua/catalog">Центральні та місцеві органи виконавчої влади</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal-background"></div>
+
+      </div><!-- container -->
+
+        <div id="search_modal" class="modal fade effect-super-scaled show" >
+              <div class="modal-dialog modal-dialog-vertical-center" role="eservice">
+                <div class="modal-content bd-0 tx-14">
+                  <div class="modal-header pd-y-20 pd-x-25">
+                    <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Пошук по послугам</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body pd-25">
+                         <form id="searchForm" action="/search/" method="GET" class="search-form">
+                              <div class="col-md-12">
+                                    Ключові слова
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" name="search_input" id="searchKeyWord"  placeholder="Введіть дані за якими бажаєте здійснити пошук">
+                                    <span class="input-group-btn">
+                                      <button class="btn bd bd-l-0 bg-white tx-gray-600" type="submit"  value="Знайти"><i class="fa fa-search"></i> Знайти</button>
+                                    </span>
+                                  </div>
+                                    <div class="suggestions_container" id="suggestionsContainer"></div>
+                                </div>
+                        </form>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+                  </div>
+
+                </div>
+              </div><!-- modal-dialog -->
+            </div>
+    </div><!-- edriver-header -->
+
+    <div class="edriver-navbar">
+      <div class="container">
+        <ul class="nav">
+
+             <li class="nav-item" data-intro='Ваша картка водія'>
+            <a class="nav-link" href="/">
+              <i class="icon ion-ios-home-outline"></i>
+              <span>Картка водія</span>
+
+            </a>
+          </li>
+           <li class="nav-item" data-intro='Головна сторінка'>
+            <a class="nav-link" href="/carpark">
+              <i class="icon ion-ios-home-outline"></i>
+              <span>Автопарк</span>
+            </a>
+          </li>
+          <li class="nav-item with-sub" data-intro='Перелік послуг'>
+            <a class="nav-link" href="/eservices">
+              <i class="icon ion-ios-book-outline"></i>
+              <span>Послуги</span>
+            </a>
+            <div class="sub-item">
+              <ul>
+                  <li><a href="/eservices">Мої послуги</a></li>
+                <li><a href="/sign/service_requests">Базова послуга</a></li>
+                <li><a href="#">Первинна реєстрація ТЗ</a></li>
+                <li><a href="#">Заміна посвідчення водія</a></li>
+                <li><a href="#">Заміна свідоцтва про реєстрацію</a></li>
+                <li><a href="#">Замовлення індивідуальних номерних знаків</a></li>
+                <li><a href="#">Бронювання номерних знаків</a></li>
+              </ul>
+            </div><!-- dropdown-menu -->
+          </li>
+          {%if not request.user.is_legal%}
+              <li class="nav-item with-sub" data-intro='Порушили? Отримайте інформацію про штраф'>
+                <a class="nav-link" href="#">
+                  <i class="icon ion-ios-book-outline"></i>
+                  <span>Штрафи</span>
+                </a>
+                <div class="sub-item">
+                  <ul>
+                    <li><a href="/fines">Мої штрафи</a></li>
+                    <li><a href="#">Протоколи про адміністративні правопорушення</a></li>
+                  </ul>
+                </div><!-- dropdown-menu -->
+              </li>
+          {%endif%}
+          <li class="nav-item " data-intro='ДТП інформація, документація та архів'>
+            <a class="nav-link" href="#" >
+              <i class="icon ion-ios-gear-outline"></i>
+              <span>ДТП</span>
+            </a>
+
+          </li>
+
+          <!--<li class="nav-item with-sub" data-intro='Застрахувати транспортний засіб можна тут!'>-->
+            <!--<a class="nav-link" href="#">-->
+              <!--<i class="icon ion-ios-book-outline"></i>-->
+              <!--<span>Страхування</span>-->
+            <!--</a>-->
+            <!--<div class="sub-item">-->
+              <!--<ul>-->
+                <!--<li><a href="#">Перевірка полісу чинності внутрішнього страхування</a></li>-->
+                <!--<li><a href="#">Замовлення полісу внутрішнього страхування</a></li>-->
+              <!--</ul>-->
+            <!--</div>&lt;!&ndash; dropdown-menu &ndash;&gt;-->
+          <!--</li>-->
+             <li class="nav-item" data-intro='Перевірте транспортний засіб вчасно'>
+            <a class="nav-link" href="#">
+              <i class="icon ion-ios-analytics-outline"></i>
+              <span>Перевірка ТЗ</span>
+            </a>
+          </li>
+        </ul>
+      </div><!-- container -->
+    </div><!-- edriver-navbar -->
+
+    <div class="edriver-mainpanel">
+      <div class="container">
+
+{% block breadcrumb%}{% endblock %}
+
+        <div class="row row-sm ">
+          <div class="col-lg-12">
+
+                {% block content %}{% endblock %}
+
+
+        <!--</div>&lt;!&ndash; row &ndash;&gt;-->
+      </div><!-- container -->
+    </div><!-- edriver-mainpanel -->
+
+    <div class="modal-gov" id="modal-gov">
+        <div class="close"></div>
+        <div class="wrap">
+            <ul class="wrap-link">
+                <li>
+                    <a href="#" target="_blank">Президент України</a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">Верховна Рада України</a>
+                </li>
+            </ul>
+            <ul class="wrap-link">
+                <li>
+                    <a href="#" target="_blank">Конституційний суд України</a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">Рада національної безпеки і оборони України</a>
+                </li>
+            </ul>
+            <ul class="wrap-link" target="_blank">
+                <li>
+                    <a href="#">Центральні та місцеві органи виконавчої влади</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+      <footer >
+      <div class="container mt-footer">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="description">
+                    <div class="item">
+                        <div class="icon"></div>
+                        <span class="first links_description">
+
+                          Власність Головного Сервісного Центру України. Проект реалізовано
+                            <a href="#" target="_blank">
+                               Фондом "Східна Європа"
+                            </a>
+                            та
+                            <a href="#" target="_blank">
+                                Державним агентством з питань електронного урядування України
+                            </a>
+                            у межах програми міжнародної
+                            технічної допомоги
+                            <a href="#" target="_blank">
+                                 "Електронне врядування задля підзвітності влади та участі громади"
+                            </a> (TAPAS) ,
+                            за фінансової підтримки
+                            <a href="#" target="_blank">
+                                 Швейцарської агенції розвитку та співробітництва
+                            </a>
+                        </span>
+                    </div>
+                    <div class="item">
+                        <div class="icon"></div>
+                    <span>
+                         Портал працює в тестовому режимі.
+                         Якщо ви маєте зауваження або пропозиції, будь ласка, напишіть нам:
+                        <a href="#">support@hsc.gov.ua</a>
+                    </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 right_footer_block">
+                <div class="social-links">
+                    <ul>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="fa fa-2x fa-facebook-square"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="fa fa-2x fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="fa fa-2x fa-youtube-play"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="change_footer">
+                    <img class="icon_change" src="{% static '/img/icn-accessability-f.png' %}" alt="">
+                    <span><a href="">Людям із порушенням зору</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="developer">
+                    <div class="license">
+                        <div class="icon"></div>
+                    <span>
+                         Весь контент доступний за ліцензією
+                        <a target="_blank" href="#">Creative Commons Attribution 4.0 International license</a>, якщо не зазначено інше
+                    </span>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--<p>    Проект реалізовано-->
+                            <!--<a href="http://eef.org.ua" target="_blank">-->
+                               <!--Фондом Східна Європа-->
+                            <!--</a>-->
+                            <!--та-->
+                            <!--<a href="http://dknii.gov.ua" target="_blank">-->
+                                <!--Державним агентством з питань електронного урядування України-->
+                            <!--</a>-->
+                            <!--у межах програми міжнародної-->
+                            <!--технічної допомоги-->
+                            <!--<a href="http://TAPAS.org.ua" target="_blank">-->
+                                 <!--"Електронне врядування задля підзвітності влади та участі громади"-->
+                            <!--</a> (TAPAS)</p>-->
+
+      </div><!-- container -->
+    </footer>
+
+{% compress js %}
+
+    <script src="{% static 'lib/jquery/js/jquery.js' %}"></script>
+    <script src="{% static 'js/datepicker.js' %}"></script>
+    <script src="{% static 'lib/popper.js/js/popper.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'lib/jquery.cookie/js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'lib/jquery.steps/js/jquery.steps.js' %}"></script>
+    <script src="{% static 'lib/parsleyjs/js/parsley.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+{% endcompress %}
+    <script>
+        $(document).ready(function() {
+{#            var resize = new Array('a', 'li', 'td', 'span');#}
+            var resize = new Array('body', 'tr', '.table-responsive', '.nav-link', '.country', 'li');
+            resize = resize.join(',');
+
+            //resets the font size when "reset" is clicked
+            var resetFont = $(resize).css('font-size');
+            $(".reset").click(function () {
+                $(resize).css('font-size', resetFont);
+            });
+
+            //increases font size when "+" is clicked
+            $(".increase").click(function () {
+                var originalFontSize = $(resize).css('font-size');
+                var originalFontNumber = parseFloat(originalFontSize, 10);
+                var newFontSize = originalFontNumber * 1.2;
+                $(resize).css('font-size', newFontSize);
+                return false;
+            });
+
+            //decrease font size when "-" is clicked
+
+            $(".decrease").click(function () {
+                var originalFontSize = $(resize).css('font-size');
+                var originalFontNumber = parseFloat(originalFontSize, 10);
+                var newFontSize = originalFontNumber * 0.8;
+                $(resize).css('font-size', newFontSize);
+                return false;
+            });
+        });
+    </script>
+    <script>
+         $( "#change" ).click(function() {
+   $("#fonts").toggleClass("hide");
+});
+    </script>
+    <script type="application/javascript">
+
+$(document).ready(function() {
+
+    var logo = $('.main-logo');
+    var modalBackground = $('.modal-background');
+    var modalGov = $('#modal-gov');
+    var close = $('#modal-gov .close');
+
+    $(logo).on('click', function(event) {
+        event.preventDefault();
+        $(modalBackground).fadeIn(200, function() {
+            $(modalGov).fadeIn(200);
+        });
+    });
+
+    $(modalBackground).on('click', function() {
+         $(modalGov).fadeOut('400');
+         $(modalBackground).fadeOut('400');
+    });
+
+    $(close).on('click', function() {
+        $(modalGov).fadeOut('400');
+        $(modalBackground).fadeOut('400');
+    });
+
+});
+</script>
+
+
+  {% block js_footer %}{% endblock %}
+  </body>
+</html>

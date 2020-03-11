@@ -1,0 +1,93 @@
+{% extends 'backend/base.html' %}
+{% load staticfiles %}
+
+{% block extrahead %}
+     <link href="{% static 'css/bootstrap-datepicker.min.css' %}" rel="stylesheet"/>
+
+{% endblock %}
+
+{% block breadcrumb%}
+    <div class="gpdk-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+
+        </ol>
+        <h6 class="gpdk-pagetitle">Виберіть послугу</h6>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="container section-wrapper">
+      <div class="row">
+        <div class="col-md-12">
+            <div id="accordion2" class=" accordion-one accordion-one-primary" role="tablist" aria-multiselectable="true">
+                <div class="card card-without-border">
+                  <div class="card-header" role="tab" id="headingOne2">
+                    <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2" class="tx-gray-800 transition">
+                     Фільтр по даті
+                    </a>
+                  </div><!-- card-header -->
+
+                  <div id="collapseOne2" class="collapse {% if to or from_date %}show{% endif %}" role="tabpanel" aria-labelledby="headingOne2">
+                      <div class="wrap-form p-3">
+
+                              <label class="label_data" for="datepicker_from">Початкова дата:</label>
+                                <input type="text" id="datepicker_from" data-date-format="dd-mm-yyyy" placeholder="Напр. 28-12-2018" value="{{from_date}}"
+                                       class="form-control input-md input-no-border fo datapicker">
+
+                                <label class="label_data" for="datepicker_to">Кінцева дата:</label>
+
+                                <input type="text" id="datepicker_to" data-date-format="dd-mm-yyyy" placeholder="Напр. 28-12-2018" value="{{to}}"
+                                       class="form-control input-md input-no-border fo datapicker">
+                                <div class="box-filter mt-3">
+                                    <button type="submit" class="btn  btn-fill btn btn-success"
+                                            id="filter">Фільтрувати
+                                    </button>
+                                    <a href="/backend/reports/service_status/">
+                                    <button type="button" class="btn  btn-fill btn-warning"
+                                            >Скинути фільтр
+                                    </button></a>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="mt-4">
+            <div class="table-responsive">
+                    <table class="table mg-b-0">
+                      <thead>
+                        <tr>
+                          <th>Послуг - у роботі</th>
+                          <th>Послуг - відхилено</th>
+                          <th>Послуг - на погоджені</th>
+                          <th>Послуг - на доопрацюванні</th>
+                          <th>Послуг - виконано</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                          <td>{{e_services_in_work}}</td>
+                          <td>{{e_services_in_rejected}}</td>
+                          <td>{{e_services_on_approval}}</td>
+                          <td>{{e_services_on_refinement}}</td>
+                          <td>{{e_services_done}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+              </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block js_footer %}
+    <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.uk.min.js' %}" charset="UTF-8"></script>
+    <script src="{% static 'js/reports/reports.js' %}"></script>
+
+{% endblock %}

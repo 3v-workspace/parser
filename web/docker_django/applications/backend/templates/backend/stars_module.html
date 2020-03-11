@@ -1,0 +1,34 @@
+{% load staticfiles %}
+{% load stars_filter %}
+<div class="table-responsive mt-4 bg-white">
+            <table class="table table-bordered tx-center">
+              <thead class="thead-colored">
+                <tr>
+                  <th class="wd-75p bg-esdf text-white">Оцінка</th>
+                  <th class="wd-2p bg-esdf text-white">Кількість</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Відмінно (8-10) <i class="fa fa-star"></i></th>
+                  <td><a href="eservices/rating/?stars=maximum">{{ star|stars_filter:'maximum' }}</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">Добре (6-8)<i class="fa fa-star-half-full"></i></th>
+                    <td><a href="eservices/rating/?stars=good">{{ star|stars_filter:'good' }}</a></td>
+                </tr>
+              <tr>
+                  <th scope="row">Посередньо (4-6)<i class="fa fa-star-half-o"></i></th>
+                  <td><a href="eservices/rating/?stars=average">{{ star|stars_filter:'average' }}</a></td>
+                </tr>
+              <tr>
+                  <th scope="row">Погано (2-4)<i class="fa fa-star-half-o"></i></th>
+                  <td><a href="eservices/rating/?stars=bad">{{ star|stars_filter:'bad' }}</a></td>
+                </tr>
+              <tr>
+                  <th scope="row">Дуже погано (0-2)<i class="fa fa-star-o"></i></th>
+                  <td><a href="eservices/rating/?stars=worst">{{ star|stars_filter:'worst' }}</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
