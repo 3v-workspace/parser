@@ -1,5 +1,3 @@
-edited by Vital
-
 **How to work on a task:**
 
  create a new branch
